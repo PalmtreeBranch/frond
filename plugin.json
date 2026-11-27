@@ -7,11 +7,11 @@
   "author": {
     "name": "Herman Palmgren"
   },
-  "homepage": "https://github.com/hermanpalmgren/frond",
-  "repository": "https://github.com/hermanpalmgren/frond",
+  "homepage": "https://github.com/PalmtreeBranch/frond",
+  "repository": "https://github.com/PalmtreeBranch/frond",
   "suggestedPrompts": [
+    "Run /setup-frond to configure models for this runtime",
     "Run /beta-testers on our app and report every bug with repro steps",
-    "Run /feature-fit before adding this new feature to the dashboard",
-    "Run /council on the current branch before opening a pull request"
+    "Run /feature-fit before adding this new feature to the dashboard"
   ]
 }

@@ -13,27 +13,48 @@
 | Task checklist | `update_steps` | Todolist tool | `TodoWrite` | Plan / checklist in reply |
 | Skill discovery path | `~/.gemini/config/plugins/frond` or `.agents/skills/` | `~/.cursor/plugins/frond` or `.cursor/skills/` | `~/.claude/plugins/frond` or `.claude/skills/` | `~/.codex/skills/` or `.agents/skills/` |
 
-## Model configuration (optional)
+## Model configuration (`~/.config/frond/models.md`)
 
-Skills that choose models (`beta-testers`, `council`, `pre-ship-review`) check for an optional user config file at `~/.config/frond/models.md`.
+Run [`/setup-frond`](../skills/setup-frond/SKILL.md) inside each tool you use (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`). It writes **per-runtime sections** into one `~/.config/frond/models.md` file so switching tools or subscriptions never breaks another runtime's config.
+
+Each skill reads `## shared` first, then the section matching the **active runtime** (`## antigravity`, `## claude-code`, `## cursor`, `## codex`, or `## t3-code`).
 
 Example `~/.config/frond/models.md`:
 
 ```markdown
-# frond models
+# frond models (managed by /setup-frond)
+
+## shared
 beta-tester-count: 10
+default-budget: balanced
+
+## antigravity
+beta-tester-model: flash
+beta-tester-verifier: inherit
+audit-explorer-model: flash
+audit-chief-model: pro
+strongman-model: pro
+council-mode: single-family-fallback
+
+## claude-code
+beta-tester-model: sonnet
+beta-tester-verifier: inherit
+audit-explorer-model: sonnet
+audit-chief-model: opus
+strongman-model: sonnet
+council-mode: single-family-fallback
+
+## t3-code
 beta-tester-model: balanced
 beta-tester-verifier: inherit
-
 audit-explorer-model: balanced
 audit-chief-model: deep
-
+council-mode: multi-family
 council-seat-1: gemini | antigravity | gemini-4-neon | thinking_level=high
-council-seat-2: claude | claudeAgent | claude-opus-5-5 | effort=high
+council-seat-2: muse | muse | muse-wonder-full-1.0 | reasoningEffort=max
 council-seat-3: gpt | codex | gpt-6.1-sol | reasoningEffort=xhigh
 council-standin: claude | claudeAgent | claude-sonnet-5-5 | effort=high
-review-lens: inherit
-review-skeptic: inherit
+strongman-model: cross-provider
 ```
 
 ### Model tier mapping (`beta-testers`)

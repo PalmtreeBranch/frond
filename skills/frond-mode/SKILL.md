@@ -1,6 +1,6 @@
 ---
 name: frond-mode
-description: "Opinionated engineering mode for shipping real products without AI slop: smart defaults over feature bloat, live UI verification, multi-model review, structural mistake prevention, and crisp Simplified Technical English replies. Use for /frond-mode or when the user asks to work in frond style."
+description: "Opinionated engineering mode for indie hackers and small agile teams shipping real products without AI slop: matches tasks to lean playbooks, propagates worker rules to subagents, routes to frond skills, enforces smart defaults and real proof, and writes crisp Simplified Technical English replies. Use for /frond-mode or when the user asks to work in frond style."
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,19 @@ disable-model-invocation: true
 
 A lean working mode for building and shipping real software without AI slop.
 
-Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/harness.md`](../../docs/harness.md) to map subagent and browser primitives to your active runtime.
+Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/harness.md`](../../docs/harness.md) and the active runtime's section in `~/.config/frond/models.md` before choosing subagent models.
+
+## Start of task (playbook dispatch)
+
+1. **Restate the goal and smallest change** in 1-2 lines, then match the task to one playbook below and open its file:
+   - New or changed feature -> [`playbooks/feature.md`](./playbooks/feature.md)
+   - Bug fix or customer issue -> [`playbooks/bug-fix.md`](./playbooks/bug-fix.md)
+   - UI polish, localization, or release QA -> [`playbooks/ui-polish.md`](./playbooks/ui-polish.md)
+   - Security, scalability, or performance audit -> [`playbooks/audit-and-harden.md`](./playbooks/audit-and-harden.md)
+   - Multi-issue list or numbered plan -> [`playbooks/ship-queue.md`](./playbooks/ship-queue.md)
+2. **Copy the playbook steps into your checklist tool first** so later verification, cleanup, and review steps never get dropped mid-task.
+3. **Propagate `worker.md` to every subagent:** Subagents do not inherit slash-command skills automatically. Make the first line of every subagent kickoff:
+   `Read <abs-path-to-this-folder>/worker.md before anything else.`
 
 ## Core principles
 
@@ -26,22 +38,24 @@ Load and follow the matching sibling skill whenever a trigger hits:
 
 | Trigger | Skill to load |
 | --- | --- |
-| Ambiguous idea or rough Linear/GitHub ticket before building | [`../sharpen/SKILL.md`](../sharpen/SKILL.md) (deeper brief, raw sources, clear product calls) |
-| Ordered list of issues/tasks or approved numbered plan | [`../work-queue/SKILL.md`](../work-queue/SKILL.md) (one issue per branch/PR, live status table) |
-| Adding or changing visible UI, dashboard cards, nav items, or settings | [`../feature-fit/SKILL.md`](../feature-fit/SKILL.md) before coding (or on the UI diff before pushing) |
-| Fixing a bug or adding a focused regression check | [`../repro-first/SKILL.md`](../repro-first/SKILL.md) (real repro first, red-then-green check, minimal root-cause fix) |
-| Starting from a customer screenshot, support report, walkthrough, or call | [`../replay-customer-bug/SKILL.md`](../replay-customer-bug/SKILL.md) (anonymized replay through normal flow + verify booking/payment/message side effects) |
-| Small-looking or risky change that could break something outside the diff | [`../blast-radius/SKILL.md`](../blast-radius/SKILL.md) (trace past grep + prove the safety fact with code) |
-| Agent is stuck looping or over-asking on a non-sensitive task | [`../strongman/SKILL.md`](../strongman/SKILL.md) (fresh model/provider angle + drive all sanctioned tools end to end) |
-| Writing, translating, or auditing multi-language UI copy or glossaries | [`../locale-craft/SKILL.md`](../locale-craft/SKILL.md) (native copy, ICU safety, cross-skill language hooks) |
-| Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) (configurable persona panel on the live UI) |
+| First-time setup or configuring models for this runtime (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`) | [`../setup-frond/SKILL.md`](../setup-frond/SKILL.md) |
+| Picking the right skill or checking setup status | [`../frond-help/SKILL.md`](../frond-help/SKILL.md) |
+| Ambiguous idea or rough Linear/GitHub ticket before building | [`../sharpen/SKILL.md`](../sharpen/SKILL.md) |
+| Ordered list of issues/tasks or approved numbered plan | [`../work-queue/SKILL.md`](../work-queue/SKILL.md) |
+| Adding or changing visible UI, dashboard cards, nav items, or settings | [`../feature-fit/SKILL.md`](../feature-fit/SKILL.md) |
+| Fixing a bug or adding a focused regression check | [`../repro-first/SKILL.md`](../repro-first/SKILL.md) |
+| Starting from a customer screenshot, support report, walkthrough, or call | [`../replay-customer-bug/SKILL.md`](../replay-customer-bug/SKILL.md) |
+| Small-looking or risky change that could break something outside the diff | [`../blast-radius/SKILL.md`](../blast-radius/SKILL.md) |
+| Agent is stuck looping or over-asking on a non-sensitive task | [`../strongman/SKILL.md`](../strongman/SKILL.md) |
+| Writing, translating, or auditing multi-language UI copy or glossaries | [`../locale-craft/SKILL.md`](../locale-craft/SKILL.md) |
+| Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) |
 | Repo has no safe scripted way to launch, doctor, and drive its UI | [`../create-ui-verification-skill/SKILL.md`](../create-ui-verification-skill/SKILL.md) |
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
-| Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) (4 lenses + skeptic + finding fates) |
-| High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) (3 model families, blind parallel, max 3 rounds) |
-| Full-system security, scalability, and performance audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) (6 parallel explorers + flagship Chief Auditor/Skeptic, Severity x Likelihood matrix) |
-| Ready to merge a PR, wait for green CI, release, or verify live in production | [`../land-pr/SKILL.md`](../land-pr/SKILL.md) (SHA-pinned merge, deploy proof, cleanup) |
-| Drafting an email, SMS, or chat update to a customer, partner, or colleague | [`../stakeholder-reply/SKILL.md`](../stakeholder-reply/SKILL.md) (facts only, recipient language, never sends unapproved) |
+| Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) |
+| High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) |
+| Full-system security, scalability, and performance audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) |
+| Ready to merge a PR, wait for green CI, release, or verify live in production | [`../land-pr/SKILL.md`](../land-pr/SKILL.md) |
+| Drafting an email, SMS, or chat update to a customer, partner, or colleague | [`../stakeholder-reply/SKILL.md`](../stakeholder-reply/SKILL.md) |
 | Corrected by the user, a reviewer, or CI on a repeatable mistake | [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md) |
 | Wrapping up a long or bumpy session and capturing durable skill improvements | [`../reflect/SKILL.md`](../reflect/SKILL.md) |
 

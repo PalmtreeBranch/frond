@@ -6,12 +6,14 @@ AI makes it easy to generate ten features a day and ship ten subtle bugs with th
 
 Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from one repository.
 
-## Skills (19)
+## Skills (21)
 
-### Entry point
+### Entry point & setup
 | Skill | When to use it | What it produces |
 | --- | --- | --- |
-| [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting a non-trivial task in this style | Principles, automatic routing across all skills, and crisp technical replies |
+| [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting a non-trivial task in this style | Matches 5 lean playbooks (`feature`, `bug-fix`, `ui-polish`, `audit-and-harden`, `ship-queue`), propagates `worker.md` to subagents, routes skills, and keeps replies crisp |
+| [`/setup-frond`](./skills/setup-frond/SKILL.md) | First-time setup or adding a new runtime/subscription | Detects available models in the active tool (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`) and updates only its section in `~/.config/frond/models.md` |
+| [`/frond-help`](./skills/frond-help/SKILL.md) | Unsure which skill fits or checking setup state | Inspects active runtime config, picks the right skill, and hands back one copy-paste prompt without burning tokens |
 
 ### Plan & shape
 | Skill | When to use it | What it produces |
@@ -56,7 +58,7 @@ Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from on
 Clone the repo anywhere on your machine, then run the install script to symlink it into your active agent tools:
 
 ```bash
-git clone https://github.com/hermanpalmgren/frond.git ~/Developer/frond
+git clone https://github.com/PalmtreeBranch/frond.git ~/Developer/frond
 ~/Developer/frond/scripts/install.sh all
 ```
 
@@ -69,7 +71,9 @@ Or install for one tool at a time:
 ~/Developer/frond/scripts/install.sh codex        # ~/.codex/skills/*
 ```
 
-See [docs/harness.md](./docs/harness.md) for cross-tool primitive mapping and optional model configuration (`~/.config/frond/models.md`).
+Then run `/setup-frond` inside each tool you use (`antigravity`, `claude-code`, `cursor`, `codex`, or `t3-code`) to configure models for that runtime in `~/.config/frond/models.md` without overwriting your other runtimes.
+
+See [docs/harness.md](./docs/harness.md) for cross-tool primitive mapping and per-runtime model config.
 
 ## Works well alongside `pstack`
 
