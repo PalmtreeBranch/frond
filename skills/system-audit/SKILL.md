@@ -20,11 +20,19 @@ Both the audit scope and the two model tiers are configurable per run or in `~/.
 
 | Setting | Default | Prompt examples | `~/.config/frond/models.md` key |
 | --- | --- | --- | --- |
-| **Scope** | `full` (all 6 slices) | `--scope diff`, `--scope security`, `--scope perf`, `--scope app/api` | - |
+| **Scope** | `full` (all 6 slices) | `--scope diff`, `--scope security`, `--scope perf`, `--scope ai-integrity`, `--scope app/api` | - |
 | **Explorer model** | `balanced` (mid-tier / fast) | `--explorers light`, `--explorers sonnet` | `audit-explorer-model: balanced` |
 | **Chief Auditor model** | `deep` (strongest security/reasoning model) | `--chief opus`, `--chief gemini-carbon`, `--chief pro` | `audit-chief-model: deep` |
 
 Always state the scope, explorer model, and Chief Auditor model in one line before launching subagents.
+
+### AI & user-intent integrity audit (`--scope ai-integrity`)
+When invoked with `--scope ai-integrity` (or asked to check for AI sabotage, silent nerfing, or guardrail overreach), inspect agent prompts, outbound filters, denylists/allowlists, ML/scoring weights, model routers, and check suites across the codebase:
+- **Preference & ideological integrity:** check for hidden rules overriding user/customer/owner inputs, lifestyle or demographic categories misclassified as sensitive blocks, or silent degradation in ML/scoring/ranking pipelines instead of explicit refusals.
+- **Notes-app over-blocking:** check where security guards drop benign authenticated owner facts (links, phone numbers, catalog URLs, accepted payment methods) or use unanchored short substrings with false positives on ordinary domain text.
+- **Check & eval honesty:** scan tests, mutation scripts, and benchmark runners for vacuous assertions, self-replacing no-op mutations (`.replace(a, a)`), copied-oracle checks, or hidden model favoritism.
+
+Return each finding as intentional sabotage vs guardrail overreach vs check gaming, with `file:line`, concrete user harm, and whether a documented safety/compliance reason justifies keeping part of the rule.
 
 ### Fast diff security sweep (`--scope diff`)
 When invoked with `--scope diff` (or `"security sweep on this branch"`), skip the 6-slice swarm and run **one focused read-only pass** over `git diff <base>...HEAD` plus direct imports, checking:
@@ -60,11 +68,11 @@ Open a checklist with these four phases:
 2. Spend 1-2 minutes mapping the repo layout: entry points (`app/`, `api/`, `routes/`, `workers/`), database/migrations/RLS, auth/middleware, external providers, queues/crons, and deploy config (`vercel.json`, `Dockerfile`, `fly.toml`, etc.).
 3. Select the active slices (all 6 for `full`, or the subset matching `--scope`):
    - **Slice 1: Auth, Tenancy & Access Boundaries:** route/action auth inventory (who can call what), RLS vs service-role bypasses, role checks (`viewer`/`member`/`owner`/`admin`), IDOR, OAuth/session/MFA boundaries.
-   - **Slice 2: Input, Abuse, Secrets & Cost Burn:** webhook signature/timing-safe checks, rate limiters (fail-open vs fail-closed, per-instance vs shared), unauthenticated spend/bot paths, validation/body-size limits, secret storage/rotation, XSS/CSP/SSRF.
+   - **Slice 2: Input, Abuse, Secrets & Cost Burn:** webhook signature/timing-safe checks, rate limiters (fail-open vs fail-closed, per-instance vs shared), unauthenticated spend/bot paths, validation/body-size limits, secret storage/rotation, XSS/CSP/SSRF, and outbound prompt/guard filters that silently strip legitimate authenticated user data.
    - **Slice 3: Data & Query Scalability:** missing indexes on hot/policy columns, N+1 queries, unbounded selects/pagination, lock contention, connection-pool saturation, migration/schema bottlenecks as rows grow 10x.
    - **Slice 4: Concurrency, Queues & Failure Modes:** process-local locks or caches on serverless, ack-before-durable-enqueue message loss, inline webhook work causing retry storms, missing idempotency keys, single-instance SPOFs, external timeout cascades.
    - **Slice 5: Runtime & Frontend Performance:** sequential data waterfalls, oversized client bundles, missing `Cache-Control` / ISR / memoization, slow cold starts, unbounded payloads, memory or WebSocket leaks.
-   - **Slice 6: Cross-Cutting & Operational Surface:** middleware gaps, response/security headers, PII/tokens/raw errors in logs, health-check abuse, exposed internal metadata, dependency/config drift.
+   - **Slice 6: Cross-Cutting & Operational Surface:** middleware gaps, response/security headers, PII/tokens/raw errors in logs, health-check abuse, exposed internal metadata, dependency/config drift, silent AI preference overrides or ML/scoring degradation, and vacuous or self-replacing verification checks.
 
 ---
 
@@ -101,6 +109,7 @@ The Chief Auditor performs **three mandatory jobs**:
      - Chained vulnerabilities (two `Low`/`Medium` gaps combining into a `High`/`Critical` exploit)
      - End-to-end load amplification (e.g., fail-open rate limit + inline webhook + DB pool limit = outage during traffic spike)
      - Architectural mismatches (e.g., stateful work on serverless, shared global secret spanning too many lanes, inconsistent fail-open vs fail-closed posture)
+     - Silent product degradation across guards, denylists, and scoring rules (security or compliance blocks spilling over into normal authenticated user features, or copied one-way ratchets propagation)
 
 3. **Final prioritization & ship verdict:**
    - Assign final `Severity (1-4)`, `Likelihood (1-3)`, `Score = Severity x Likelihood`, Priority Band (`P0`–`P3`), and `Effort (S|M|L)` per [`references/risk-scale.md`](./references/risk-scale.md).

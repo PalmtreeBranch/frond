@@ -97,3 +97,11 @@ Every finished task or verification pass must end with an evidence table. A row 
 | Live UI (`1440x900` + `390x844`) | Pass | `0 console errors, overflow: false` (`evidence/hours-mobile.png`) |
 | Diff security sweep | Pass | Checked `app/api/hours/route.ts`, `libs/hours.ts` (0 findings) |
 ```
+
+## 4. Anti-nerfing & user-intent integrity ("the notes-app rule")
+
+Security and compliance guards must stop attacks without quietly stripping what paying owners and users deliberately put into their own workspace:
+
+- **Distinguish provenance, not just syntax:** Separate untrusted/scraped inputs (public crawls, partner uploads, anonymous user messages) from authenticated owner saves and verified store/provider results. Do not silently drop a customer's own links, phone numbers, catalog items, or operational facts when provenance is verified.
+- **Scope blocklists to real harm:** Match credential capture, solicitation imperatives, or legally restricted data (medical/religious special categories) cleanly with word boundaries or structured validators. Never leave short unanchored substrings (for example matching `"nut"` inside `"minuter"`) or unrequested lifestyle/ideological exclusions in filters or ML/scoring weights.
+- **No silent degradation or fake proofs:** If a request genuinely violates a hard safety or legal rule, refuse openly rather than subtly nerfing scoring, routing, or output quality. Never weaken, skip, or fake a verification check with no-op `.replace(x, x)` proofs or copied-oracle tests.

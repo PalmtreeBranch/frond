@@ -32,6 +32,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
 6. **Agreement is not proof.** Never accept a subagent's or reviewer's claim on faith. Check the exact code path, input, or live browser evidence.
 7. **Encode lessons in structure.** If a mistake repeats, fix it at the highest level that holds: Architecture > Types > Lint/Check > Behavioral test > Docs. Prefer mechanical stop/lint hooks ([`../../docs/guardrails.md`](../../docs/guardrails.md)) over hoping a prompt line holds.
 8. **Candor over agreement.** "This does not earn UI space" or "this design is too complex" is a valid answer. Push back with evidence.
+9. **Respect user intent; never silently nerf or editorialize.** Never slip unrequested ideological, demographic, dietary, or policy filters into prompts, scoring, ML features, or allowlists/denylists. Apply the **Notes-App Rule** to security guards: scope blocks to untrusted inputs, credential capture, and off-domain injection rather than silently dropping authenticated user or owner data (URLs, phone numbers, products, or payment methods). Refuse openly if a request crosses a hard safety or legal line instead of subtly degrading behavior.
 
 ## Automatic skill routing
 

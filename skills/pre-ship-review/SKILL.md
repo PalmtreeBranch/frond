@@ -38,12 +38,13 @@ For every write, side effect, notification, or state transition added or altered
 
 Report every cell that ends in a duplicate, silent drop, wrong message to a user, or inconsistent state.
 
-### Lens 3: Blast radius, tenancy, privacy & new dependencies
-Enumerate every setting or feature flag read by the changed code and walk its extremes (on, off, absent, contradictory combinations). Check recipients and opt-outs of notifications, webhooks, analytics, cost, shared surfaces (web, API, workers, MCP), privacy (no PII, secrets, tokens, or raw error dumps in logs), multi-tenant scoping on every read and write, and any newly added dependency (name, exact version, and whether it is genuinely needed).
+### Lens 3: Blast radius, tenancy, privacy & silent product nerfing
+Enumerate every setting or feature flag read by the changed code and walk its extremes (on, off, absent, contradictory combinations). Check recipients and opt-outs of notifications, webhooks, analytics, cost, shared surfaces (web, API, workers, MCP), privacy (no PII, secrets, tokens, or raw error dumps in logs), multi-tenant scoping on every read and write, and any newly added dependency (name, exact version, and whether it is genuinely needed). Run a **notes-app check** on every new or changed regex guard, denylist, allowlist, prompt rule, or scoring weight against realistic benign customer/owner inputs: flag short-substring collisions, bare category/payment nouns dropping informational answers, blanket link/phone stripping on authenticated owner inputs, and any unrequested preference or ideological filtering.
 
 ### Lens 4: Proof & anti-cheating test integrity
 Read every added or modified test/check file at `head` before trusting green CI:
 - **Anti-cheating audit:** list every changed test file and flag any assertion that was removed, loosened, skipped (`skip`/`only`), or replaced with a weaker check; quote exact old vs new lines.
+- **No-op proofs & copied oracles:** flag no-op self-replacements in mutation proofs (`.replace(a, a)`), production logic copied into a test as its own oracle, and one-way ratchet comments claiming human sign-off not present in the linked issue.
 - **Hidden mocks:** flag any new mock or stub that hides a real API, DB, or boundary call the test previously exercised.
 - **Scope creep:** flag any edit outside the approved plan or stated contract.
 - **Contract coverage:** for each part of the contract, confirm a real assertion fails if that part of the fix is removed (vacuity control) and identify risky sequences from Lens 2 with zero coverage.

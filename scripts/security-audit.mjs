@@ -79,6 +79,16 @@ const REQUIRED_SKILL_GUARDRAILS = [
     mustMatch: /strictly read-only/i,
     reason: 'must stay strictly read-only',
   },
+  {
+    file: 'skills/frond-mode/worker.md',
+    mustMatch: /never silently nerf/i,
+    reason: 'must forbid silent nerfing or ideological overrides of user-configured content and scoring',
+  },
+  {
+    file: 'skills/pre-ship-review/SKILL.md',
+    mustMatch: /silent product nerfing/i,
+    reason: 'must check diffs for silent product nerfing and notes-app over-blocking',
+  },
 ];
 
 function walk(dir) {
