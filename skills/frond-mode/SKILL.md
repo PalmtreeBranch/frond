@@ -45,6 +45,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Ordered list of issues/tasks or approved numbered plan | [`../work-queue/SKILL.md`](../work-queue/SKILL.md) |
 | Adding or changing visible UI, dashboard cards, nav items, or settings | [`../feature-fit/SKILL.md`](../feature-fit/SKILL.md) |
 | Fixing a bug or adding a focused regression check | [`../repro-first/SKILL.md`](../repro-first/SKILL.md) |
+| Iterating on a stubborn bug, low eval score, or metric until gains plateau | [`../hill-climb/SKILL.md`](../hill-climb/SKILL.md) |
 | Starting from a customer screenshot, support report, walkthrough, or call | [`../replay-customer-bug/SKILL.md`](../replay-customer-bug/SKILL.md) |
 | Small-looking or risky change that could break something outside the diff | [`../blast-radius/SKILL.md`](../blast-radius/SKILL.md) |
 | Agent is stuck looping or over-asking on a non-sensitive task | [`../strongman/SKILL.md`](../strongman/SKILL.md) |

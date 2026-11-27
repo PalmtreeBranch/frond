@@ -63,10 +63,11 @@ fast diff sweep:    /system-audit --scope diff
 run an issue list:  /work-queue do VOC-120, VOC-124, and VOC-129 in order to PR open
 ship it cleanly:    /land-pr merge when green and verify live
 customer update:    /stakeholder-reply draft a short Swedish email to Anna saying it is live
+climb an eval/fix:  /hill-climb get the booking eval above 95% and stop if gains plateau
 unstick a loop:     /strongman push this local Playwright setup over the finish line
 ```
 
-## All 21 skills
+## All 22 skills
 
 <details>
 <summary>Open the full skill list</summary>
@@ -89,6 +90,7 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 | Skill | Use it when | What it does |
 | --- | --- | --- |
 | [`/repro-first`](./skills/repro-first/SKILL.md) | Fixing a bug | Reproduces on the real surface first, writes the smallest failing-then-passing check, and ships the minimal root-cause fix |
+| [`/hill-climb`](./skills/hill-climb/SKILL.md) | Pushing a low eval score, perf metric, or stubborn bug until gains plateau | Sets a frozen baseline and definition of done, loops one hypothesis at a time (keep or revert), pivots at plateaus, and stops cleanly when incremental gains run out |
 | [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) | Starting from a customer screenshot, support report, call, or walkthrough | Strips personal data, replays through the normal product flow before and after the fix, and checks bookings, payments, and outbound messages |
 | [`/blast-radius`](./skills/blast-radius/SKILL.md) | Checking a small diff you do not fully trust | Traces past grep (DB columns, API JSON, webhooks, queues, flags) and proves the core safety fact by running code |
 | [`/strongman`](./skills/strongman/SKILL.md) | An agent is looping or stalling on a non-sensitive task | Spawns a fresh model or provider for a different angle and drives every allowed tool (shell, browser, tests) to a verified finish |

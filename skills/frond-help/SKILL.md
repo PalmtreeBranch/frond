@@ -26,6 +26,7 @@ Check two things and mention them **only** when relevant to the user's question:
 | Check whether a UI feature belongs in the dashboard/portal (anti-slop) | [`/feature-fit`](../feature-fit/SKILL.md) | `/feature-fit should we add a new status card to the portal home?` |
 | Work through an ordered list of Linear/GitHub issues (1 issue = 1 PR) | [`/work-queue`](../work-queue/SKILL.md) | `/work-queue do VOC-120, VOC-124, and VOC-129 in order to PR open` |
 | Fix a bug repro-first with the smallest red-then-green check | [`/repro-first`](../repro-first/SKILL.md) | `/repro-first invitations fail when the email has trailing spaces` |
+| Iterate on a stubborn bug, low eval score, or metric until it plateaus | [`/hill-climb`](../hill-climb/SKILL.md) | `/hill-climb raise our booking eval from 72% to 95% without breaking existing checks` |
 | Turn a customer screenshot, support email, or call into an anonymized test | [`/replay-customer-bug`](../replay-customer-bug/SKILL.md) | `/replay-customer-bug turn this support report into a replay test and verify no duplicate SMS fires` |
 | Check what a small risky diff could break outside grep | [`/blast-radius`](../blast-radius/SKILL.md) | `/blast-radius check what changing this webhook payload could break` |
 | Unblock a stuck non-sensitive task with a fresh model & full tool drive | [`/strongman`](../strongman/SKILL.md) | `/strongman push this local Playwright setup over the finish line and prove it passes` |
