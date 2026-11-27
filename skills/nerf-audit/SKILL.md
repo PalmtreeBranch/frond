@@ -9,6 +9,13 @@ Run a **strictly read-only**, **cross-provider** forensic audit of a repository,
 
 Read [`../../docs/harness.md`](../../docs/harness.md) and the active runtime's section in `~/.config/frond/models.md` before resolving the auditor model.
 
+## Default cadence (tiered, zero routine PR bloat)
+
+- **Off on routine PRs:** do not run standalone `/nerf-audit` on ordinary UI tweaks, copy edits, or standard CRUD diffs.
+- **Auto-triggered on high-nerf surfaces:** run a focused cross-provider `/nerf-audit` on any branch that touches outbound filters/regex guards/denylists, prompt builders or `cache_control`, model routers/fallback harnesses/eval runners, local-LM/ML inference/training/ONNX/thread/buffer configs, or CI check/mutation scripts.
+- **Built-in on reviews and full audits:** lightweight nerf/cache/gaming checks run automatically inside `/pre-ship-review`, `/council`, and `/system-audit` (Slice 7 + Chief Auditor).
+- **Periodic sweep:** run one repo-wide read-only `/nerf-audit` weekly (or after a heavy single-provider sprint) on active AI-heavy repos.
+
 ## Hard rules
 
 1. **Strictly read-only.** Never edit application code, tests, CI workflows, or configs during an audit. Never run destructive commands or touch production data.
