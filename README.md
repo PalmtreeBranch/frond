@@ -22,7 +22,7 @@ Most popular skill stacks solve this for huge engineering orgs with stacked PR t
 
 - **Stop UI slop and wasted work before it gets written.** [`/business-value`](./skills/business-value/SKILL.md) checks real usage (PostHog, GA, DB) and your 1-3 month growth trajectory before you spend days building something nobody needs, or helps you decide whether to keep pushing when stuck. [`/feature-fit`](./skills/feature-fit/SKILL.md) pauses before you add another card, tab, or toggle to a portal and asks if it should just be a smart default, live inline, replace something old, or get cut.
 - **Catch real-user breakage before customers do.** [`/beta-testers`](./skills/beta-testers/SKILL.md) is my favourite skill in the whole stack. It spins up 10 realistic user personas (a 62-year-old who hates tech, a mobile-first thumb scroller, a double-clicker, a dark-mode skeptic, and more) to click through your actual app and hand back one reproducible bug report.
-- **Stop sneaky breaking changes and fake green tests.** [`/blast-radius`](./skills/blast-radius/SKILL.md) traces past grep and proves safety by running real code. [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) runs 4 read-only lenses plus a skeptic and flags any deleted or loosened test assertion. [`/council`](./skills/council/SKILL.md) puts 3 different model families on a risky diff blind.
+- **Stop sneaky breaking changes, silent nerfs, and fake green tests.** [`/blast-radius`](./skills/blast-radius/SKILL.md) traces past grep and proves safety by running real code. [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) runs 4 read-only lenses plus a skeptic and flags silent product nerfing, cache/compute walls, and weakened or gamed tests. [`/nerf-audit`](./skills/nerf-audit/SKILL.md) runs a cross-provider forensic audit (a different model family than the code author) for Notes-App over-blocking, compute/training/cache slowdowns, rival-provider handicapping, and review bureaucracy. [`/council`](./skills/council/SKILL.md) puts 3 different model families on a risky diff blind with equal context fidelity.
 - **Turn real bugs and repeat mistakes into permanent checks.** [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) turns a support screenshot or call into an anonymized replay test. [`/correction-loop`](./skills/correction-loop/SKILL.md) fixes repeated mistakes at the highest level that holds (architecture, types, lint, test, docs last).
 - **Ship honestly.** [`/land-pr`](./skills/land-pr/SKILL.md) pins merges to the checked commit SHA and verifies the live deploy before anyone says "live". [`/stakeholder-reply`](./skills/stakeholder-reply/SKILL.md) drafts a short human update from verified facts only and never sends without your yes.
 - **Keep one rule over all of it: no receipt, no merge.**
@@ -70,6 +70,7 @@ risky small diff:   /blast-radius check what changing this webhook payload could
 customer bug:       /replay-customer-bug turn this support screenshot into a replay test
 multi-model review: /council review this auth migration before opening the PR
 full system audit:  /system-audit full --explorers balanced --chief deep
+cross-provider nerf:/nerf-audit audit this AI-authored branch for silent nerfs, cache/compute walls, and fake proofs
 fast diff sweep:    /system-audit --scope diff
 run an issue list:  /work-queue do VOC-120, VOC-124, and VOC-129 in order to PR open
 ship it cleanly:    /land-pr merge when green and verify live
@@ -78,7 +79,7 @@ climb an eval/fix:  /hill-climb get the booking eval above 95% and stop if gains
 unstick a loop:     /strongman push this local Playwright setup over the finish line
 ```
 
-## All 23 skills
+## All 24 skills
 
 <details>
 <summary>Open the full skill list</summary>
@@ -118,9 +119,10 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 | Skill | Use it when | What it does |
 | --- | --- | --- |
 | [`/comment-cleanup`](./skills/comment-cleanup/SKILL.md) | Before opening a PR or after heavy AI edits | Deletes slop comments and unsafe lint/TS suppressions, flags internal workarounds to refactor, and proposes checks for claimed constraints |
-| [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | Runs 4 read-only lenses (callers, sequences, blast radius, anti-cheating test integrity) plus 1 skeptic and JSONL finding fates |
-| [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with verified finding fates and a hard 3-round cap |
-| [`/system-audit`](./skills/system-audit/SKILL.md) | Full security, scalability, and performance audit (or `--scope diff` sweep) | 6 parallel mid-tier explorers plus a larger flagship Chief Auditor/Skeptic pass, ranked by Severity x Likelihood (`P0` to `P3`) and Effort |
+| [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | Runs 4 read-only lenses (callers, sequences, blast radius + Notes-App/nerf check, anti-cheating/anti-gaming proof) plus 1 cross-provider-preferred skeptic, stateful 3-round cap, and JSONL finding fates |
+| [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with equal context fidelity, no single-provider sole judge, verified finding fates, and a stateful hard 3-round cap |
+| [`/nerf-audit`](./skills/nerf-audit/SKILL.md) | Auditing AI-authored branches or pipelines for silent nerfs and slowdowns | Strictly read-only cross-provider forensic audit (different model family than the author) for Notes-App over-blocking, compute/training/cache walls, rival-provider handicapping, check gaming, and review bureaucracy |
+| [`/system-audit`](./skills/system-audit/SKILL.md) | Full security, scalability, performance, and AI-integrity audit (or `--scope nerfs` / `--scope diff`) | 7 parallel mid-tier explorers (including cross-provider Slice 7) plus a larger flagship cross-provider Chief Auditor/Skeptic pass, ranked by Severity x Likelihood (`P0` to `P3`) and Effort |
 
 ### Ship, communicate, and improve
 | Skill | Use it when | What it does |
@@ -135,7 +137,7 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 ## Guardrails and cross-tool notes
 
 - [docs/harness.md](./docs/harness.md): primitive and model-tier mapping across Antigravity, Cursor, Claude Code, Codex, and T3 Code.
-- [docs/guardrails.md](./docs/guardrails.md): standing deny rules, "no-done-while-red" stop hooks (so agents cannot claim finished while tests are failing), and the Receipt Table format.
+- [docs/guardrails.md](./docs/guardrails.md): standing deny rules, "no-done-while-red" stop hooks (so agents cannot claim finished while tests are failing), the Receipt Table format, and anti-nerfing, compute-integrity, and cross-provider auditing rules.
 
 ## Inspiration
 

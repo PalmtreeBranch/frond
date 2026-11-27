@@ -79,6 +79,56 @@ const REQUIRED_SKILL_GUARDRAILS = [
     mustMatch: /strictly read-only/i,
     reason: 'must stay strictly read-only',
   },
+  {
+    file: 'skills/frond-mode/worker.md',
+    mustMatch: /never silently nerf/i,
+    reason: 'must forbid silent nerfing or ideological overrides of user-configured content and scoring',
+  },
+  {
+    file: 'skills/pre-ship-review/SKILL.md',
+    mustMatch: /silent product nerfing/i,
+    reason: 'must check diffs for silent product nerfing and notes-app over-blocking',
+  },
+  {
+    file: 'skills/pre-ship-review/SKILL.md',
+    mustMatch: /stateful hard 3-round cap/i,
+    reason: 'must enforce a stateful 3-round cap derived from review history rather than default-1 resets',
+  },
+  {
+    file: 'skills/nerf-audit/SKILL.md',
+    mustMatch: /strictly read-only/i,
+    reason: 'must stay strictly read-only',
+  },
+  {
+    file: 'skills/nerf-audit/SKILL.md',
+    mustMatch: /cross-provider auditor rule/i,
+    reason: 'must enforce cross-provider auditing from a different model family than the code author',
+  },
+  {
+    file: 'skills/nerf-audit/SKILL.md',
+    mustMatch: /checked and clean/i,
+    reason: 'must include a Checked and Clean section to separate real nerfs from legitimate constraints',
+  },
+  {
+    file: 'skills/system-audit/SKILL.md',
+    mustMatch: /cross-provider auditor rule/i,
+    reason: 'must enforce cross-provider auditing for Slice 7 and Chief Auditor passes',
+  },
+  {
+    file: 'skills/council/SKILL.md',
+    mustMatch: /equal context and trace fidelity/i,
+    reason: 'must require equal context and trace fidelity across all council seats',
+  },
+  {
+    file: 'skills/council/SKILL.md',
+    mustMatch: /no single-provider sole judge/i,
+    reason: 'must forbid pinning one model provider as sole judge over rival models',
+  },
+  {
+    file: 'skills/correction-loop/SKILL.md',
+    mustMatch: /no-op mutation proofs/i,
+    reason: 'must forbid no-op mutation proofs in red-without-fix verification',
+  },
 ];
 
 function walk(dir) {

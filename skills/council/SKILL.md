@@ -22,9 +22,11 @@ Read [`../../docs/harness.md`](../../docs/harness.md) to map multi-provider dele
    - If the active runtime only exposes one model family, state that up front and ask the user whether to run a single-family blind panel or switch to a multi-provider runtime.
 3. **Announce the seats in one line** before starting them (each seat spends quota).
 
-### Stand-in rules
-- If a seat's model is missing, disabled, or out of quota, fill it with the configured stand-in immediately (no useless retry).
-- If a seat crashes or stalls, retry once. If the retry fails, fill it with the stand-in and state why.
+### Stand-in & parity rules
+- **Equal context and trace fidelity:** give every seat the exact same diff, file-access instructions, intent, and context/trace budget. Never strip, summarize away, or asymmetrically truncate traces or code context passed to rival providers.
+- **No single-provider sole judge:** never pin one model provider as sole judge, tie-breaker, or unilateral skeptic over cheaper or rival models. Every seat has equal standing, and the owner verifies every finding directly against `head`.
+- **Immediate quota failover:** if a seat's model is missing, disabled, rate-limited, or out of quota, abort retries immediately and fill it with the configured stand-in (never loop retrying an exhausted provider).
+- If a seat crashes or stalls for a transient non-quota error, retry once. If the retry fails, fill it with the stand-in and state why.
 - A council with fewer than three seated reviewers is not a council; ask the user whether to proceed or stop.
 - Never silently treat a failed or timed-out seat as an approval.
 
@@ -43,8 +45,9 @@ Each seat brief includes:
 - The `intent` (what must change and what must stay unchanged).
 - Rules:
   - Report only real defects backed by `file:line` at `head`, exact code path, and concrete trigger input or sequence.
-  - No style comments, no speculation without a code path.
-  - Severity: `blocker` (data loss, security/tenancy leak, duplicate charge/write, broken critical user path), `major` (wrong behavior a real user hits), `minor`.
+  - Explicitly check for **silent nerfing, guardrail overreach (Notes-App violations), compute/training/cache walls, alternative-provider handicapping, and verification gaming** in addition to security, data-integrity, and functional bugs.
+  - Suppress non-harm `minor` noise: no style comments, no speculation without a code path.
+  - Severity: `blocker` (data loss, security/tenancy leak, duplicate charge/write, broken critical user path, silent stripping of core owner/user data), `major` (wrong behavior a real user hits, prompt-cache busting, artificial compute/provider slowdown, vacuous/no-op proof), `minor` (concrete risk only).
   - Run an internal skeptic pass before replying.
   - End with one final line: `VERDICT: APPROVE` (when zero blocker/major findings survive) or `VERDICT: BLOCK`.
 - Privacy rule: the brief points at code only; never include production data, customer PII, secrets, or local account IDs.
@@ -84,10 +87,10 @@ Any `OBJECT` backed by real code evidence reopens that item for verification.
 
 ---
 
-## 5. Exit rules and 3-round cap
+## 5. Exit rules and stateful 3-round cap
 
 - **Approved:** in the same round, every seat returns `VERDICT: APPROVE`, zero `OBJECT` items remain open, and every `blocker`/`major` has fate `fixed`, `wrong`, or `intended` with verified evidence.
-- **Hard 3-round cap:** there is no round 4. If the council has not converged after round 3, stop. Present a decision table to the user: each open item, which seats are on each side, the code evidence, and your recommendation. Do not open or merge the PR until the user decides.
+- **Stateful hard 3-round cap:** derive the round number from prior council `Finding fates` JSONL / review records on this branch or PR (never let a default `round: 1` reset the cap). There is no round 4. If the council has not converged after round 3, stop. Present a decision table to the user: each open item, which seats are on each side, the code evidence, and your recommendation. Do not open or merge the PR until the user decides.
 
 ---
 

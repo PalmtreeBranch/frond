@@ -8,6 +8,7 @@
 | --- | --- | --- | --- | --- | --- |
 | Spawn a subagent | `invoke_subagent` (or `browser` for live UI) | `Task` (`run_in_background: true`) | `Agent` (`subagent_type: "general-purpose"` or `"Explore"`) | Spawn subagent / parallel worker | Native subagent / task tool (or sequential pass if single-agent) |
 | Multi-provider review (`council`) | T3 Code `delegate_task` when present; otherwise single-family fallback | `Task` with explicit `model` slugs per family | T3 Code `delegate_task` or single-family fallback | T3 Code `delegate_task` or single-family fallback | Multi-family when provider catalog exposes 3 families (OpenCode, Copilot, Windsurf), else single-family fallback |
+| Cross-provider nerf audit (`nerf-audit`, `system-audit` Slice 7) | Single-family warning if auditing Gemini-authored code; cross-provider satisfied for non-Gemini authors | `Task` routed to a different family than the detected code author | Single-family warning if auditing Claude-authored code; cross-provider satisfied for non-Claude authors | Single-family warning if auditing Codex/OpenAI-authored code; cross-provider satisfied for non-OpenAI authors | Automatic cross-provider routing via `~/.config/frond/models.md` on multi-provider runtimes (`t3-code`, `opencode`, `copilot`, `windsurf`); single-family warning on `gemini-cli` |
 | Live UI testing (`beta-testers`) | Project `verify-*` CLI, Playwright script, or `browser` subagent | Project `verify-*` CLI, Playwright, or browser MCP | Project `verify-*` CLI or Playwright via `Bash` | Project `verify-*` CLI or Playwright via shell | Project `verify-*` CLI, Playwright, or browser MCP |
 | Structured user choice | `ask_question` | `AskQuestion` | `AskUserQuestion` (plain text in `-p` mode) | Plain text concise choice list | Native question tool or plain text choice list |
 | Task checklist | `update_steps` | Todolist tool | `TodoWrite` | Plan / checklist in reply | Native todo tool or checklist in reply |
@@ -33,6 +34,7 @@ beta-tester-model: flash
 beta-tester-verifier: inherit
 audit-explorer-model: flash
 audit-chief-model: pro
+nerf-audit-mode: single-family-warn
 strongman-model: pro
 council-mode: single-family-fallback
 
@@ -41,6 +43,7 @@ beta-tester-model: sonnet
 beta-tester-verifier: inherit
 audit-explorer-model: sonnet
 audit-chief-model: opus
+nerf-audit-mode: single-family-warn
 strongman-model: sonnet
 council-mode: single-family-fallback
 
@@ -49,6 +52,10 @@ beta-tester-model: balanced
 beta-tester-verifier: inherit
 audit-explorer-model: balanced
 audit-chief-model: deep
+nerf-audit-mode: cross-provider
+nerf-audit-for-claude: gemini-or-openai
+nerf-audit-for-codex: claude-or-gemini
+nerf-audit-for-gemini: openai-or-claude
 council-mode: multi-family
 strongman-model: cross-provider
 
@@ -57,6 +64,10 @@ beta-tester-model: balanced
 beta-tester-verifier: inherit
 audit-explorer-model: balanced
 audit-chief-model: deep
+nerf-audit-mode: cross-provider
+nerf-audit-for-claude: gemini | antigravity | gemini-4-neon | thinking_level=high
+nerf-audit-for-codex: claude | claudeAgent | claude-sonnet-5-5 | effort=high
+nerf-audit-for-gemini: gpt | codex | gpt-6.1-sol | reasoningEffort=xhigh
 council-mode: multi-family
 council-seat-1: gemini | antigravity | gemini-4-neon | thinking_level=high
 council-seat-2: muse | muse | muse-wonder-full-1.0 | reasoningEffort=max
@@ -64,6 +75,11 @@ council-seat-3: gpt | codex | gpt-6.1-sol | reasoningEffort=xhigh
 council-standin: claude | claudeAgent | claude-sonnet-5-5 | effort=high
 strongman-model: cross-provider
 ```
+
+### Cross-provider audit routing (`nerf-audit`, `system-audit`, `pre-ship-review`)
+
+- **Multi-provider runtimes (`t3-code`, `cursor`, `opencode`, `copilot`, `windsurf`):** detect the target code's authoring provider from branch prefixes (`claude/*`, `codex/*`, `gemini/*`), commit trailers, PR metadata, or user input, then pick the matching `nerf-audit-for-<author>` route (or any entitled model from a different provider family). Never bill outside the user's active subscription without explicit approval.
+- **Single-family runtimes (`antigravity`, `claude-code`, `codex`, `gemini-cli`):** if the active runtime's family differs from the code author's family, cross-provider auditing is satisfied. If they match, warn the user that same-provider self-auditing has blind spots, recommend switching to another provider or multi-provider runtime, and only run a clearly flagged best-effort pass if the user opts in.
 
 ### Model tier mapping (`beta-testers`)
 

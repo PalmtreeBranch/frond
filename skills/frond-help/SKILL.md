@@ -37,7 +37,8 @@ Check two things and mention them **only** when relevant to the user's question:
 | Strip AI slop comments and unsafe lint/TS suppressions before review | [`/comment-cleanup`](../comment-cleanup/SKILL.md) | `/comment-cleanup` |
 | Run a 4-lens read-only review + skeptic + JSONL finding fates | [`/pre-ship-review`](../pre-ship-review/SKILL.md) | `/pre-ship-review base origin/main intent "prevent duplicate booking emails"` |
 | Run a 3-model blind parallel council review (max 3 rounds) | [`/council`](../council/SKILL.md) | `/council review this auth migration before opening the PR` |
-| Run a full security, scalability, and performance audit (Severity x Likelihood) | [`/system-audit`](../system-audit/SKILL.md) | `/system-audit full --explorers balanced --chief deep` |
+| Run a cross-provider forensic audit for silent nerfs, cache/compute walls, and check gaming | [`/nerf-audit`](../nerf-audit/SKILL.md) | `/nerf-audit audit this AI-authored branch for Notes-App over-blocking and hidden slowdowns` |
+| Run a full security, scalability, performance, and AI-integrity audit (Severity x Likelihood) | [`/system-audit`](../system-audit/SKILL.md) | `/system-audit full --explorers balanced --chief deep` |
 | Merge a green PR (SHA-pinned) and verify it live in production | [`/land-pr`](../land-pr/SKILL.md) | `/land-pr merge when green and verify live` |
 | Draft a short human email/SMS/chat update from verified facts only | [`/stakeholder-reply`](../stakeholder-reply/SKILL.md) | `/stakeholder-reply draft a Swedish email to Anna explaining the fix is live` |
 | Turn a repeated mistake into a structural fix + red-without-fix check | [`/correction-loop`](../correction-loop/SKILL.md) | `/correction-loop prevent raw summary text from reaching email subject lines` |
@@ -45,7 +46,8 @@ Check two things and mention them **only** when relevant to the user's question:
 
 ## Close calls (how to choose)
 - **`/repro-first` vs `/replay-customer-bug`:** use `repro-first` for normal engineering bugs; use `replay-customer-bug` when starting from a customer screenshot, support ticket, call, or walkthrough (it scrubs PII and verifies booking/payment/message side effects).
-- **`/pre-ship-review` vs `/council` vs `/system-audit`:** `pre-ship-review` reviews one branch with 4 lenses + skeptic; `council` adds 3 separate model families blind in parallel for high-stakes changes; `system-audit` audits the whole repository for security, scalability, and performance.
+- **`/pre-ship-review` vs `/council` vs `/system-audit`:** `pre-ship-review` reviews one branch with 4 lenses + skeptic; `council` adds 3 separate model families blind in parallel for high-stakes changes; `system-audit` audits the whole repository across 7 slices (security, scalability, performance, and AI integrity).
+- **`/nerf-audit` vs `/system-audit` vs `/pre-ship-review`:** use `nerf-audit` for a dedicated, cross-provider forensic audit of AI-authored code (Notes-App over-blocking, compute/training/cache slowdowns, rival-provider handicapping, verification gaming, review bureaucracy); use `system-audit` (`full` or `--scope nerfs`) when you want that integrated with full security/scalability/performance risk ranking; use `pre-ship-review` for fast per-PR gating before opening a pull request.
 - **`/feature-fit` vs `/beta-testers`:** `feature-fit` decides *before* coding whether a UI element belongs and where it goes; `beta-testers` clicks through the built UI with real-world personas *after* coding.
 - **`/correction-loop` vs `/reflect`:** `correction-loop` fixes a code/repo mistake class structurally (type, lint, check); `reflect` improves agent skills and `AGENTS.md` after a session.
 

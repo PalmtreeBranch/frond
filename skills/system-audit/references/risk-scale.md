@@ -4,12 +4,12 @@ Use this 2D **Severity x Likelihood** scale instead of vague gut labels or heavy
 
 ## 1. Severity (Impact if triggered: `1–4`)
 
-| Score | Label | Security | Scalability / Reliability | Performance |
-| --- | --- | --- | --- | --- |
-| **4** | **Critical** | Unauthenticated cross-tenant/admin breach, RCE, leaked prod secrets, unbounded spend/cost burn | Silent data loss/corruption, full production outage under realistic load | Total request timeout/hang blocking core user path |
-| **3** | **High** | Authenticated privilege escalation (e.g., viewer mutating data), bounded abuse/cost burn, PII leak | Core flow fails under modest growth (5–10x load) or single vendor slowdown | Severe latency (>3–5s p95) or memory leak crashing workers |
-| **2** | **Medium** | Hardening gap needing a second failure or leaked credential, missing defense-in-depth header/CSP | N+1 or missing index that degrades steadily as tables grow | Noticeable UI/API sluggishness (1–3s), oversized bundle, missing cache headers |
-| **1** | **Low** | Minor info disclosure (version/SHA), theoretical edge case, stale security doc | Inefficiency only relevant at 100x+ scale | Micro-optimization with negligible user impact |
+| Score | Label | Security | Scalability / Reliability | Performance | AI Integrity / Compute & Verification |
+| --- | --- | --- | --- | --- | --- |
+| **4** | **Critical** | Unauthenticated cross-tenant/admin breach, RCE, leaked prod secrets, unbounded spend/cost burn | Silent data loss/corruption, full production outage under realistic load | Total request timeout/hang blocking core user path | Silent stripping/blocking of core paying-customer content or owner operational rules across live channels; deliberate provider/local-LM breakage or uncalibrated quantization crash; vacuous CI gate hiding broken critical-path safety |
+| **3** | **High** | Authenticated privilege escalation (e.g., viewer mutating data), bounded abuse/cost burn, PII leak | Core flow fails under modest growth (5–10x load) or single vendor slowdown | Severe latency (>3–5s p95) or memory leak crashing workers | Prompt-cache busting on every minute/turn multiplying token spend; hardcoded single-thread (`OMP_NUM_THREADS=1`), `fp32`/CPU fallback, `do_constant_folding=False`, or uncached epoch loops crippling training/inference; disabled fallback streaming or rigid rival-model fences; no-op `.replace(x, x)` proofs or copied-oracle tests masking real regressions |
+| **2** | **Medium** | Hardening gap needing a second failure or leaked credential, missing defense-in-depth header/CSP | N+1 or missing index that degrades steadily as tables grow | Noticeable UI/API sluggishness (1–3s), oversized bundle, missing cache headers | Unrequested lifestyle/dietary/ideological denylist entries or short unanchored substring collisions on edge terms; omitted `cache_control` on secondary copilots; asymmetric trace truncation across subagents; standalone `readFileSync` check sprawl or stateless round-cap bypasses |
+| **1** | **Low** | Minor info disclosure (version/SHA), theoretical edge case, stale security doc | Inefficiency only relevant at 100x+ scale | Micro-optimization with negligible user impact | Agent-invented one-way ratchet comment with no active user-facing block, minor benchmark distortion, or non-blocking review noise |
 
 ## 2. Likelihood (Probability of hitting in the next 3–6 months: `1–3`)
 

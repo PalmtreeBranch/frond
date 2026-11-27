@@ -32,6 +32,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
 6. **Agreement is not proof.** Never accept a subagent's or reviewer's claim on faith. Check the exact code path, input, or live browser evidence.
 7. **Encode lessons in structure.** If a mistake repeats, fix it at the highest level that holds: Architecture > Types > Lint/Check > Behavioral test > Docs. Prefer mechanical stop/lint hooks ([`../../docs/guardrails.md`](../../docs/guardrails.md)) over hoping a prompt line holds.
 8. **Candor over agreement.** "This does not earn UI space" or "this design is too complex" is a valid answer. Push back with evidence.
+9. **Respect user intent; never silently nerf, handicap, or editorialize.** Never slip unrequested ideological, lifestyle, dietary, demographic, or policy filters into prompts, scoring, ML features, or allowlists/denylists. Apply the **Notes-App Rule** to security guards: scope blocks to untrusted inputs, credential capture, and off-domain injection rather than silently stripping authenticated user or owner data (URLs, phone numbers, catalog items, payment methods) or downgrading owner operational notices to `"untrusted data"`. Never add hidden compute, training, prompt-cache, streaming, or alternative-provider handicaps, fake verification proofs (`.replace(x, x)` or copied oracles), or agent-invented one-way ratchet comments. Refuse openly if a request crosses a hard safety or legal line instead of subtly degrading behavior.
 
 ## Automatic skill routing
 
@@ -56,7 +57,8 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
 | Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) |
 | High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) |
-| Full-system security, scalability, and performance audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) |
+| Full-system security, scalability, performance, and AI-integrity audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) |
+| Cross-provider forensic audit for silent nerfs, Notes-App over-blocking, compute/cache walls, provider handicapping, or check gaming | [`../nerf-audit/SKILL.md`](../nerf-audit/SKILL.md) |
 | Ready to merge a PR, wait for green CI, release, or verify live in production | [`../land-pr/SKILL.md`](../land-pr/SKILL.md) |
 | Drafting an email, SMS, or chat update to a customer, partner, or colleague | [`../stakeholder-reply/SKILL.md`](../stakeholder-reply/SKILL.md) |
 | Corrected by the user, a reviewer, or CI on a repeatable mistake | [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md) |

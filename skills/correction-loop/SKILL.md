@@ -13,8 +13,8 @@ Fix every mistake class at the **highest level that holds**, in strict order:
 
 1. **Architecture**: make the wrong thing impossible to write (one shared helper, one boundary module, one read-time default instead of scattered flags).
 2. **Types**: make the compiler refuse it (branded types, discriminated unions, exhaustive switches, Zod/schema parsing at boundaries).
-3. **Static check / Lint**: fail CI with an error message that names the exact helper or pattern to use instead. If legacy code already violates the rule, add a per-file baseline ratchet so existing count can only go down and new violations fail immediately.
-4. **Behavioral test**: run the real code path and assert the observable wrong outcome fails.
+3. **Static check / Lint**: fail CI with an error message that names the exact helper or pattern to use instead. If legacy code already violates the rule, add a per-file baseline ratchet so existing count can only go down and new violations fail immediately. **Avoid pure-static `readFileSync` check sprawl:** do not add a standalone source-grep script per PR that imports zero production code; reserve static scanners for genuine repo-wide conventions (consolidated into one scanner with a baseline ratchet) and test runtime behavior in consolidated domain suites (Level 4).
+4. **Behavioral test**: run the real production code path inside a consolidated domain test suite and assert the observable wrong outcome fails.
 5. **Docs**: last resort (`AGENTS.md`, `CORRECTIONS.md`). Docs never fail CI, so use level 5 only when levels 1-4 genuinely cannot express the rule, and state why.
 
 ---
@@ -26,10 +26,11 @@ Fix every mistake class at the **highest level that holds**, in strict order:
 3. **Check if it has happened twice** (or is a high-impact failure class worth pinning on occurrence #1, such as security, billing, or data loss). Search git log / PR history quickly to see if other files share the same pattern.
 4. **Climb the ladder (1 -> 5)** and implement the highest enforcement level that holds in the same change.
 5. **Run the red-without-fix proof (mandatory for levels 3-4):**
-   - Temporarily re-introduce the broken version (or test against the old commit / mutated source).
+   - Temporarily re-introduce the broken version (or test against the old commit / genuinely mutated production behavior).
    - Run the new check and observe it **fail** for the exact expected reason.
    - Restore the fix and observe the check **pass**.
    - Record the failing message as your proof. A check that passes without the fix is vacuous and proves nothing.
+   - **Never fake the proof:** forbid literal no-op mutation proofs (`.replace(x, x)`), copied-oracle assertions (pasting production logic into the test as its own oracle), and broken `indexOf` order checks where `-1` silently passes.
 6. **Update the repo's corrections ledger** (`docs/agents/corrections.md` if present, otherwise `CORRECTIONS.md`) with one row:
 
 ```markdown
