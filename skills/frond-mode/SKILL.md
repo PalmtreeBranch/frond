@@ -39,6 +39,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
 | Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) (4 lenses + skeptic + finding fates) |
 | High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) (3 model families, blind parallel, max 3 rounds) |
+| Full-system security, scalability, and performance audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) (6 parallel explorers + flagship Chief Auditor/Skeptic, Severity x Likelihood matrix) |
 | Ready to merge a PR, wait for green CI, release, or verify live in production | [`../land-pr/SKILL.md`](../land-pr/SKILL.md) (SHA-pinned merge, deploy proof, cleanup) |
 | Drafting an email, SMS, or chat update to a customer, partner, or colleague | [`../stakeholder-reply/SKILL.md`](../stakeholder-reply/SKILL.md) (facts only, recipient language, never sends unapproved) |
 | Corrected by the user, a reviewer, or CI on a repeatable mistake | [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md) |

@@ -25,6 +25,9 @@ beta-tester-count: 10
 beta-tester-model: balanced
 beta-tester-verifier: inherit
 
+audit-explorer-model: balanced
+audit-chief-model: deep
+
 council-seat-1: gemini | antigravity | gemini-4-neon | thinking_level=high
 council-seat-2: claude | claudeAgent | claude-opus-5-5 | effort=high
 council-seat-3: gpt | codex | gpt-6.1-sol | reasoningEffort=xhigh

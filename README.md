@@ -6,7 +6,7 @@ AI makes it easy to generate ten features a day and ship ten subtle bugs with th
 
 Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from one repository.
 
-## Skills (18)
+## Skills (19)
 
 ### Entry point
 | Skill | When to use it | What it produces |
@@ -41,6 +41,7 @@ Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from on
 | [`/comment-cleanup`](./skills/comment-cleanup/SKILL.md) | Before opening a PR or after heavy AI edits | Strips slop comments and bad suppressions, flags internal surprises to refactor, and encodes real constraints structurally |
 | [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | 4 read-only lenses (callers, sequences, blast radius, proof) + 1 skeptic + JSONL finding fates |
 | [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with verified finding fates and a hard 3-round cap |
+| [`/system-audit`](./skills/system-audit/SKILL.md) | Full-system security, scalability, and performance audit | 6 parallel read-only explorer subagents (mid-tier model) + flagship Chief Auditor/Skeptic pass catching blind spots, ranked by Severity × Likelihood (`P0–P3`) + Effort |
 
 ### Ship, communicate & improve
 | Skill | When to use it | What it produces |
