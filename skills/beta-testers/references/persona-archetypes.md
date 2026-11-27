@@ -15,6 +15,20 @@ Cast **10 personas** by pairing each archetype below with a realistic user of **
 | 9 | **Interrupted & slow-network user** | Mobile `390x844`, light | Leaves a form half-filled, navigates away and returns, reloads mid-wizard, triggers slow or failing requests | Lost draft data without warning, infinite spinners, unhandled failed fetches, missing retry/recovery UI |
 | 10 | **Domain-specific buyer / operator** | Desktop `1440x900`, light (or app's primary customer device) | Mirrors the app's real paying customer under real-world pressure (e.g., busy restaurant manager, clinic receptionist, finance lead) | Missing trust signals, wrong domain terminology, awkward multi-step workflows, mismatch between marketing promise and product UI |
 
+## Scaling rules (choosing `N` personas)
+
+Default is **`N = 10`** (all 10 core archetypes above). When the user requests a different count:
+
+- **`N < 10` (quick smoke or focused PR check):** always keep archetypes **#1 (Low-tech hesitant)**, **#2 (Mobile-first)**, **#4 (Double-clicker)**, and **#10 (Domain buyer/operator)** first (as budget allows), then pick the remaining `N - 4` archetypes that best match the changed surface (for example, add #7 Messy-input for forms, #5 Tech-savvy dark mode for theme/URL changes, #8 Accessibility for modals/nav).
+- **`N == 10` (default):** run all 10 core archetypes.
+- **`N > 10` (deep release sweep):** run all 10 core archetypes plus additional app-specific personas drawn from this expansion pool:
+  - **#11 Longest-locale user** (switches to the most verbose supported locale, e.g., `de`/`fi`/`nl`/`fr`, on `390x844` mobile)
+  - **#12 Tablet landscape user** (`1024x768`, checks awkward mid-breakpoint layouts where desktop sidebars collide with mobile drawers)
+  - **#13 Heavy-data returning operator** (long lists, pagination, search/filter combinations, sorting)
+  - **#14 Impatient multi-tab user** (edits in Tab A while Tab B is open, checks stale state and conflict handling)
+  - **#15 Copy-paste & autofill user** (pastes formatted text from Word/Sheets, relies on browser autofill and password managers)
+  - **#16+ Additional domain roles** (distinct customer verticals or secondary roles in the app, e.g., staff member vs owner vs end guest)
+
 ## Casting rules
 
 - **Ground every persona in the product.** Example: for a B2B restaurant portal, Persona #1 is "Ingrid, 62, bakery owner who still prefers paper calendars and only opens the portal once a week to change holiday hours" — not "Generic 62yo woman".

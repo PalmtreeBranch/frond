@@ -11,7 +11,7 @@ Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from on
 | Skill | When to use it | What it produces |
 | --- | --- | --- |
 | [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting a non-trivial task in this style | Principles, automatic skill routing, and crisp technical replies |
-| [`/beta-testers`](./skills/beta-testers/SKILL.md) | Before shipping a UI change or onboarding flow | 10 context-grounded user personas clicking through the real app in parallel, merged into one developer-ready bug report |
+| [`/beta-testers`](./skills/beta-testers/SKILL.md) | Before shipping a UI change or onboarding flow | Context-grounded user personas (default 10, configurable count and model tier: `light` / `balanced` / `deep` or exact model) clicking through the real app in parallel, merged into one developer-ready bug report |
 | [`/feature-fit`](./skills/feature-fit/SKILL.md) | Before adding a feature to a dashboard/portal, or auditing a UI diff | Anti-slop placement gate: `CUT`, `DEFAULT`, `INTEGRATE`, `REPLACE`, or `NEW SURFACE` with a flow map |
 | [`/locale-craft`](./skills/locale-craft/SKILL.md) | Translating UI copy, setting up a new locale, or auditing multi-language apps | Per-language style/glossary kit, native anti-slop copy, ICU/tag/length checks, and hooks into `/beta-testers` and `/feature-fit` |
 | [`/create-ui-verification-skill`](./skills/create-ui-verification-skill/SKILL.md) | Repo has no safe scripted UI harness yet | Generates a project-local `verify-<app>` CLI (isolated/demo/env safety modes, doctor, CDP Chromium, feature map) that `/beta-testers` plugs into |

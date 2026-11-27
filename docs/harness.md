@@ -15,22 +15,36 @@
 
 ## Model configuration (optional)
 
-Skills that pick models across families (`council`, `pre-ship-review`) check for an optional user config file at `~/.config/frond/models.md`.
+Skills that choose models (`beta-testers`, `council`, `pre-ship-review`) check for an optional user config file at `~/.config/frond/models.md`.
 
 Example `~/.config/frond/models.md`:
 
 ```markdown
 # frond models
+beta-tester-count: 10
+beta-tester-model: balanced
+beta-tester-verifier: inherit
+
 council-seat-1: gemini | antigravity | gemini-4-neon | thinking_level=high
 council-seat-2: claude | claudeAgent | claude-opus-5-5 | effort=high
 council-seat-3: gpt | codex | gpt-6.1-sol | reasoningEffort=xhigh
 council-standin: claude | claudeAgent | claude-sonnet-5-5 | effort=high
 review-lens: inherit
 review-skeptic: inherit
-tester: fast-or-inherit
 ```
+
+### Model tier mapping (`beta-testers`)
+
+When a skill specifies a logical tier (`light`, `balanced`, `deep`) instead of an explicit model slug, map it to the active runtime's available models:
+
+| Logical tier | Intent | Antigravity (`invoke_subagent` `Model`) | Claude Code (`Agent` `model`) | Cursor (`Task` `model`) | Codex / other |
+| --- | --- | --- | --- | --- | --- |
+| **`light`** | Fast / cheapest for large sweeps | `flash_lite` | `haiku` | Fast/mini/haiku-class slug | Cheapest fast model |
+| **`balanced` (default)** | Middle tier: strong UI driving at reasonable cost | `flash` | `sonnet` (or `haiku` if user prefers faster) | Mid-tier sonnet/flash/balanced slug | Default mid-tier model |
+| **`deep`** | Extensive / flagship reasoning for subtle UX & edge bugs | `pro` (or `inherit` if already on flagship) | `opus` | Flagship opus/pro/xhigh slug | Highest reasoning model |
+| **Explicit slug** | User names a model (e.g. `opus`, `haiku`, `gemini-4-neon`) | Pass matching `Model` or omit if unsupported and say so | Pass exact `model` (and `effort` if supported) | Pass exact slug from available models | Pass exact model ID |
 
 Rules:
 - Never hardcode private instance IDs, account emails, or API keys in a repository or skill brief.
 - Never route a seat through a provider that bills outside the user's active subscription unless the user explicitly approves it.
-- If a runtime only exposes one model family, state that explicitly up front instead of pretending three families reviewed the change.
+- If a runtime rejects a model slug or only exposes one model family, fall back cleanly to the closest available model (or omit `model` to inherit) and state that in one line.

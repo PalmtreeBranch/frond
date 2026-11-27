@@ -69,14 +69,15 @@ The coordinator outputs ONE clean markdown report in this exact format:
 
 - **Target:** `<url>` (`<mode>`)
 - **Commit:** `<short-sha>`
-- **Panel:** `<completed>/10` personas completed
+- **Tester model:** `<tier / model slug>` (verifier: `<model>`)
+- **Panel:** `<completed>/<N>` personas completed
 - **Evidence dir:** `<path>`
 - **Summary:** `<P0> P0 · <P1> P1 · <P2> P2 · <P3> P3 · <friction> UX friction items`
 
 ## Bugs (reproducible, sorted by severity)
 
 ### [BT-01] <Short concrete title> — `P1`
-- **Hit by:** `3/10` personas (Double-clicker, Mobile-first, Low-tech)
+- **Hit by:** `3/<N>` personas (Double-clicker, Mobile-first, Low-tech)
 - **Category:** `functional`
 - **Route / Likely source:** `/portal/hours` (`components/portal/HoursEditor.tsx`)
 - **Environment:** `1280x800 light`, `390x844 light`
