@@ -14,6 +14,10 @@ const ALLOWED_URL_HOSTS = new Set([
   'youtube.com',
   'trustmrr.com',
   'vocasolutions.com',
+  'treenerdacademy.com',
+  'apps.apple.com',
+  'venture-pals.com',
+  'mobilaunch.io',
   'localhost',
   '127.0.0.1',
 ]);

@@ -6,7 +6,7 @@
 
 I'm Herman Palmgren ([X](https://x.com/palmgren_herman), [YouTube](https://www.youtube.com/@HermanPalmgren), [TrustMRR](https://trustmrr.com/founder/hpalmtreebranch)), a founder and developer in Stockholm. "Palmgren" means palm branch in Swedish, which is where `frond` (and `PalmtreeBranch`) comes from.
 
-I co-founded [VOCA](https://vocasolutions.com), where we build an AI receptionist that handles phone calls, chat, email, SMS, and social messages for local businesses and books into their existing systems, in seven languages. Before and alongside VOCA, I shipped a bunch of bootstrapped projects: Tree Nerd Academy (ISA Certified Arborist exam prep and flashcards with Chris Comer), Arbster, VenturePals, and MobiLaunch.
+I co-founded [VOCA](https://vocasolutions.com), where we build an AI receptionist that handles phone calls, chat, email, SMS, and social messages for local businesses and books into their existing systems, in seven languages. Before and alongside VOCA, I shipped a bunch of bootstrapped projects: [Tree Nerd Academy](https://www.treenerdacademy.com) (ISA Certified Arborist exam prep and flashcards with Chris Comer), [Arbster](https://apps.apple.com/app/arbster/id1661608920), [VenturePals](https://www.venture-pals.com), and [MobiLaunch](https://mobilaunch.io).
 
 On VOCA alone, this workflow lets us ship nearly 300 merged PRs a week (900+ a month, up to 67 in a single day) with a <0.25% revert rate (2 reverts across the last 937 merged PRs), backed by 1,100+ automated invariant checks across 336 API routes and 7 UI languages.
 
