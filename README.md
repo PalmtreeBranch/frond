@@ -6,9 +6,9 @@
 
 I'm Herman Palmgren ([X](https://x.com/palmgren_herman), [YouTube](https://www.youtube.com/@HermanPalmgren), [TrustMRR](https://trustmrr.com/founder/hpalmtreebranch)), a founder and developer in Stockholm. "Palmgren" means palm branch in Swedish, which is where `frond` (and `PalmtreeBranch`) comes from.
 
-I co-founded [VOCA](https://vocasolutions.com), where we build an AI receptionist that handles phone calls, chat, email, SMS, and social messages for local businesses and books into their existing systems, in seven languages. Before and alongside VOCA, I shipped a bunch of bootstrapped projects: [Tree Nerd Academy](https://www.treenerdacademy.com) (ISA Certified Arborist exam prep and flashcards with Chris Comer), [Arbster](https://apps.apple.com/app/arbster/id1661608920), [VenturePals](https://www.venture-pals.com), and [MobiLaunch](https://mobilaunch.io).
+I co-founded [VOCA](https://vocasolutions.com), where we build an AI receptionist that handles phone calls, chat, email, SMS, and social messages for local businesses and books into their existing systems, in seven languages. Before and alongside VOCA, I built and ran a bunch of bootstrapped businesses and apps: [Arboristbutiken](https://arboristbutiken.se) (arborist and tree-climbing gear e-commerce in Sweden), [Tree Nerd Academy](https://www.treenerdacademy.com) (ISA Certified Arborist exam prep and flashcards with Chris Comer), [VenturePals](https://www.venture-pals.com), [FrondFrame](https://frondframe.io), [MobiLaunch](https://mobilaunch.io), and several mobile apps including [Arbster](https://apps.apple.com/app/arbster/id1661608920), [Steady](https://apps.apple.com/app/steady-fear-of-flying/id6764277758), and [Pouch Quit](https://apps.apple.com/us/app/pouch-quit-quit-nicotine/id6566173079).
 
-On VOCA alone, this workflow lets us ship nearly 300 merged PRs a week (900+ a month, up to 67 in a single day) with a <0.25% revert rate (2 reverts across the last 937 merged PRs), backed by 1,100+ automated invariant checks across 336 API routes and 7 UI languages.
+Across my projects, this workflow lets me push and merge 300+ PRs a day with a <0.25% revert rate, backed by 1,100+ automated invariant checks across 336 API routes and 7 UI languages on VOCA alone.
 
 ## Why frond exists
 
