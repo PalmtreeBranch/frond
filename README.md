@@ -1,68 +1,38 @@
 # frond
 
-**frond** (*palm branch*, from Palmgren) is a portable skill stack built for **indie hackers, founders, and small agile product teams** shipping real software with Linear or GitHub Issues — without enterprise ceremony or AI slop.
+I'm [Herman Palmgren](https://x.com/hpalmtreebranch), a developer and founder in Stockholm. "Palmgren" means palm branch in Swedish, which is where `frond` (and `PalmtreeBranch`) comes from.
 
-AI makes it easy to generate ten features a day and ship ten subtle bugs with them. `frond` guards the whole product loop: whether a feature belongs in the UI, whether real users can get through it without breaking it, whether independent models agree the diff is sound, whether the PR actually lands live in production, and whether customers get an honest human update.
+I'm a co-founder at [VOCA](https://vocasolutions.com), where we build an AI assistant that answers phone calls, web chat, email, SMS, and social messages for local businesses and books into whatever booking system they already use. We ship it in seven languages. Before and alongside VOCA, I built a handful of bootstrapped products and tools: Tree Nerd Academy (ISA Certified Arborist exam prep, flashcards, and mock exams, built with Chris Comer), Arbster, VenturePals, and MobiLaunch (a Flutter starter kit).
 
-Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from one repository.
+## Why I built this
 
-## Skills (21)
+Most popular agent skill stacks were written for huge engineering orgs with stacked PR trains, custom internal bots, and enterprise tooling. When you are a solo founder or a small team working out of Linear or GitHub Issues, that gets in the way.
 
-### Entry point & setup
-| Skill | When to use it | What it produces |
-| --- | --- | --- |
-| [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting a non-trivial task in this style | Matches 5 lean playbooks (`feature`, `bug-fix`, `ui-polish`, `audit-and-harden`, `ship-queue`), propagates `worker.md` to subagents, routes skills, and keeps replies crisp |
-| [`/setup-frond`](./skills/setup-frond/SKILL.md) | First-time setup or adding a new runtime/subscription | Detects available models in the active tool (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`) and updates only its section in `~/.config/frond/models.md` |
-| [`/frond-help`](./skills/frond-help/SKILL.md) | Unsure which skill fits or checking setup state | Inspects active runtime config, picks the right skill, and hands back one copy-paste prompt without burning tokens |
+At the same time, coding with AI makes it far too easy to bolt ten extra cards onto a dashboard, ship machine-translated UI strings that clip on mobile, weaken a test to get a green check, or tell a customer a fix is live before the deploy finished.
 
-### Plan & shape
-| Skill | When to use it | What it produces |
-| --- | --- | --- |
-| [`/sharpen`](./skills/sharpen/SKILL.md) | Before starting a vague idea or rough Linear/GitHub ticket | Deeper (not bigger) brief naming raw sources, cheap prototypes, and founder-only choices |
-| [`/feature-fit`](./skills/feature-fit/SKILL.md) | Before adding a feature to a dashboard/portal, or auditing a UI diff | Anti-slop placement gate: `CUT`, `DEFAULT`, `INTEGRATE`, `REPLACE`, or `NEW SURFACE` with a flow map |
-| [`/work-queue`](./skills/work-queue/SKILL.md) | Running through an ordered list of Linear/GitHub issues or a numbered plan | One issue per branch/PR, live status table, non-blocking blocker handling, handoff to `/land-pr` |
+Every skill in `frond` comes from real mistakes and real habits across VOCA and my side projects:
 
-### Build, debug & localize
-| Skill | When to use it | What it produces |
-| --- | --- | --- |
-| [`/repro-first`](./skills/repro-first/SKILL.md) | Fixing a bug or locking down a regression | Real-surface repro, smallest failing-then-passing check, and minimal root-cause fix |
-| [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) | Starting from a customer screenshot, support report, call, or walkthrough | Anonymized test case run through the normal product flow before/after the fix, verifying booking/payment/message side effects |
-| [`/blast-radius`](./skills/blast-radius/SKILL.md) | Checking a small-looking diff you do not fully trust | Traces past grep (DB, JSON, webhooks, queues, flags) and proves the core safety fact by running code |
-| [`/strongman`](./skills/strongman/SKILL.md) | Pushing a stuck non-sensitive task through when an agent stalls or loops | Fresh model/provider creative angle that drives all sanctioned tools (shell, browser, tests) end to end |
-| [`/locale-craft`](./skills/locale-craft/SKILL.md) | Translating UI copy, setting up a new locale, or auditing multi-language apps | Per-language style/glossary kit, native anti-slop copy, ICU/tag/length checks, and hooks into `/beta-testers`, `/feature-fit`, and `/stakeholder-reply` |
+- Spawning 10 different user personas to click through the live app before a release (`/beta-testers`)
+- Pausing before adding another card or toggle to a portal (`/feature-fit`)
+- Keeping seven UI languages natural and safe from broken ICU tags (`/locale-craft`)
+- Turning a customer screenshot or support call into an anonymized replay test (`/replay-customer-bug`)
+- Running three separate model families blind on risky diffs (`/council`) and a two-tier security and scale sweep across the whole repo (`/system-audit`)
+- Landing PRs with real deploy proof (`/land-pr`) and drafting honest human updates to customers (`/stakeholder-reply`)
 
-### UI verification & QA
-| Skill | When to use it | What it produces |
-| --- | --- | --- |
-| [`/create-ui-verification-skill`](./skills/create-ui-verification-skill/SKILL.md) | Repo has no safe scripted UI harness yet | Generates a project-local `verify-<app>` CLI (isolated/demo/env safety modes, doctor, CDP Chromium, feature map) that `/beta-testers` plugs into |
-| [`/beta-testers`](./skills/beta-testers/SKILL.md) | Before shipping a UI change or onboarding flow | Context-grounded user personas (default 10, configurable count and model tier: `light` / `balanced` / `deep` or exact model) clicking through the real app in parallel, merged into one developer-ready bug report |
+One rule runs through the whole stack: **no receipt, no merge.**
 
-### Clean & review
-| Skill | When to use it | What it produces |
-| --- | --- | --- |
-| [`/comment-cleanup`](./skills/comment-cleanup/SKILL.md) | Before opening a PR or after heavy AI edits | Strips slop comments and bad suppressions, flags internal surprises to refactor, and encodes real constraints structurally |
-| [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | 4 read-only lenses (callers, sequences, blast radius, proof) + 1 skeptic + JSONL finding fates |
-| [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with verified finding fates and a hard 3-round cap |
-| [`/system-audit`](./skills/system-audit/SKILL.md) | Full-system security, scalability, and performance audit | 6 parallel read-only explorer subagents (mid-tier model) + flagship Chief Auditor/Skeptic pass catching blind spots, ranked by Severity × Likelihood (`P0–P3`) + Effort |
+`frond` runs from one repo across **Antigravity**, **Cursor**, **Claude Code**, **Codex**, and **T3 Code**. Fork it, cut what you do not use, and make it yours.
 
-### Ship, communicate & improve
-| Skill | When to use it | What it produces |
-| --- | --- | --- |
-| [`/land-pr`](./skills/land-pr/SKILL.md) | Merging a ready PR and verifying it live in production | CI failure classification (2-round cap), SHA-pinned merge, deploy/ancestor verification, branch/worktree cleanup, exact status |
-| [`/stakeholder-reply`](./skills/stakeholder-reply/SKILL.md) | Replying to a customer, partner, or colleague by email, SMS, or chat | Short human message in the recipient's language built strictly from verified facts; never sends without an explicit yes |
-| [`/correction-loop`](./skills/correction-loop/SKILL.md) | After a reviewer, CI, or user catches a repeatable mistake | Fix at the highest level that holds (Architecture > Types > Check > Test > Docs) with red-without-fix proof |
-| [`/reflect`](./skills/reflect/SKILL.md) | After a long or bumpy session | Mines durable learnings and routes them to targeted skill edits, `AGENTS.md`, or `/correction-loop` checks |
+## Install
 
-## Quick install
-
-Clone the repo anywhere on your machine, then run the install script to symlink it into your active agent tools:
+Clone the repo and symlink it into the tools on your machine:
 
 ```bash
 git clone https://github.com/PalmtreeBranch/frond.git ~/Developer/frond
 ~/Developer/frond/scripts/install.sh all
 ```
 
-Or install for one tool at a time:
+Or link one tool at a time:
 
 ```bash
 ~/Developer/frond/scripts/install.sh antigravity  # ~/.gemini/config/plugins/frond
@@ -71,16 +41,60 @@ Or install for one tool at a time:
 ~/Developer/frond/scripts/install.sh codex        # ~/.codex/skills/*
 ```
 
-Then run `/setup-frond` inside each tool you use (`antigravity`, `claude-code`, `cursor`, `codex`, or `t3-code`) to configure models for that runtime in `~/.config/frond/models.md` without overwriting your other runtimes.
+Next, run `/setup-frond` inside each tool you use. It detects the models available in that runtime and saves them under a separate section in `~/.config/frond/models.md` (`## antigravity`, `## claude-code`, `## cursor`, `## codex`, `## t3-code`) so one tool never overwrites another.
 
-See [docs/harness.md](./docs/harness.md) for cross-tool primitive mapping and per-runtime model config, and [docs/guardrails.md](./docs/guardrails.md) for standing deny rules, "no-done-while-red" stop hooks (Antigravity, Claude Code, git), and the Receipt Table standard.
+For runtime primitive mapping, see [docs/harness.md](./docs/harness.md). For standing deny rules, "no-done-while-red" stop hooks, and the Receipt Table format, see [docs/guardrails.md](./docs/guardrails.md).
 
-## Works well alongside `pstack`
+## Skills (21)
 
-`frond` complements [pstack](https://github.com/cursor/plugins/tree/main/pstack) instead of duplicating everything in it:
-- Use `frond`'s `/create-ui-verification-skill` to generate a safety-bounded `verify-<app>` web harness, then drive it with `/beta-testers`'s 10 personas.
-- Use `pstack`'s `/unslop` for prose cleanup and `frond`'s `/feature-fit` for product and UI anti-slop.
-- Use `pstack`'s `/interrogate` for repro-only stress tests and `frond`'s `/council` + `/pre-ship-review` for multi-lens, multi-model pre-merge gates.
+### Entry point and setup
+| Skill | When to use it | What it does |
+| --- | --- | --- |
+| [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting a real task | Picks one of 5 lean playbooks (`feature`, `bug-fix`, `ui-polish`, `audit-and-harden`, `ship-queue`), passes `worker.md` to subagents, routes to the skills below, and requires a receipt table at the end |
+| [`/setup-frond`](./skills/setup-frond/SKILL.md) | First run, or adding another editor/CLI | Detects available models in the active runtime and updates only its section in `~/.config/frond/models.md` |
+| [`/frond-help`](./skills/frond-help/SKILL.md) | Unsure which skill fits | Checks your setup, names the right skill, and gives one prompt to paste without starting work |
+
+### Plan and shape
+| Skill | When to use it | What it does |
+| --- | --- | --- |
+| [`/sharpen`](./skills/sharpen/SKILL.md) | Before starting a vague idea or rough ticket | Rewrites the brief deeper (not bigger) with raw source files, cheap prototypes to run, and product calls left to you |
+| [`/feature-fit`](./skills/feature-fit/SKILL.md) | Before adding a UI control, card, tab, or setting, or auditing a UI diff | Forces a placement verdict: `CUT`, `DEFAULT`, `INTEGRATE`, `REPLACE`, or `NEW SURFACE` |
+| [`/work-queue`](./skills/work-queue/SKILL.md) | Running through an ordered list of Linear or GitHub issues | One issue per branch and PR, one live status table, skips blocked items without stalling independent ones, hands finished PRs to `/land-pr` |
+
+### Build, debug, and localize
+| Skill | When to use it | What it does |
+| --- | --- | --- |
+| [`/repro-first`](./skills/repro-first/SKILL.md) | Fixing a bug | Reproduces on the real surface first, writes the smallest failing-then-passing check, and ships the minimal root-cause fix |
+| [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) | Starting from a customer screenshot, support report, call, or walkthrough | Strips personal data, replays through the normal product flow before and after the fix, and checks whether any booking, payment, or message fired |
+| [`/blast-radius`](./skills/blast-radius/SKILL.md) | Checking a small diff you do not fully trust | Traces past grep (DB columns, API JSON, webhooks, queues, flags) and proves the core safety fact by running code |
+| [`/strongman`](./skills/strongman/SKILL.md) | Pushing a stuck non-sensitive task through when an agent loops or stalls | Spawns a fresh model or provider for a different angle and drives every allowed tool (shell, browser, tests) to a verified finish |
+| [`/locale-craft`](./skills/locale-craft/SKILL.md) | Translating UI copy, adding a locale, or auditing multi-language apps | Builds per-language glossaries and style guides, catches translationese and ICU/tag/length bugs, and feeds locale checks into `/beta-testers` and `/feature-fit` |
+
+### UI verification and QA
+| Skill | When to use it | What it does |
+| --- | --- | --- |
+| [`/create-ui-verification-skill`](./skills/create-ui-verification-skill/SKILL.md) | Repo has no safe scripted browser harness yet | Builds a project-local `verify-<app>` CLI with `isolated`/`demo`/`env` safety modes, `doctor`, persistent headless Chromium, and a feature map |
+| [`/beta-testers`](./skills/beta-testers/SKILL.md) | Before shipping a UI change or onboarding flow | Launches context-grounded user personas (default 10, configurable count and `light`/`balanced`/`deep` model tier) to click through the live app and return one reproducible bug report |
+
+### Clean and review
+| Skill | When to use it | What it does |
+| --- | --- | --- |
+| [`/comment-cleanup`](./skills/comment-cleanup/SKILL.md) | Before opening a PR or after heavy AI edits | Deletes slop comments and unsafe lint/TS suppressions, flags internal workarounds to refactor, and proposes checks for claimed constraints |
+| [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | Runs 4 read-only lenses (callers, sequences, blast radius, anti-cheating test integrity) plus 1 skeptic and JSONL finding fates |
+| [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with verified finding fates and a hard 3-round cap |
+| [`/system-audit`](./skills/system-audit/SKILL.md) | Full security, scalability, and performance audit (or `--scope diff` sweep) | 6 parallel mid-tier explorers plus a larger flagship Chief Auditor/Skeptic pass, ranked by Severity x Likelihood (`P0` to `P3`) and Effort |
+
+### Ship, communicate, and improve
+| Skill | When to use it | What it does |
+| --- | --- | --- |
+| [`/land-pr`](./skills/land-pr/SKILL.md) | Merging a ready PR and confirming it is live | Classifies CI failures (2-round cap), pins merge to the checked head SHA, verifies live deploy via ancestor check, cleans up branches/worktrees, and reports exact state |
+| [`/stakeholder-reply`](./skills/stakeholder-reply/SKILL.md) | Drafting an email, SMS, or chat reply to a customer, partner, or colleague | Short human message in the recipient's language built strictly from verified session facts; never sends without an explicit yes in the current turn |
+| [`/correction-loop`](./skills/correction-loop/SKILL.md) | After a reviewer, CI, or user catches a repeated mistake | Fixes at the highest level that holds (Architecture > Types > Lint/Check > Behavioral test > Docs) with red-without-fix proof |
+| [`/reflect`](./skills/reflect/SKILL.md) | After a long or bumpy session | Mines durable lessons and proposes edits to `frond`, `AGENTS.md`, or `/correction-loop` |
+
+## Using `frond` with `pstack`
+
+I use parts of Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack) alongside `frond`, and several ideas here were inspired by it. They sit next to each other cleanly: `pstack`'s `/unslop` cleans up writing while `frond`'s `/feature-fit` stops UI clutter; `pstack`'s `/interrogate` stress-tests a diff while `frond`'s `/council` and `/pre-ship-review` gate risky merges.
 
 ## Validate the repo
 
