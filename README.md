@@ -14,7 +14,7 @@ Most popular skill stacks solve this for huge engineering orgs with stacked PR t
 
 `frond` is the set of small, composable skills I actually use every day to stop slop and breaking changes without slowing down:
 
-- **Stop UI slop before it gets written.** [`/feature-fit`](./skills/feature-fit/SKILL.md) pauses before you add another card, tab, or toggle to a portal and asks if it should just be a smart default, live inline, replace something old, or get cut.
+- **Stop UI slop and wasted work before it gets written.** [`/business-value`](./skills/business-value/SKILL.md) checks real usage (PostHog, GA, DB) and your 1-3 month growth trajectory before you spend days building something nobody needs, or helps you decide whether to keep pushing when stuck. [`/feature-fit`](./skills/feature-fit/SKILL.md) pauses before you add another card, tab, or toggle to a portal and asks if it should just be a smart default, live inline, replace something old, or get cut.
 - **Catch real-user breakage before customers do.** [`/beta-testers`](./skills/beta-testers/SKILL.md) spins up 10 realistic user personas (a 62-year-old who hates tech, a mobile-first thumb scroller, a double-clicker, a dark-mode skeptic, and more) to click through your actual app and hand back one reproducible bug report.
 - **Stop sneaky breaking changes and fake green tests.** [`/blast-radius`](./skills/blast-radius/SKILL.md) traces past grep and proves safety by running real code. [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) runs 4 read-only lenses plus a skeptic and flags any deleted or loosened test assertion. [`/council`](./skills/council/SKILL.md) puts 3 different model families on a risky diff blind.
 - **Turn real bugs and repeat mistakes into permanent checks.** [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) turns a support screenshot or call into an anonymized replay test. [`/correction-loop`](./skills/correction-loop/SKILL.md) fixes repeated mistakes at the highest level that holds (architecture, types, lint, test, docs last).
@@ -52,6 +52,7 @@ Not sure which skill to run? Ask [`/frond-help`](./skills/frond-help/SKILL.md).
 Mostly I start with [`/frond-mode`](./skills/frond-mode/SKILL.md), which picks one of 5 lean playbooks (`feature`, `bug-fix`, `ui-polish`, `audit-and-harden`, `ship-queue`), hands `worker.md` to subagents, and routes to the right skills as needed. You can also call any skill directly:
 
 ```text
+worth building?:    /business-value check if VOC-142 is worth finishing or if we should cut it
 anti-slop UI gate:  /feature-fit should we add a new status card to the portal home?
 live persona QA:    /beta-testers 10 personas on balanced focusing on /onboarding
 quick smoke QA:     /beta-testers 4 personas on deep on the new billing modal
@@ -67,7 +68,7 @@ climb an eval/fix:  /hill-climb get the booking eval above 95% and stop if gains
 unstick a loop:     /strongman push this local Playwright setup over the finish line
 ```
 
-## All 22 skills
+## All 23 skills
 
 <details>
 <summary>Open the full skill list</summary>
@@ -82,6 +83,7 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 ### Plan and shape
 | Skill | Use it when | What it does |
 | --- | --- | --- |
+| [`/business-value`](./skills/business-value/SKILL.md) | Prioritizing an idea/issue, or deciding whether to keep going when stuck | Checks real usage analytics (PostHog, GA, DB) and 1-3 month growth trajectory, then returns `BUILD NOW`, `BUILD NOW (CRITICAL FIX)`, `BUILD NOW FOR UPCOMING SCALE`, `SIMPLIFY`, `DEFER`, or `SKIP / STOP` |
 | [`/sharpen`](./skills/sharpen/SKILL.md) | Starting from a vague idea or rough ticket | Rewrites the brief deeper (not bigger) with raw source files, cheap prototypes to run, and product calls left to you |
 | [`/feature-fit`](./skills/feature-fit/SKILL.md) | Before adding a UI card, tab, or toggle, or auditing a UI diff | Forces a placement verdict: `CUT`, `DEFAULT`, `INTEGRATE`, `REPLACE`, or `NEW SURFACE` |
 | [`/work-queue`](./skills/work-queue/SKILL.md) | Working through an ordered Linear or GitHub issue list | One issue per branch and PR, one live status table, skips blocked items without stalling independent ones, hands PRs to `/land-pr` |

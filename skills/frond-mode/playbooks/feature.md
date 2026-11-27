@@ -3,8 +3,8 @@
 Copy these steps into your checklist first. You own the design, verification, and final diff.
 
 1. **Ground before writing (Grounding Receipt):** Read the project manifest (`package.json`, `pyproject.toml`, etc.) and record exact versions of every library this task touches. Verify every external API, SDK call, or CLI flag against docs, MCP docs, or installed dependency source; if a feature cannot be verified in docs or source, stop and tell the user rather than guessing from memory.
-2. **Frame, sharpen & UI anti-slop gate:**
-   - Restate the user goal and smallest change in 2 lines. If ambiguous, run [`../../sharpen/SKILL.md`](../../sharpen/SKILL.md).
+2. **Value, sharpen & UI anti-slop gate:**
+   - Restate the user goal and smallest change in 2 lines. If business impact or timing is uncertain, run [`../../business-value/SKILL.md`](../../business-value/SKILL.md). If scope is ambiguous, run [`../../sharpen/SKILL.md`](../../sharpen/SKILL.md).
    - If visible UI changes, run [`../../feature-fit/SKILL.md`](../../feature-fit/SKILL.md) before writing UI code. Pause if the verdict is `CUT`, `DEFAULT`, or a different placement than asked.
 3. **Signed plan (<25 lines, before editing non-trivial changes):** State concisely:
    - **Data shape & defaults:** types/state first; prefer smart code defaults over new toggles.

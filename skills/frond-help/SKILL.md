@@ -22,6 +22,7 @@ Check two things and mention them **only** when relevant to the user's question:
 | --- | --- | --- |
 | Run any non-trivial task end to end with playbooks & rules | [`/frond-mode`](../frond-mode/SKILL.md) | `/frond-mode fix the double-submit bug on the billing page and verify it live` |
 | Configure models for this tool (Antigravity, Claude Code, Cursor, Codex, T3 Code) | [`/setup-frond`](../setup-frond/SKILL.md) | `/setup-frond` |
+| Evaluate whether an idea, issue, or stuck task is worth building now, for upcoming scale, or skipping | [`/business-value`](../business-value/SKILL.md) | `/business-value is VOC-142 worth building now given our 2-month growth plan?` |
 | Make a vague idea or rough Linear ticket sharper before coding | [`/sharpen`](../sharpen/SKILL.md) | `/sharpen add exportable monthly reports to the portal` |
 | Check whether a UI feature belongs in the dashboard/portal (anti-slop) | [`/feature-fit`](../feature-fit/SKILL.md) | `/feature-fit should we add a new status card to the portal home?` |
 | Work through an ordered list of Linear/GitHub issues (1 issue = 1 PR) | [`/work-queue`](../work-queue/SKILL.md) | `/work-queue do VOC-120, VOC-124, and VOC-129 in order to PR open` |
