@@ -26,6 +26,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 
 | Trigger | Skill to load |
 | --- | --- |
+| Ordered list of issues/tasks or approved numbered plan | [`../work-queue/SKILL.md`](../work-queue/SKILL.md) (one issue per branch/PR, live status table) |
 | Adding or changing visible UI, dashboard cards, nav items, or settings | [`../feature-fit/SKILL.md`](../feature-fit/SKILL.md) before coding (or on the UI diff before pushing) |
 | Writing, translating, or auditing multi-language UI copy or glossaries | [`../locale-craft/SKILL.md`](../locale-craft/SKILL.md) (native copy, ICU safety, cross-skill language hooks) |
 | Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) (10 persona subagents on the live UI) |
@@ -33,6 +34,8 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
 | Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) (4 lenses + skeptic + finding fates) |
 | High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) (3 model families, blind parallel, max 3 rounds) |
+| Ready to merge a PR, wait for green CI, release, or verify live in production | [`../land-pr/SKILL.md`](../land-pr/SKILL.md) (SHA-pinned merge, deploy proof, cleanup) |
+| Drafting an email, SMS, or chat update to a customer, partner, or colleague | [`../stakeholder-reply/SKILL.md`](../stakeholder-reply/SKILL.md) (facts only, recipient language, never sends unapproved) |
 | Corrected by the user, a reviewer, or CI on a repeatable mistake | [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md) |
 
 ## Autonomy boundaries

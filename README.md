@@ -1,8 +1,8 @@
 # frond
 
-**frond** (*palm branch*, from Palmgren) is a portable skill stack for AI coding agents.
+**frond** (*palm branch*, from Palmgren) is a portable skill stack built for **indie hackers, founders, and small agile product teams** shipping real software with Linear or GitHub Issues — without enterprise ceremony or AI slop.
 
-AI makes it easy to generate ten features a day and ship ten subtle bugs with them. `frond` slows down the parts that actually matter: whether a feature belongs in the product, whether real users can get through the UI without breaking it, whether independent models agree the diff is sound, and whether every repeated mistake becomes a permanent check.
+AI makes it easy to generate ten features a day and ship ten subtle bugs with them. `frond` guards the whole product loop: whether a feature belongs in the UI, whether real users can get through it without breaking it, whether independent models agree the diff is sound, whether the PR actually lands live in production, and whether customers get an honest human update.
 
 Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from one repository.
 
@@ -11,13 +11,16 @@ Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from on
 | Skill | When to use it | What it produces |
 | --- | --- | --- |
 | [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting a non-trivial task in this style | Principles, automatic skill routing, and crisp technical replies |
-| [`/beta-testers`](./skills/beta-testers/SKILL.md) | Before shipping a UI change or onboarding flow | Context-grounded user personas (default 10, configurable count and model tier: `light` / `balanced` / `deep` or exact model) clicking through the real app in parallel, merged into one developer-ready bug report |
+| [`/work-queue`](./skills/work-queue/SKILL.md) | Running through an ordered list of Linear/GitHub issues or a numbered plan | One issue per branch/PR, live status table, non-blocking blocker handling, handoff to `/land-pr` |
 | [`/feature-fit`](./skills/feature-fit/SKILL.md) | Before adding a feature to a dashboard/portal, or auditing a UI diff | Anti-slop placement gate: `CUT`, `DEFAULT`, `INTEGRATE`, `REPLACE`, or `NEW SURFACE` with a flow map |
-| [`/locale-craft`](./skills/locale-craft/SKILL.md) | Translating UI copy, setting up a new locale, or auditing multi-language apps | Per-language style/glossary kit, native anti-slop copy, ICU/tag/length checks, and hooks into `/beta-testers` and `/feature-fit` |
+| [`/locale-craft`](./skills/locale-craft/SKILL.md) | Translating UI copy, setting up a new locale, or auditing multi-language apps | Per-language style/glossary kit, native anti-slop copy, ICU/tag/length checks, and hooks into `/beta-testers`, `/feature-fit`, and `/stakeholder-reply` |
 | [`/create-ui-verification-skill`](./skills/create-ui-verification-skill/SKILL.md) | Repo has no safe scripted UI harness yet | Generates a project-local `verify-<app>` CLI (isolated/demo/env safety modes, doctor, CDP Chromium, feature map) that `/beta-testers` plugs into |
+| [`/beta-testers`](./skills/beta-testers/SKILL.md) | Before shipping a UI change or onboarding flow | Context-grounded user personas (default 10, configurable count and model tier: `light` / `balanced` / `deep` or exact model) clicking through the real app in parallel, merged into one developer-ready bug report |
 | [`/comment-cleanup`](./skills/comment-cleanup/SKILL.md) | Before opening a PR or after heavy AI edits | Strips slop comments and bad suppressions, flags internal surprises to refactor, and encodes real constraints structurally |
-| [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with verified finding fates and a hard 3-round cap |
 | [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | 4 read-only lenses (callers, sequences, blast radius, proof) + 1 skeptic + JSONL finding fates |
+| [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with verified finding fates and a hard 3-round cap |
+| [`/land-pr`](./skills/land-pr/SKILL.md) | Merging a ready PR and verifying it live in production | CI failure classification (2-round cap), SHA-pinned merge, deploy/ancestor verification, branch/worktree cleanup, exact status |
+| [`/stakeholder-reply`](./skills/stakeholder-reply/SKILL.md) | Replying to a customer, partner, or colleague by email, SMS, or chat | Short human message in the recipient's language built strictly from verified facts; never sends without an explicit yes |
 | [`/correction-loop`](./skills/correction-loop/SKILL.md) | After a reviewer, CI, or user catches a repeatable mistake | Fix at the highest level that holds (Architecture > Types > Check > Test > Docs) with red-without-fix proof |
 
 ## Quick install
