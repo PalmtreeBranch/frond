@@ -61,6 +61,9 @@ case "$TARGET" in
   gemini-cli)
     link_skills "$HOME/.gemini/skills"
     ;;
+  agents)
+    link_skills "$HOME/.agents/skills"
+    ;;
   all)
     link_dir "$HOME/.gemini/config/plugins/frond"
     [ -d "$HOME/.cursor" ] && link_dir "$HOME/.cursor/plugins/frond" || true
@@ -70,9 +73,10 @@ case "$TARGET" in
     [ -d "$HOME/.copilot" ] && link_skills "$HOME/.copilot/skills" || true
     [ -d "$HOME/.codeium/windsurf" ] && link_skills "$HOME/.codeium/windsurf/skills" || true
     [ -d "$HOME/.gemini" ] && link_skills "$HOME/.gemini/skills" || true
+    [ -d "$HOME/.agents" ] && link_skills "$HOME/.agents/skills" || true
     ;;
   *)
-    echo "Usage: $0 [all|antigravity|cursor|claude|codex|opencode|copilot|windsurf|gemini-cli]" >&2
+    echo "Usage: $0 [all|antigravity|cursor|claude|codex|opencode|copilot|windsurf|gemini-cli|agents]" >&2
     exit 1
     ;;
 esac

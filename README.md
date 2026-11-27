@@ -21,7 +21,7 @@ Most popular skill stacks solve this for huge engineering orgs with stacked PR t
 `frond` is built around **small PRs and low reverts**: one focused change or one closed-loop cleanup per branch, backed by real runtime receipts instead of giant diffs or process theater. Here is how the pieces fit together:
 
 - **Stop UI slop and wasted work before it gets written.** [`/business-value`](./skills/business-value/SKILL.md) checks real usage (PostHog, GA, DB) and your 1-3 month growth trajectory before you spend days building something nobody needs, or helps you decide whether to keep pushing when stuck. [`/feature-fit`](./skills/feature-fit/SKILL.md) pauses before you add another card, tab, or toggle to a portal and asks if it should just be a smart default, live inline, replace something old, or get cut.
-- **Kill architectural drift in small, closed-loop PRs.** [`/consolidate`](./skills/consolidate/SKILL.md) looks at high-churn hotspots with "Day 1 with full hindsight", applies Ousterhout's Deletion Test to shallow wrappers, proves semantic equivalence, locks a behavioral baseline, migrates every caller, and deletes the old v1 path in the same small, mergeable PR (never a 10,000-line refactor).
+- **Kill architectural and test-suite drift in small, closed-loop PRs.** [`/consolidate`](./skills/consolidate/SKILL.md) looks at high-churn hotspots with "Day 1 with full hindsight", applies Ousterhout's Deletion Test to shallow wrappers, proves semantic equivalence, locks a behavioral baseline, migrates every caller, and deletes the old v1 path in the same small, mergeable PR (never a 10,000-line refactor). [`/test-fit`](./skills/test-fit/SKILL.md) brings that exact discipline to CI and unit tests: catching bypassable CI gates and vacuous mocks, adding missing behavioral tests on unprotected critical paths, speeding up slow runs with measured wall-clock proof, and deleting redundant or `readFileSync`-theater checks with a Coverage Equivalence Receipt.
 - **Catch real-user breakage before customers do.** [`/beta-testers`](./skills/beta-testers/SKILL.md) is my favourite skill in the whole stack. It spins up 10 realistic user personas (a 62-year-old who hates tech, a mobile-first thumb scroller, a double-clicker, a dark-mode skeptic, and more) to click through your actual app and hand back one reproducible bug report.
 - **Stop sneaky breaking changes, silent nerfs, and fake green tests.** [`/blast-radius`](./skills/blast-radius/SKILL.md) traces past grep and proves safety by running real code. [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) runs 4 read-only lenses plus a skeptic and flags silent product nerfing, cache/compute walls, and weakened or gamed tests. [`/nerf-audit`](./skills/nerf-audit/SKILL.md) runs a cross-provider forensic audit (a different model family than the code author) for Notes-App over-blocking, compute/training/cache slowdowns, rival-provider handicapping, and review bureaucracy. [`/council`](./skills/council/SKILL.md) puts 3 different model families on a risky diff blind with equal context fidelity.
 - **Turn real bugs and repeat mistakes into permanent checks.** [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) turns a support screenshot or call into an anonymized replay test. [`/correction-loop`](./skills/correction-loop/SKILL.md) fixes repeated mistakes at the highest level that holds (architecture, types, lint, test, docs last).
@@ -74,6 +74,7 @@ full system audit:  /system-audit full --explorers balanced --chief deep
 cross-provider nerf:/nerf-audit audit this AI-authored branch for silent nerfs, cache/compute walls, and fake proofs
 fast diff sweep:    /system-audit --scope diff
 de-entropy batch:   /consolidate --batches 3 deduplicate webhook and retry helpers
+audit & trim tests: /test-fit --batches 3 fix CI bypasses, fill gaps, and cut slow/redundant checks
 run an issue list:  /work-queue do VOC-120, VOC-124, and VOC-129 in order to PR open
 ship it cleanly:    /land-pr merge when green and verify live
 customer update:    /stakeholder-reply draft a short Swedish email to Anna saying it is live
@@ -81,7 +82,7 @@ climb an eval/fix:  /hill-climb get the booking eval above 95% and stop if gains
 unstick a loop:     /strongman push this local Playwright setup over the finish line
 ```
 
-## All 25 skills
+## All 26 skills
 
 <details>
 <summary>Open the full skill list</summary>
@@ -121,6 +122,7 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 | Skill | Use it when | What it does |
 | --- | --- | --- |
 | [`/consolidate`](./skills/consolidate/SKILL.md) | Deduplicating parallel helpers, removing shallow wrappers, or reducing codebase entropy | Maps high-churn hotspots ("Day 1 with full hindsight"), runs the Deletion Test + Semantic Equivalence Gate, locks a behavioral baseline, migrates callers, and deletes the old path in small, low-revert closed-loop PRs |
+| [`/test-fit`](./skills/test-fit/SKILL.md) | Auditing CI and test suites that feel bypassable, slow, gap-ridden, or bloated | Audits CI bypasses and vacuous tests, adds missing behavioral tests on critical paths, speeds up slow runs (with before/after timing), and merges/deletes redundant checks with a Coverage Equivalence Receipt |
 | [`/comment-cleanup`](./skills/comment-cleanup/SKILL.md) | Before opening a PR or after heavy AI edits | Deletes slop comments and unsafe lint/TS suppressions, flags internal workarounds to refactor, and proposes checks for claimed constraints |
 | [`/pre-ship-review`](./skills/pre-ship-review/SKILL.md) | Before opening a PR that changes user-facing behavior or side effects | Runs 4 read-only lenses (callers, sequences, blast radius + Notes-App/nerf check, anti-cheating/anti-gaming proof) plus 1 cross-provider-preferred skeptic, stateful 3-round cap, and JSONL finding fates |
 | [`/council`](./skills/council/SKILL.md) | High-stakes changes (auth, billing, tenancy, migrations, critical flows) | 3-model blind parallel review with equal context fidelity, no single-provider sole judge, verified finding fates, and a stateful hard 3-round cap |
