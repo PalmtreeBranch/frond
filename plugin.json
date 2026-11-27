@@ -1,0 +1,17 @@
+{
+  "name": "frond",
+  "displayName": "frond",
+  "version": "0.1.0",
+  "description": "Opinionated agent skills for shipping real products without AI slop: 10-persona UI beta testers, dashboard feature-fit gates, multi-model council reviews, 4-lens pre-ship reviews, and a structural correction loop.",
+  "logo": "assets/logo.svg",
+  "author": {
+    "name": "Herman Palmgren"
+  },
+  "homepage": "https://github.com/hermanpalmgren/frond",
+  "repository": "https://github.com/hermanpalmgren/frond",
+  "suggestedPrompts": [
+    "Run /beta-testers on our app and report every bug with repro steps",
+    "Run /feature-fit before adding this new feature to the dashboard",
+    "Run /council on the current branch before opening a pull request"
+  ]
+}
