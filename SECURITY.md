@@ -11,7 +11,7 @@ Installing someone else's agent skills gives those markdown files influence over
   - `/land-pr` forbids admin bypass, disabling branch protection, and force-pushing.
   - `/beta-testers`, `/create-ui-verification-skill`, and `/replay-customer-bug` forbid testing against live customer data or paid outbound side effects, and require stripping personal data from test fixtures.
   - `/strongman` applies to non-sensitive local work only and explicitly forbids bypassing access controls, credentials, sandbox boundaries, or CAPTCHAs.
-  - `/system-audit` is strictly read-only.
+  - `/system-audit` and `/nerf-audit` are strictly read-only, and `/nerf-audit` enforces cross-provider auditing (a different model family than the code author) alongside anti-nerfing and anti-gaming checks.
   - `/setup-frond` never writes secrets, account emails, or private instance IDs into any repository.
 
 ## Automated security audit (local and CI)
@@ -31,7 +31,7 @@ What `scripts/security-audit.mjs` enforces across every file in the repository:
 4. Zero network calls or `eval` inside `scripts/`.
 5. Strict URL host allowlist (only GitHub, Herman's verified profile/project domains, and localhost).
 6. Zero unexpected file types, zero external dependencies, and valid PNG header verification for `assets/logo.png`.
-7. Mandatory safety guardrail assertions on every high-impact skill (`stakeholder-reply`, `land-pr`, `strongman`, `beta-testers`, `replay-customer-bug`, `system-audit`).
+7. Mandatory safety guardrail assertions on every high-impact skill (`stakeholder-reply`, `land-pr`, `strongman`, `beta-testers`, `replay-customer-bug`, `system-audit`, `nerf-audit`, `frond-mode`, `pre-ship-review`, `council`, `correction-loop`).
 
 ## Reporting an issue
 
