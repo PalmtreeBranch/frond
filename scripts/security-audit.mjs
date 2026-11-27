@@ -129,6 +129,21 @@ const REQUIRED_SKILL_GUARDRAILS = [
     mustMatch: /no-op mutation proofs/i,
     reason: 'must forbid no-op mutation proofs in red-without-fix verification',
   },
+  {
+    file: 'skills/consolidate/SKILL.md',
+    mustMatch: /never build giant mega-branches/i,
+    reason: 'must forbid giant unreviewable mega-branches and enforce small, independently mergeable PRs',
+  },
+  {
+    file: 'skills/consolidate/SKILL.md',
+    mustMatch: /delete the replaced implementation/i,
+    reason: 'must enforce closed-loop caller migration and deletion of replaced implementations',
+  },
+  {
+    file: 'skills/consolidate/SKILL.md',
+    mustMatch: /semantic equivalence before merging/i,
+    reason: 'must require proving semantic equivalence before merging duplicate implementations',
+  },
 ];
 
 function walk(dir) {

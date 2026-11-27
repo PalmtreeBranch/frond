@@ -17,6 +17,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
    - Bug fix or customer issue -> [`playbooks/bug-fix.md`](./playbooks/bug-fix.md)
    - UI polish, localization, or release QA -> [`playbooks/ui-polish.md`](./playbooks/ui-polish.md)
    - Security, scalability, or performance audit -> [`playbooks/audit-and-harden.md`](./playbooks/audit-and-harden.md)
+   - Architectural consolidation, deduplication, or entropy reduction -> [`../consolidate/SKILL.md`](../consolidate/SKILL.md)
    - Multi-issue list or numbered plan -> [`playbooks/ship-queue.md`](./playbooks/ship-queue.md)
 2. **Copy the playbook steps into your checklist tool first** so later verification, cleanup, and review steps never get dropped mid-task.
 3. **Propagate `worker.md` to every subagent:** Subagents do not inherit slash-command skills automatically. Make the first line of every subagent kickoff:
@@ -24,7 +25,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
 
 ## Core principles
 
-1. **Subtract before you add.** Default to deletion, simplification, and smart code defaults over new toggles, dashboard cards, or compatibility layers.
+1. **Subtract before you add (and close the loop).** Default to deletion, simplification, and smart code defaults over new toggles, dashboard cards, or compatibility layers. Apply Ousterhout's **Deletion Test** to every wrapper or abstraction (*if this layer is deleted, does complexity disappear or spread to callers?*). When introducing a canonical helper, migrate callers and delete the replaced implementation instead of leaving parallel v1/v2 paths alive.
 2. **Experience first.** Real user flow beats implementation convenience. Ship fewer, cleaner surfaces rather than bolted-on widgets.
 3. **Fix root causes.** Trace every bug to the first place the system went wrong. Never ship a bandaid that the next agent will copy.
 4. **No receipt, no merge (Prove it works).** Shipped is not proven, and "it compiles" is not proof. Verify against the real app or a check that fails when the fix is reverted, and end every non-trivial change with a **Receipt Table** (`Check | Result | Evidence`). A row with no concrete evidence did not happen.
@@ -33,6 +34,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
 7. **Encode lessons in structure.** If a mistake repeats, fix it at the highest level that holds: Architecture > Types > Lint/Check > Behavioral test > Docs. Prefer mechanical stop/lint hooks ([`../../docs/guardrails.md`](../../docs/guardrails.md)) over hoping a prompt line holds.
 8. **Candor over agreement.** "This does not earn UI space" or "this design is too complex" is a valid answer. Push back with evidence.
 9. **Respect user intent; never silently nerf, handicap, or editorialize.** Never slip unrequested ideological, lifestyle, dietary, demographic, or policy filters into prompts, scoring, ML features, or allowlists/denylists. Apply the **Notes-App Rule** to security guards: scope blocks to untrusted inputs, credential capture, and off-domain injection rather than silently stripping authenticated user or owner data (URLs, phone numbers, catalog items, payment methods) or downgrading owner operational notices to `"untrusted data"`. Never add hidden compute, training, prompt-cache, streaming, or alternative-provider handicaps, fake verification proofs (`.replace(x, x)` or copied oracles), or agent-invented one-way ratchet comments. Refuse openly if a request crosses a hard safety or legal line instead of subtly degrading behavior.
+10. **Small PRs, low reverts.** Ship one logical change or one closed-loop consolidation per branch and PR. Never build unreviewable multi-thousand-line mega-branches across unrelated domains, and leave cold, working code untouched unless it is an active hotspot.
 
 ## Automatic skill routing
 
@@ -55,6 +57,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) |
 | Repo has no safe scripted way to launch, doctor, and drive its UI | [`../create-ui-verification-skill/SKILL.md`](../create-ui-verification-skill/SKILL.md) |
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
+| Deduplicating parallel implementations, removing shallow wrappers, or reducing architectural entropy in small closed-loop PRs | [`../consolidate/SKILL.md`](../consolidate/SKILL.md) |
 | Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) |
 | High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) |
 | Full-system security, scalability, performance, and AI-integrity audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) |

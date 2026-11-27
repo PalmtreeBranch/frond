@@ -35,6 +35,7 @@ Check two things and mention them **only** when relevant to the user's question:
 | Build a safe `verify-<app>` CLI (isolated/demo/env modes + Chromium) | [`/create-ui-verification-skill`](../create-ui-verification-skill/SKILL.md) | `/create-ui-verification-skill` |
 | Test live UI with 10 (or `N`) real-world personas on a chosen model tier | [`/beta-testers`](../beta-testers/SKILL.md) | `/beta-testers 10 personas on balanced focusing on /onboarding` |
 | Strip AI slop comments and unsafe lint/TS suppressions before review | [`/comment-cleanup`](../comment-cleanup/SKILL.md) | `/comment-cleanup` |
+| Reduce architectural entropy and deduplicate parallel helpers in small closed-loop PRs | [`/consolidate`](../consolidate/SKILL.md) | `/consolidate --batches 3 deduplicate webhook and retry helpers` |
 | Run a 4-lens read-only review + skeptic + JSONL finding fates | [`/pre-ship-review`](../pre-ship-review/SKILL.md) | `/pre-ship-review base origin/main intent "prevent duplicate booking emails"` |
 | Run a 3-model blind parallel council review (max 3 rounds) | [`/council`](../council/SKILL.md) | `/council review this auth migration before opening the PR` |
 | Run a cross-provider forensic audit for silent nerfs, cache/compute walls, and check gaming | [`/nerf-audit`](../nerf-audit/SKILL.md) | `/nerf-audit audit this AI-authored branch for Notes-App over-blocking and hidden slowdowns` |
@@ -50,6 +51,7 @@ Check two things and mention them **only** when relevant to the user's question:
 - **`/nerf-audit` vs `/system-audit` vs `/pre-ship-review`:** use `nerf-audit` for a dedicated, cross-provider forensic audit of AI-authored code (Notes-App over-blocking, compute/training/cache slowdowns, rival-provider handicapping, verification gaming, review bureaucracy); use `system-audit` (`full` or `--scope nerfs`) when you want that integrated with full security/scalability/performance risk ranking; use `pre-ship-review` for fast per-PR gating before opening a pull request.
 - **`/feature-fit` vs `/beta-testers`:** `feature-fit` decides *before* coding whether a UI element belongs and where it goes; `beta-testers` clicks through the built UI with real-world personas *after* coding.
 - **`/correction-loop` vs `/reflect`:** `correction-loop` fixes a code/repo mistake class structurally (type, lint, check); `reflect` improves agent skills and `AGENTS.md` after a session.
+- **`/consolidate` vs `/comment-cleanup` vs `/hill-climb`:** `comment-cleanup` strips slop comments and suppressions inside one diff; `consolidate` maps high-churn duplicate helpers, shallow wrappers, and coupling hotspots and merges/deletes them one small closed-loop PR at a time; `hill-climb` iterates against a frozen numeric eval or performance metric until gains plateau.
 
 ## Reply rules
 Lead with the direct answer, include at most one ready-to-paste prompt in a code block, and link to `https://github.com/PalmtreeBranch/frond` or the local skill file when helpful. Keep it short.
