@@ -26,10 +26,13 @@ Load and follow the matching sibling skill whenever a trigger hits:
 
 | Trigger | Skill to load |
 | --- | --- |
+| Ambiguous idea or rough Linear/GitHub ticket before building | [`../sharpen/SKILL.md`](../sharpen/SKILL.md) (deeper brief, raw sources, clear product calls) |
 | Ordered list of issues/tasks or approved numbered plan | [`../work-queue/SKILL.md`](../work-queue/SKILL.md) (one issue per branch/PR, live status table) |
 | Adding or changing visible UI, dashboard cards, nav items, or settings | [`../feature-fit/SKILL.md`](../feature-fit/SKILL.md) before coding (or on the UI diff before pushing) |
+| Fixing a bug or adding a focused regression check | [`../repro-first/SKILL.md`](../repro-first/SKILL.md) (real repro first, red-then-green check, minimal root-cause fix) |
+| Small-looking or risky change that could break something outside the diff | [`../blast-radius/SKILL.md`](../blast-radius/SKILL.md) (trace past grep + prove the safety fact with code) |
 | Writing, translating, or auditing multi-language UI copy or glossaries | [`../locale-craft/SKILL.md`](../locale-craft/SKILL.md) (native copy, ICU safety, cross-skill language hooks) |
-| Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) (10 persona subagents on the live UI) |
+| Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) (configurable persona panel on the live UI) |
 | Repo has no safe scripted way to launch, doctor, and drive its UI | [`../create-ui-verification-skill/SKILL.md`](../create-ui-verification-skill/SKILL.md) |
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
 | Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) (4 lenses + skeptic + finding fates) |
@@ -37,6 +40,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Ready to merge a PR, wait for green CI, release, or verify live in production | [`../land-pr/SKILL.md`](../land-pr/SKILL.md) (SHA-pinned merge, deploy proof, cleanup) |
 | Drafting an email, SMS, or chat update to a customer, partner, or colleague | [`../stakeholder-reply/SKILL.md`](../stakeholder-reply/SKILL.md) (facts only, recipient language, never sends unapproved) |
 | Corrected by the user, a reviewer, or CI on a repeatable mistake | [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md) |
+| Wrapping up a long or bumpy session and capturing durable skill improvements | [`../reflect/SKILL.md`](../reflect/SKILL.md) |
 
 ## Autonomy boundaries
 
