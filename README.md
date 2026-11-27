@@ -6,7 +6,7 @@ AI makes it easy to generate ten features a day and ship ten subtle bugs with th
 
 Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from one repository.
 
-## Skills (16)
+## Skills (18)
 
 ### Entry point
 | Skill | When to use it | What it produces |
@@ -24,7 +24,9 @@ Works across **Antigravity**, **Cursor**, **Claude Code**, and **Codex** from on
 | Skill | When to use it | What it produces |
 | --- | --- | --- |
 | [`/repro-first`](./skills/repro-first/SKILL.md) | Fixing a bug or locking down a regression | Real-surface repro, smallest failing-then-passing check, and minimal root-cause fix |
+| [`/replay-customer-bug`](./skills/replay-customer-bug/SKILL.md) | Starting from a customer screenshot, support report, call, or walkthrough | Anonymized test case run through the normal product flow before/after the fix, verifying booking/payment/message side effects |
 | [`/blast-radius`](./skills/blast-radius/SKILL.md) | Checking a small-looking diff you do not fully trust | Traces past grep (DB, JSON, webhooks, queues, flags) and proves the core safety fact by running code |
+| [`/strongman`](./skills/strongman/SKILL.md) | Pushing a stuck non-sensitive task through when an agent stalls or loops | Fresh model/provider creative angle that drives all sanctioned tools (shell, browser, tests) end to end |
 | [`/locale-craft`](./skills/locale-craft/SKILL.md) | Translating UI copy, setting up a new locale, or auditing multi-language apps | Per-language style/glossary kit, native anti-slop copy, ICU/tag/length checks, and hooks into `/beta-testers`, `/feature-fit`, and `/stakeholder-reply` |
 
 ### UI verification & QA

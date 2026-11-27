@@ -30,7 +30,9 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Ordered list of issues/tasks or approved numbered plan | [`../work-queue/SKILL.md`](../work-queue/SKILL.md) (one issue per branch/PR, live status table) |
 | Adding or changing visible UI, dashboard cards, nav items, or settings | [`../feature-fit/SKILL.md`](../feature-fit/SKILL.md) before coding (or on the UI diff before pushing) |
 | Fixing a bug or adding a focused regression check | [`../repro-first/SKILL.md`](../repro-first/SKILL.md) (real repro first, red-then-green check, minimal root-cause fix) |
+| Starting from a customer screenshot, support report, walkthrough, or call | [`../replay-customer-bug/SKILL.md`](../replay-customer-bug/SKILL.md) (anonymized replay through normal flow + verify booking/payment/message side effects) |
 | Small-looking or risky change that could break something outside the diff | [`../blast-radius/SKILL.md`](../blast-radius/SKILL.md) (trace past grep + prove the safety fact with code) |
+| Agent is stuck looping or over-asking on a non-sensitive task | [`../strongman/SKILL.md`](../strongman/SKILL.md) (fresh model/provider angle + drive all sanctioned tools end to end) |
 | Writing, translating, or auditing multi-language UI copy or glossaries | [`../locale-craft/SKILL.md`](../locale-craft/SKILL.md) (native copy, ICU safety, cross-skill language hooks) |
 | Testing a UI change, onboarding flow, or release like real users | [`../beta-testers/SKILL.md`](../beta-testers/SKILL.md) (configurable persona panel on the live UI) |
 | Repo has no safe scripted way to launch, doctor, and drive its UI | [`../create-ui-verification-skill/SKILL.md`](../create-ui-verification-skill/SKILL.md) |
