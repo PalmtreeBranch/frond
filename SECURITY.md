@@ -31,7 +31,7 @@ What `scripts/security-audit.mjs` enforces across every file in the repository:
 4. Zero network calls or `eval` inside `scripts/`.
 5. Strict URL host allowlist (only GitHub, Herman's verified profile/project domains, and localhost).
 6. Zero unexpected file types, zero external dependencies, and valid PNG header verification for `assets/logo.png`.
-7. Mandatory safety guardrail assertions on every high-impact skill (`stakeholder-reply`, `land-pr`, `strongman`, `beta-testers`, `replay-customer-bug`, `system-audit`, `nerf-audit`, `consolidate`, `frond-mode`, `pre-ship-review`, `council`, `correction-loop`).
+7. Mandatory safety guardrail assertions on every high-impact skill (`stakeholder-reply`, `land-pr`, `strongman`, `beta-testers`, `replay-customer-bug`, `system-audit`, `nerf-audit`, `consolidate`, `test-fit`, `frond-mode`, `pre-ship-review`, `council`, `correction-loop`).
 
 ## Reporting an issue
 

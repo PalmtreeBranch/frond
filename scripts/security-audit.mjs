@@ -144,6 +144,21 @@ const REQUIRED_SKILL_GUARDRAILS = [
     mustMatch: /semantic equivalence before merging/i,
     reason: 'must require proving semantic equivalence before merging duplicate implementations',
   },
+  {
+    file: 'skills/test-fit/SKILL.md',
+    mustMatch: /never delete a failing test to make ci green/i,
+    reason: 'must forbid deleting failing tests to mask regressions',
+  },
+  {
+    file: 'skills/test-fit/SKILL.md',
+    mustMatch: /coverage equivalence receipt/i,
+    reason: 'must require a Coverage Equivalence Receipt before deleting or merging redundant tests',
+  },
+  {
+    file: 'skills/test-fit/SKILL.md',
+    mustMatch: /small, independently mergeable pr/i,
+    reason: 'must enforce small-PR, low-revert batching instead of giant test-suite rewrites',
+  },
 ];
 
 function walk(dir) {

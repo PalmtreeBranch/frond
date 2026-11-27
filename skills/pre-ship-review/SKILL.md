@@ -46,7 +46,7 @@ Enumerate every setting or feature flag read by the changed code and walk its ex
 
 ### Lens 4: Proof & anti-cheating test integrity
 Read every added or modified test/check file at `head` before trusting green CI:
-- **Anti-cheating audit:** list every changed test file and flag any assertion that was removed, loosened, skipped (`skip`/`only`), or replaced with a weaker check; quote exact old vs new lines.
+- **Anti-cheating audit:** list every changed test file and flag any assertion that was removed, loosened, skipped (`skip`/`only`), or replaced with a weaker check; quote exact old vs new lines. The *only* valid test removal is a dedicated [`/test-fit`](../test-fit/SKILL.md) consolidation or pruning PR backed by an explicit **Coverage Equivalence Receipt** (proving a surviving behavioral test still fails on mutation, a strict type/compiler rule now forbids the state, or the feature was intentionally deleted).
 - **Anti-gaming & anti-bloat:** flag literal no-op self-replacements in mutation proofs (`.replace(x, x)`), production logic copied into a test as its own oracle, vacuous assertions that pass if the fix is deleted, broken `indexOf` order checks where `-1` silently passes, standalone per-PR `readFileSync` source-grep scripts that import zero production code instead of behavioral tests inside consolidated domain suites, and unverified agent-invented one-way ratchet comments claiming human sign-off not present in the linked issue.
 - **Hidden mocks:** flag any new mock or stub that hides a real API, DB, or boundary call the test previously exercised.
 - **Scope creep:** flag any edit outside the approved plan or stated contract.

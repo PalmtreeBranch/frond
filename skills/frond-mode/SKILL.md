@@ -18,6 +18,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
    - UI polish, localization, or release QA -> [`playbooks/ui-polish.md`](./playbooks/ui-polish.md)
    - Security, scalability, or performance audit -> [`playbooks/audit-and-harden.md`](./playbooks/audit-and-harden.md)
    - Architectural consolidation, deduplication, or entropy reduction -> [`../consolidate/SKILL.md`](../consolidate/SKILL.md)
+   - CI or test suite audit, bypass check, gap-filling, pruning, or speedup -> [`../test-fit/SKILL.md`](../test-fit/SKILL.md)
    - Multi-issue list or numbered plan -> [`playbooks/ship-queue.md`](./playbooks/ship-queue.md)
 2. **Copy the playbook steps into your checklist tool first** so later verification, cleanup, and review steps never get dropped mid-task.
 3. **Propagate `worker.md` to every subagent:** Subagents do not inherit slash-command skills automatically. Make the first line of every subagent kickoff:
@@ -58,6 +59,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 | Repo has no safe scripted way to launch, doctor, and drive its UI | [`../create-ui-verification-skill/SKILL.md`](../create-ui-verification-skill/SKILL.md) |
 | Cleaning up comments, dead code notes, or unjustified lint/TS suppressions before review | [`../comment-cleanup/SKILL.md`](../comment-cleanup/SKILL.md) |
 | Deduplicating parallel implementations, removing shallow wrappers, or reducing architectural entropy in small closed-loop PRs | [`../consolidate/SKILL.md`](../consolidate/SKILL.md) |
+| Auditing CI workflows and unit tests for bypasses, missing behavioral coverage, slow runs, or redundant check sprawl | [`../test-fit/SKILL.md`](../test-fit/SKILL.md) |
 | Consequential change (user-facing behavior, bookings, notifications, state writes) | [`../pre-ship-review/SKILL.md`](../pre-ship-review/SKILL.md) |
 | High-stakes change (auth, tenancy, billing, migrations, critical path) | [`../council/SKILL.md`](../council/SKILL.md) |
 | Full-system security, scalability, performance, and AI-integrity audit | [`../system-audit/SKILL.md`](../system-audit/SKILL.md) |
