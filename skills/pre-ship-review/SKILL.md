@@ -38,18 +38,18 @@ For every write, side effect, notification, or state transition added or altered
 
 Report every cell that ends in a duplicate, silent drop, wrong message to a user, or inconsistent state.
 
-### Lens 3 — Blast radius, tenancy & privacy
-Enumerate every setting or feature flag read by the changed code and walk its extremes (on, off, absent, contradictory combinations). Check recipients and opt-outs of notifications, webhooks, analytics, cost, shared surfaces (web, API, workers, MCP), privacy (no PII, secrets, tokens, or raw error dumps in logs), and multi-tenant scoping on every read and write.
+### Lens 3 — Blast radius, tenancy, privacy & new dependencies
+Enumerate every setting or feature flag read by the changed code and walk its extremes (on, off, absent, contradictory combinations). Check recipients and opt-outs of notifications, webhooks, analytics, cost, shared surfaces (web, API, workers, MCP), privacy (no PII, secrets, tokens, or raw error dumps in logs), multi-tenant scoping on every read and write, and any newly added dependency (name, exact version, and whether it is genuinely needed).
 
-### Lens 4 — Proof & tests
-Read the added or updated tests/checks at `head` (do not just trust they pass). For each part of the contract:
-- Does a real assertion go red if that part of the fix is removed?
-- Does any assertion pin buggy behavior as correct?
-- Is there a vacuity control proving the fixture actually hit the changed code?
-- Which risky sequences from Lens 2 have zero coverage?
+### Lens 4 — Proof & anti-cheating test integrity
+Read every added or modified test/check file at `head` before trusting green CI:
+- **Anti-cheating audit:** list every changed test file and flag any assertion that was removed, loosened, skipped (`skip`/`only`), or replaced with a weaker check — quote exact old vs new lines.
+- **Hidden mocks:** flag any new mock or stub that hides a real API, DB, or boundary call the test previously exercised.
+- **Scope creep:** flag any edit outside the approved plan or stated contract.
+- **Contract coverage:** for each part of the contract, confirm a real assertion fails if that part of the fix is removed (vacuity control) and identify risky sequences from Lens 2 with zero coverage.
 
 ### Lens return rules
-Each lens returns a list of findings (`severity: blocker|major|minor`, `title`, `evidence: file:line + code path + trigger input`, `suggested_fix`) plus `paths_checked` (even when clean). No style comments.
+Each lens returns a list of findings (`severity: blocker|major|minor`, `title`, `evidence: file:line + code path + trigger input`, `suggested_fix`) plus a mandatory `paths_checked` list ("nothing found" without naming what was checked is invalid). No style comments. Also include the **top 3 specific `file:line` spots the human should read themselves**.
 
 In rounds 2-3: review `git diff <since>...<head>` only; never repeat settled findings (`intended`, `wrong`, `ignored` unless the new diff makes them worse); check that every `fixed` bug was fixed as a class across all instances.
 

@@ -20,11 +20,20 @@ Both the audit scope and the two model tiers are configurable per run or in `~/.
 
 | Setting | Default | Prompt examples | `~/.config/frond/models.md` key |
 | --- | --- | --- | --- |
-| **Scope** | `full` (all 6 slices) | `--scope security`, `--scope perf`, `--scope app/api` | — |
+| **Scope** | `full` (all 6 slices) | `--scope diff`, `--scope security`, `--scope perf`, `--scope app/api` | — |
 | **Explorer model** | `balanced` (mid-tier / fast) | `--explorers light`, `--explorers sonnet` | `audit-explorer-model: balanced` |
 | **Chief Auditor model** | `deep` (strongest security/reasoning model) | `--chief opus`, `--chief gemini-carbon`, `--chief pro` | `audit-chief-model: deep` |
 
 Always state the scope, explorer model, and Chief Auditor model in one line before launching subagents.
+
+### Fast diff security sweep (`--scope diff`)
+When invoked with `--scope diff` (or `"security sweep on this branch"`), skip the 6-slice swarm and run **one focused read-only pass** over `git diff <base>...HEAD` plus direct imports, checking:
+- Secrets, credentials, or PII in code, config, or logs
+- Unescaped user input reaching SQL, shell commands, HTML/XSS sinks, or file paths
+- Missing auth, role, or tenant checks on new or altered routes/handlers
+- Newly added dependencies (exact name, version, and why it is needed)
+
+Return each finding with `file:line`, `Severity x Likelihood`, 1-sentence exploit path, and smallest fix — plus a **mandatory "What I checked" receipt list** even when 0 findings are found ("nothing found" without naming checked files/paths is invalid).
 
 ## Hard rules
 

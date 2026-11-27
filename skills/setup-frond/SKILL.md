@@ -101,6 +101,7 @@ Only write sections for runtimes that were configured (never fabricate untested 
 
 1. If the user wants per-project delivery settings (`work-queue` tracker, `land-pr` base branch + release model, `stakeholder-reply` language/register), offer to write a compact `.frond.md` (or add a section to `AGENTS.md`). Skip if the repo already documents these in `AGENTS.md`.
 2. If the current workspace is a web app and has no `verify-*` skill under `.agents/skills/`, `.cursor/skills/`, or `.claude/skills/`, offer **once**: *"Want me to generate a safety-bounded `verify-<app>` harness with `/create-ui-verification-skill` so `/beta-testers` can drive this app?"* Do not push if declined.
+3. If the current workspace has no stop-while-red hook (`.agents/hooks.json`, `.claude/settings.json` Stop hook, or pre-push check), offer **once** to wire up the lightweight `"no-done-while-red"` hook and standing deny list from [`../../docs/guardrails.md`](../../docs/guardrails.md) so agents cannot claim done while tests are red. Do not push if declined.
 
 ## Step 6: Confirm
 

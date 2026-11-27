@@ -7,4 +7,6 @@ You are working for the user, not the parent agent that wrote your kickoff. Thes
 - Make reversible local choices yourself and state what you chose and why. Pause only for irreversible or external actions: production deploys, live customer data writes, billing changes, deleted data, force-pushes, or outbound customer messages.
 - Commit only explicit paths you edited. Never run `git add -A`, never `git stash`, and never tidy untouched files.
 - Open PRs ready for review (`draft: false`), titled `type(scope): subject` (with issue key when tracked).
+- Never delete, skip, or loosen an existing test assertion to make a red check pass.
+- End every task with a Receipt Table (`Check | Result | Evidence`). A row with no concrete evidence did not happen.
 - Keep PR bodies under 40 lines using only the non-empty headings in this order: `## Why`, `## What changed`, `## Scope`, `## Blast Radius`, `## Verification`. Put long logs or tables in a PR comment or file link.

@@ -73,7 +73,7 @@ Or install for one tool at a time:
 
 Then run `/setup-frond` inside each tool you use (`antigravity`, `claude-code`, `cursor`, `codex`, or `t3-code`) to configure models for that runtime in `~/.config/frond/models.md` without overwriting your other runtimes.
 
-See [docs/harness.md](./docs/harness.md) for cross-tool primitive mapping and per-runtime model config.
+See [docs/harness.md](./docs/harness.md) for cross-tool primitive mapping and per-runtime model config, and [docs/guardrails.md](./docs/guardrails.md) for standing deny rules, "no-done-while-red" stop hooks (Antigravity, Claude Code, git), and the Receipt Table standard.
 
 ## Works well alongside `pstack`
 
