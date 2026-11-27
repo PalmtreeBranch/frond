@@ -1,23 +1,23 @@
 # Cross-tool harness guide
 
-`frond` skills are written in tool-neutral markdown so one repository works across Antigravity, Cursor, Claude Code, and Codex. Read the column for your active runtime when a skill invokes subagents, browser tools, or questions.
+`frond` skills are written in tool-neutral markdown so one repository works across Antigravity, Cursor, Claude Code, Codex, T3 Code, OpenCode, GitHub Copilot, Windsurf, Gemini CLI, and any other Agent Skills runtime. Read the column for your active runtime when a skill invokes subagents, browser tools, or questions.
 
 ## Primitive mapping
 
-| Concept in `frond` | Antigravity | Cursor | Claude Code | Codex |
-| --- | --- | --- | --- | --- |
-| Spawn a subagent | `invoke_subagent` (or `browser` for live UI) | `Task` (`run_in_background: true`) | `Agent` (`subagent_type: "general-purpose"` or `"Explore"`) | Spawn subagent / parallel worker |
-| Multi-provider review (`council`) | T3 Code `delegate_task` when present; otherwise `invoke_subagent` with distinct models | `Task` with explicit `model` slugs per family | T3 Code `delegate_task` or `Agent` with distinct model tiers | T3 Code `delegate_task` or parallel read-only subagents |
-| Live UI testing (`beta-testers`) | Project `verify-*` CLI, Playwright script, or `browser` subagent | Project `verify-*` CLI, Playwright, or browser MCP | Project `verify-*` CLI or Playwright via `Bash` | Project `verify-*` CLI or Playwright via shell |
-| Structured user choice | `ask_question` | `AskQuestion` | `AskUserQuestion` (plain text in `-p` mode) | Plain text concise choice list |
-| Task checklist | `update_steps` | Todolist tool | `TodoWrite` | Plan / checklist in reply |
-| Skill discovery path | `~/.gemini/config/plugins/frond` or `.agents/skills/` | `~/.cursor/plugins/frond` or `.cursor/skills/` | `~/.claude/plugins/frond` or `.claude/skills/` | `~/.codex/skills/` or `.agents/skills/` |
+| Concept in `frond` | Antigravity | Cursor | Claude Code | Codex | OpenCode / Copilot / Windsurf / Gemini CLI |
+| --- | --- | --- | --- | --- | --- |
+| Spawn a subagent | `invoke_subagent` (or `browser` for live UI) | `Task` (`run_in_background: true`) | `Agent` (`subagent_type: "general-purpose"` or `"Explore"`) | Spawn subagent / parallel worker | Native subagent / task tool (or sequential pass if single-agent) |
+| Multi-provider review (`council`) | T3 Code `delegate_task` when present; otherwise single-family fallback | `Task` with explicit `model` slugs per family | T3 Code `delegate_task` or single-family fallback | T3 Code `delegate_task` or single-family fallback | Multi-family when provider catalog exposes 3 families (OpenCode, Copilot, Windsurf), else single-family fallback |
+| Live UI testing (`beta-testers`) | Project `verify-*` CLI, Playwright script, or `browser` subagent | Project `verify-*` CLI, Playwright, or browser MCP | Project `verify-*` CLI or Playwright via `Bash` | Project `verify-*` CLI or Playwright via shell | Project `verify-*` CLI, Playwright, or browser MCP |
+| Structured user choice | `ask_question` | `AskQuestion` | `AskUserQuestion` (plain text in `-p` mode) | Plain text concise choice list | Native question tool or plain text choice list |
+| Task checklist | `update_steps` | Todolist tool | `TodoWrite` | Plan / checklist in reply | Native todo tool or checklist in reply |
+| Skill discovery path | `~/.gemini/config/plugins/frond` or `.agents/skills/` | `~/.cursor/plugins/frond` or `.cursor/skills/` | `~/.claude/skills/` or `.claude/skills/` | `~/.codex/skills/` or `.agents/skills/` | `~/.config/opencode/skills/`, `~/.copilot/skills/`, `~/.codeium/windsurf/skills/`, `~/.gemini/skills/`, or `.agents/skills/` |
 
 ## Model configuration (`~/.config/frond/models.md`)
 
-Run [`/setup-frond`](../skills/setup-frond/SKILL.md) inside each tool you use (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`). It writes **per-runtime sections** into one `~/.config/frond/models.md` file so switching tools or subscriptions never breaks another runtime's config.
+Run [`/setup-frond`](../skills/setup-frond/SKILL.md) inside each tool you use (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`, `opencode`, `copilot`, `windsurf`, `gemini-cli`, or any custom runtime name). It writes **per-runtime sections** into one `~/.config/frond/models.md` file so switching tools or subscriptions never breaks another runtime's config.
 
-Each skill reads `## shared` first, then the section matching the **active runtime** (`## antigravity`, `## claude-code`, `## cursor`, `## codex`, or `## t3-code`).
+Each skill reads `## shared` first, then the section matching the **active runtime** (`## <runtime>`).
 
 Example `~/.config/frond/models.md`:
 
@@ -43,6 +43,14 @@ audit-explorer-model: sonnet
 audit-chief-model: opus
 strongman-model: sonnet
 council-mode: single-family-fallback
+
+## opencode
+beta-tester-model: balanced
+beta-tester-verifier: inherit
+audit-explorer-model: balanced
+audit-chief-model: deep
+council-mode: multi-family
+strongman-model: cross-provider
 
 ## t3-code
 beta-tester-model: balanced

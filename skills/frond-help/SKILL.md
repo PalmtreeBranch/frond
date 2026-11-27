@@ -13,7 +13,7 @@ Answer questions about `frond`, check what is configured in the active runtime, 
 ## Step 1: Check local setup state (quietly)
 
 Check two things and mention them **only** when relevant to the user's question:
-1. Does `~/.config/frond/models.md` exist, and does it have a section for the **active runtime** (`antigravity`, `claude-code`, `cursor`, `codex`, or `t3-code`)? If missing, note in one line that `/setup-frond` configures models for this runtime without overwriting other tools.
+1. Does `~/.config/frond/models.md` exist, and does it have a section for the **active runtime** (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`, `opencode`, `copilot`, `windsurf`, `gemini-cli`, or custom)? If missing, note in one line that `/setup-frond` configures models for this runtime without overwriting other tools.
 2. Does the current project have a `verify-*` skill (under `.agents/skills/`, `.cursor/skills/`, or `.claude/skills/`)? Mention `/create-ui-verification-skill` only when the user asks about UI testing or `/beta-testers`.
 
 ## Step 2: Route to the right skill

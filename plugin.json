@@ -3,7 +3,7 @@
   "displayName": "frond",
   "version": "0.1.0",
   "description": "Portable agent skill stack for indie hackers and small agile teams: UI beta-tester personas, dashboard feature-fit gates, multi-language copy craft, multi-model council reviews, Linear/GitHub work queues, verified PR landing, and human stakeholder replies.",
-  "logo": "assets/logo.svg",
+  "logo": "assets/logo.png",
   "author": {
     "name": "Herman Palmgren"
   },

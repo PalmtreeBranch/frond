@@ -1,31 +1,33 @@
 ---
 name: setup-frond
-description: "Configure frond models and defaults for the active coding-agent runtime (Antigravity, Claude Code, Cursor, Codex, or T3 Code) and save them cleanly into per-runtime sections of ~/.config/frond/models.md without overwriting other runtimes. Safe to re-run in every tool you use. Use for /setup-frond, 'configure frond', or changing models/budgets for beta-testers, council, system-audit, or strongman."
+description: "Configure frond models and defaults for any active coding-agent runtime (Antigravity, Claude Code, Cursor, Codex, T3 Code, OpenCode, GitHub Copilot, Windsurf, Gemini CLI, or custom) and save them into per-runtime sections of ~/.config/frond/models.md without overwriting other runtimes. Safe to re-run in every tool you use. Use for /setup-frond, 'configure frond', or changing models/budgets for beta-testers, council, system-audit, or strongman."
 ---
 
 # Setup frond
 
-Configure `frond`'s per-role models and defaults in `~/.config/frond/models.md` so one shared config works across every coding-agent tool and subscription you use on this machine (**Antigravity**, **Claude Code**, **Cursor**, **Codex**, and **T3 Code**).
+Configure `frond`'s per-role models and defaults in `~/.config/frond/models.md` so one shared config works across every coding-agent tool and subscription you use on this machine (**Antigravity**, **Claude Code**, **Cursor**, **Codex**, **T3 Code**, **OpenCode**, **GitHub Copilot**, **Windsurf**, **Gemini CLI**, or any other Agent Skills runtime).
 
-**Safe to run multiple times:** running `/setup-frond` inside Claude Code updates only `## claude-code` (plus `## shared` if changed) and preserves `## antigravity`, `## cursor`, `## codex`, and `## t3-code` untouched.
+**Safe to run multiple times:** running `/setup-frond` inside Claude Code updates only `## claude-code` (plus `## shared` if changed) and preserves every other `## <runtime>` section untouched.
 
 ## Step 1: Detect the active runtime and its available models
 
-1. **Identify the active runtime** (unless the user explicitly named another target like `/setup-frond cursor`):
+1. **Identify the active runtime** (unless the user explicitly named another target like `/setup-frond opencode`):
    - **`t3-code`**: if `orchestrator_capabilities` answers (multi-provider runtime).
    - **`antigravity`**: Antigravity IDE / CLI (`invoke_subagent` exposes `inherit`, `flash_lite`, `flash`, `pro`).
    - **`claude-code`**: Claude Code (`Agent` exposes Claude models only, e.g. `opus`, `sonnet`, `haiku` + effort).
    - **`cursor`**: Cursor (`Task` exposes the user's configured Cursor model catalog).
    - **`codex`**: OpenAI Codex runtime (Codex/GPT models only).
+   - **`opencode`**: OpenCode (`opencode.json` / provider catalog, including Token Pass, OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, Gemini, or local Ollama models).
+   - **`copilot`**: GitHub Copilot CLI / VS Code (models enabled on the user's Copilot plan).
+   - **`windsurf`**: Windsurf / Cascade (models enabled in the user's Windsurf plan).
+   - **`gemini-cli`**: Gemini CLI (Gemini models only).
+   - **Other runtime (e.g. `amp`, `cline`, `roo`, `pi`, or custom):** pick a short lowercase kebab-case section name (`## <runtime>`) and store only models confirmed available in that tool.
 2. **Enumerate only the models actually entitled in this runtime:**
-   - Read the live tool schema (`invoke_subagent`, `Agent`, `Task`, or `orchestrator_capabilities`).
+   - Read the live tool schema (`invoke_subagent`, `Agent`, `Task`, `orchestrator_capabilities`) or the tool's local config (for example `~/.config/opencode/opencode.json`).
    - **Never write a model slug that is unavailable in this runtime** and **never select a route that bills paid overage credits outside the user's active subscription** without explicit confirmation.
-   - Respect vendor boundaries:
-     - Inside **`claude-code`**, use Claude models only.
-     - Inside **`antigravity`**, use Antigravity/Gemini tiers only.
-     - Inside **`codex`**, use Codex models only.
-     - Inside **`cursor`**, use only models included in the user's Cursor plan (never credit-only routes unless approved).
-     - Inside **`t3-code`**, map each seat to its configured `driverKind`, model, and effort options from `orchestrator_capabilities` (never write private instance IDs or account emails into any repo).
+   - Respect provider boundaries:
+     - Single-family runtimes (**`claude-code`**, **`antigravity`**, **`gemini-cli`**, **`codex`**): only write models from that vendor; set `council-mode: single-family-fallback`.
+     - Multi-provider runtimes (**`t3-code`**, **`cursor`**, **`opencode`**, **`copilot`**, **`windsurf`**): allow 3 distinct model families for `/council` only across providers actually included in the user's active plan/keys. Never write private instance IDs, account emails, or API keys into any repo.
 
 ## Step 2: Load existing `~/.config/frond/models.md`
 
@@ -45,8 +47,8 @@ Use structured multiple-choice questions (`ask_question` / `AskQuestion` / `AskU
 2. **Default `beta-testers` panel size (`## shared`):**
    - `10` **(Recommended)**, `5` (fast PR checks), or custom `N`.
 3. **Council handling for `<active-runtime>`:**
-   - **Multi-provider runtime (`t3-code`, `cursor`):** choose 3 distinct model families + 1 stand-in from the detected catalog.
-   - **Single-family runtime (`antigravity`, `claude-code`, `codex`):** set `council-mode: single-family-fallback` (with a clear note that true 3-family blind council runs in `t3-code` or `cursor`) so `/council` never tries to call an unavailable vendor slug.
+   - **Multi-provider runtime (`t3-code`, `cursor`, `opencode`, `copilot`, `windsurf`):** choose 3 distinct model families + 1 stand-in from the detected catalog.
+   - **Single-family runtime (`antigravity`, `claude-code`, `codex`, `gemini-cli`):** set `council-mode: single-family-fallback` (with a clear note that true 3-family blind council runs in a multi-provider runtime like `t3-code`, `opencode`, or `cursor`) so `/council` never tries to call an unavailable vendor slug.
 
 ## Step 4: Write `~/.config/frond/models.md` idempotently
 
@@ -108,4 +110,4 @@ Only write sections for runtimes that were configured (never fabricate untested 
 Report:
 - Which section of `~/.config/frond/models.md` was updated (and which other runtime sections stayed untouched).
 - The exact role -> model table active for this runtime.
-- Reminder: run `/setup-frond` once inside each other tool you use (`claude-code`, `cursor`, `codex`, `t3-code`) to add its section.
+- Reminder: run `/setup-frond` once inside each other tool you use (`claude-code`, `cursor`, `codex`, `t3-code`, `opencode`, `copilot`, `windsurf`, `gemini-cli`, or custom) to add its section.

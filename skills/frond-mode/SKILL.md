@@ -39,7 +39,7 @@ Load and follow the matching sibling skill whenever a trigger hits:
 
 | Trigger | Skill to load |
 | --- | --- |
-| First-time setup or configuring models for this runtime (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`) | [`../setup-frond/SKILL.md`](../setup-frond/SKILL.md) |
+| First-time setup or configuring models for any runtime (`antigravity`, `claude-code`, `cursor`, `codex`, `t3-code`, `opencode`, `copilot`, `windsurf`, `gemini-cli`, or custom) | [`../setup-frond/SKILL.md`](../setup-frond/SKILL.md) |
 | Picking the right skill or checking setup status | [`../frond-help/SKILL.md`](../frond-help/SKILL.md) |
 | Deciding whether an idea, issue, or stuck task is worth building now, for upcoming scale, or skipping | [`../business-value/SKILL.md`](../business-value/SKILL.md) |
 | Ambiguous idea or rough Linear/GitHub ticket before building | [`../sharpen/SKILL.md`](../sharpen/SKILL.md) |

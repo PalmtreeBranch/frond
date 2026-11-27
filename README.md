@@ -1,8 +1,14 @@
+<img src="./assets/logo.png" alt="frond logo" width="80" height="80" />
+
 # frond
 
-I'm [Herman Palmgren](https://x.com/hpalmtreebranch), a founder and developer in Stockholm. "Palmgren" means palm branch in Swedish, which is where `frond` (and `PalmtreeBranch`) comes from.
+[![Validate & Security Audit](https://github.com/PalmtreeBranch/frond/actions/workflows/ci.yml/badge.svg)](https://github.com/PalmtreeBranch/frond/actions/workflows/ci.yml)
+
+I'm Herman Palmgren ([X](https://x.com/palmgren_herman), [YouTube](https://www.youtube.com/@HermanPalmgren), [TrustMRR](https://trustmrr.com/founder/hpalmtreebranch)), a founder and developer in Stockholm. "Palmgren" means palm branch in Swedish, which is where `frond` (and `PalmtreeBranch`) comes from.
 
 I co-founded [VOCA](https://vocasolutions.com), where we build an AI receptionist that handles phone calls, chat, email, SMS, and social messages for local businesses and books into their existing systems, in seven languages. Before and alongside VOCA, I shipped a bunch of bootstrapped projects: Tree Nerd Academy (ISA Certified Arborist exam prep and flashcards with Chris Comer), Arbster, VenturePals, and MobiLaunch.
+
+On VOCA alone, this workflow lets us ship nearly 300 merged PRs a week (900+ a month, up to 67 in a single day) with a <0.25% revert rate (2 reverts across the last 937 merged PRs), backed by 1,100+ automated invariant checks across 336 API routes and 7 UI languages.
 
 ## Why frond exists
 
@@ -21,7 +27,7 @@ Most popular skill stacks solve this for huge engineering orgs with stacked PR t
 - **Ship honestly.** [`/land-pr`](./skills/land-pr/SKILL.md) pins merges to the checked commit SHA and verifies the live deploy before anyone says "live". [`/stakeholder-reply`](./skills/stakeholder-reply/SKILL.md) drafts a short human update from verified facts only and never sends without your yes.
 - **Keep one rule over all of it: no receipt, no merge.**
 
-Works from one repo across **Antigravity**, **Cursor**, **Claude Code**, **Codex**, and **T3 Code**. Fork it, strip out whatever you do not need, and make it yours.
+Works from one repo across **Antigravity**, **Cursor**, **Claude Code**, **Codex**, **T3 Code**, **OpenCode**, **GitHub Copilot**, **Windsurf**, **Gemini CLI**, and any other Agent Skills runtime. Fork it, strip out whatever you do not need, and make it yours.
 
 ## Get started
 
@@ -41,9 +47,13 @@ Or link one tool at a time:
 ~/Developer/frond/scripts/install.sh cursor       # ~/.cursor/plugins/frond
 ~/Developer/frond/scripts/install.sh claude       # ~/.claude/skills/*
 ~/Developer/frond/scripts/install.sh codex        # ~/.codex/skills/*
+~/Developer/frond/scripts/install.sh opencode     # ~/.config/opencode/skills/*
+~/Developer/frond/scripts/install.sh copilot      # ~/.copilot/skills/*
+~/Developer/frond/scripts/install.sh windsurf     # ~/.codeium/windsurf/skills/*
+~/Developer/frond/scripts/install.sh gemini-cli   # ~/.gemini/skills/*
 ```
 
-2. Run [`/setup-frond`](./skills/setup-frond/SKILL.md) inside each tool you use. It detects only the models available in that runtime and saves them to its own section in `~/.config/frond/models.md` (`## antigravity`, `## claude-code`, `## cursor`, `## codex`, `## t3-code`) so your Claude Code setup never clobbers your T3 Code or Cursor setup.
+2. Run [`/setup-frond`](./skills/setup-frond/SKILL.md) inside each tool you use. It detects only the models available in that runtime and saves them to its own section in `~/.config/frond/models.md` (`## antigravity`, `## claude-code`, `## cursor`, `## codex`, `## t3-code`, `## opencode`, `## copilot`, `## windsurf`, `## gemini-cli`, or any custom runtime name) so your Claude Code setup never clobbers your OpenCode, T3 Code, or Cursor setup.
 
 Not sure which skill to run? Ask [`/frond-help`](./skills/frond-help/SKILL.md).
 
@@ -77,7 +87,7 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 | Skill | Use it when | What it does |
 | --- | --- | --- |
 | [`/frond-mode`](./skills/frond-mode/SKILL.md) | Starting any non-trivial task | Picks one of 5 playbooks, propagates `worker.md` to subagents, routes skills, and enforces grounding receipts plus a final receipt table |
-| [`/setup-frond`](./skills/setup-frond/SKILL.md) | First run or adding another tool | Detects models in the active runtime and updates only its section in `~/.config/frond/models.md` |
+| [`/setup-frond`](./skills/setup-frond/SKILL.md) | First run or adding another tool | Detects models in any active runtime (Antigravity, Claude Code, Cursor, Codex, T3 Code, OpenCode, Copilot, Windsurf, Gemini CLI, or custom) and updates only its section in `~/.config/frond/models.md` |
 | [`/frond-help`](./skills/frond-help/SKILL.md) | Picking a skill or checking setup | Checks local setup, maps your task to a skill, and hands back one prompt without starting work |
 
 ### Plan and shape
@@ -131,13 +141,18 @@ unstick a loop:     /strongman push this local Playwright setup over the finish 
 
 Big thanks to Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack) and Matt Pocock's [skills](https://github.com/mattpocock/skills). Both shaped how I think about making coding agents less reckless. `frond` sits nicely alongside them if you already use either one.
 
-## Validate the repo
+## Trust and security audit
+
+You should never blindly install random agent skills from the internet. `frond` ships plain text only (zero npm dependencies, zero compiled binaries, zero network-calling scripts), and GitHub Actions runs an automated security audit on every commit.
+
+Run both checks yourself before symlinking anything:
 
 ```bash
 node scripts/validate.mjs
+node scripts/security-audit.mjs
 ```
 
-Checks all manifests, skill frontmatter, relative links, and bans em dashes across the repo.
+`validate.mjs` checks all manifests, skill frontmatter, relative links, and bans em dashes. `security-audit.mjs` checks every file for hidden zero-width/bidi Unicode, hidden HTML comments, remote shell pipes, secret shapes, unallowlisted URLs, script network calls, and required safety guardrails across high-impact skills. See [SECURITY.md](./SECURITY.md) for details.
 
 ## License
 

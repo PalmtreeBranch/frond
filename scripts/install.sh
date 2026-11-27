@@ -49,14 +49,30 @@ case "$TARGET" in
   codex)
     link_skills "$HOME/.codex/skills"
     ;;
+  opencode)
+    link_skills "$HOME/.config/opencode/skills"
+    ;;
+  copilot)
+    link_skills "$HOME/.copilot/skills"
+    ;;
+  windsurf)
+    link_skills "$HOME/.codeium/windsurf/skills"
+    ;;
+  gemini-cli)
+    link_skills "$HOME/.gemini/skills"
+    ;;
   all)
     link_dir "$HOME/.gemini/config/plugins/frond"
     [ -d "$HOME/.cursor" ] && link_dir "$HOME/.cursor/plugins/frond" || true
     [ -d "$HOME/.claude" ] && link_skills "$HOME/.claude/skills" || true
     [ -d "$HOME/.codex" ] && link_skills "$HOME/.codex/skills" || true
+    [ -d "$HOME/.config/opencode" ] && link_skills "$HOME/.config/opencode/skills" || true
+    [ -d "$HOME/.copilot" ] && link_skills "$HOME/.copilot/skills" || true
+    [ -d "$HOME/.codeium/windsurf" ] && link_skills "$HOME/.codeium/windsurf/skills" || true
+    [ -d "$HOME/.gemini" ] && link_skills "$HOME/.gemini/skills" || true
     ;;
   *)
-    echo "Usage: $0 [all|antigravity|cursor|claude|codex]" >&2
+    echo "Usage: $0 [all|antigravity|cursor|claude|codex|opencode|copilot|windsurf|gemini-cli]" >&2
     exit 1
     ;;
 esac
