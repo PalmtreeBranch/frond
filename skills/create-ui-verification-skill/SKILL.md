@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Create a UI verification skill
 
-Generate a project-local `verify-<app>` skill (under `.agents/skills/verify-<app>/` or `.cursor/skills/verify-<app>/`, matching the repo's convention) so any future agent — and [`/beta-testers`](../beta-testers/SKILL.md) — can launch, health-check, drive, audit, and tear down the real web application safely.
+Generate a project-local `verify-<app>` skill (under `.agents/skills/verify-<app>/` or `.cursor/skills/verify-<app>/`, matching the repo's convention) so any future agent (and [`/beta-testers`](../beta-testers/SKILL.md)) can launch, health-check, drive, audit, and tear down the real web application safely.
 
 Write the generated skill for a cold agent mid-task, not for a human tutorial. Leave zero placeholders.
 
@@ -15,7 +15,7 @@ Write the generated skill for a cold agent mid-task, not for a human tutorial. L
 Inspect the repo before asking the user anything:
 - **Framework & start command:** Next.js, Vite, Remix, SvelteKit, Rails, etc. (`package.json`, `Makefile`, `.nvmrc`, `README.md`).
 - **Surfaces & routes:** public/marketing pages, onboarding/signup, auth pages, authenticated app/portal, locales, light and dark themes.
-- **Safety boundaries (critical):** list every env var that triggers real side effects — billing (Stripe), email (Mailgun/Resend/Postmark), SMS/telephony, paid AI/LLM APIs, external webhooks, production databases.
+- **Safety boundaries (critical):** list every env var that triggers real side effects: billing (Stripe), email (Mailgun/Resend/Postmark), SMS/telephony, paid AI/LLM APIs, external webhooks, production databases.
 - **Auth & demo accounts:** how does local sign-in work? Is there a safe demo/seed account, and how do we fail closed if an account belongs to a real paying customer or has MFA enabled?
 - **Browser & visual audit tooling:** check if Playwright or Chromium is already installed in the repo (or a sub-package), and whether a rendered layout/contrast checker (such as `impeccable detect`) is available.
 - **Locking & isolation:** does the framework share a build cache inside one worktree (such as `.next/`)? If so, the generated helper must hold a per-checkout lock so two runs never corrupt each other.

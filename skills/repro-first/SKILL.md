@@ -12,14 +12,14 @@ Every bug fix must trace to real runtime evidence, not a plausible theory. Repro
 
 ### 1. Reproduce on the real surface
 - Trigger the actual bug yourself (via the app's `verify-<app>` CLI, browser, API call, or focused script).
-- Ask the user to reproduce **only** if a required credential, third-party webhook, or production-only state genuinely blocks local reproduction — and say exactly what blocked you.
+- Ask the user to reproduce **only** if a required credential, third-party webhook, or production-only state genuinely blocks local reproduction, and say exactly what blocked you.
 - If the bug is elusive, binary-search the cause with targeted logging or a minimal harness until you confirm the exact mechanism.
 
 ### 2. Write the smallest failing check first
 - Pick the narrowest executable check that exercises **real code** (existing test file, project invariant script, or one standalone repro script).
 - Assert **observable user/caller behavior**, never internal implementation details or heavy mocks that pass even when the real bug exists.
 - Run the check **before editing application code** and confirm it fails for the exact bug you are fixing.
-- **Skip a permanent unit test when impractical:** if a test would require brittle mocks, massive fixture churn, or slow infra for a tiny edge case, use a focused repro script or browser verification instead — no test is better than a fake test.
+- **Skip a permanent unit test when impractical:** if a test would require brittle mocks, massive fixture churn, or slow infra for a tiny edge case, use a focused repro script or browser verification instead; no test is better than a fake test.
 
 ### 3. Fix the root cause (smallest honest diff)
 - Fix the first place the system went wrong, not a downstream bandaid guard that hides a broken invariant.

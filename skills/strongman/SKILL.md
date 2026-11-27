@@ -34,7 +34,7 @@ When the current session is stuck or repeating itself, delegate the bottleneck t
 - Give it a tight, outcome-oriented brief:
   - The goal and observable done state.
   - What failed so far (do not repeat it).
-  - Explicit instruction: *"Take a fresh, creative technical angle. Use every sanctioned tool available — shell, scripts, headless/live browser, tests — to solve and verify it directly instead of handing back manual steps."*
+  - Explicit instruction: *"Take a fresh, creative technical angle. Use every sanctioned tool available (shell, scripts, headless/live browser, tests) to solve and verify it directly instead of handing back manual steps."*
 
 ### 3. Drive every sanctioned tool end to end
 Execute every reversible step yourself instead of pausing to ask:

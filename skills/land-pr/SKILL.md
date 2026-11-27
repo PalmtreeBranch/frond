@@ -5,7 +5,7 @@ description: "Take an open pull request from ready to merged, and optionally to 
 
 # Land PR
 
-Take an open pull request from "ready" to "merged" — and, when requested, to "verified live in production". Report the exact verified state with zero guessing. This skill finishes delivery; it does not design features or review code.
+Take an open pull request from "ready" to "merged": and, when requested, to "verified live in production". Report the exact verified state with zero guessing. This skill finishes delivery; it does not design features or review code.
 
 Read [`../../docs/harness.md`](../../docs/harness.md) when mapping platform wait/notification tools.
 
@@ -13,9 +13,9 @@ Read [`../../docs/harness.md`](../../docs/harness.md) when mapping platform wait
 
 1. **Pull request:** defaults to the open PR for the current branch (or a PR number/branch named by the user).
 2. **Landing level** (defaults to the project config when not specified):
-   - **Level 1 — Merge only:** merge when green and clean up.
-   - **Level 2 — Merge and wait for next normal release:** merge when green, then report when the normal deploy or release train will ship it (wait for deploy if continuous deploy).
-   - **Level 3 — Merge and release now:** requires explicit words from the user such as `"release now"` or `"deploy it"`. Triggers a manual release workflow when the project uses a scheduled train or manual release.
+   - **Level 1: Merge only:** merge when green and clean up.
+   - **Level 2: Merge and wait for next normal release:** merge when green, then report when the normal deploy or release train will ship it (wait for deploy if continuous deploy).
+   - **Level 3: Merge and release now:** requires explicit words from the user such as `"release now"` or `"deploy it"`. Triggers a manual release workflow when the project uses a scheduled train or manual release.
 
 ## Project configuration
 
@@ -40,7 +40,7 @@ Read these from the repo's `AGENTS.md`, `.github/workflows/`, or `~/.config/fron
 ### 1. Identify and verify ownership
 - Resolve the PR, head branch, base branch, and current full `head` SHA.
 - Confirm this user or session owns the PR.
-- **Refuse** if the PR is a draft, has merge conflicts (unless resolved in step 3), or is owned by someone else — unless the user explicitly overrides this.
+- **Refuse** if the PR is a draft, has merge conflicts (unless resolved in step 3), or is owned by someone else, unless the user explicitly overrides this.
 
 ### 2. Read check state on the head SHA
 - Always inspect checks on the exact current `head` SHA. Any new push resets evaluation.
@@ -48,7 +48,7 @@ Read these from the repo's `AGENTS.md`, `.github/workflows/`, or `~/.config/fron
 
 ### 3. Wait or classify CI failures
 - **Pending checks:** wait using the platform's notification/event mechanism (never poll in a tight loop). If no event mechanism exists, check at intervals matching the repo's normal CI duration.
-- **Failing check — classify first:**
+- **Failing check: classify first:**
   1. **Caused by this change:** fix it, commit, and push. Counts as **1 CI round**.
   2. **Known flaky:** re-run the failed job once. Does **not** count as a round.
   3. **Also fails on the base branch:** not caused by this PR. Report it and offer to file an issue (`Found while landing #<num>`). Do **not** fix it on this branch.
@@ -74,10 +74,10 @@ Verify every item on the current `head` SHA before merging:
 ### 7. Verify live in production (Levels 2 continuous / Level 3)
 Confirm all of the following before claiming a change is live:
 1. The production deployment is in a `ready` / `success` state.
-2. The deployed commit **contains** the merge commit — use a git ancestor check (`git merge-base --is-ancestor <merge-sha> <deployed-sha>`), because newer merges may already sit on top of it.
+2. The deployed commit **contains** the merge commit; use a git ancestor check (`git merge-base --is-ancestor <merge-sha> <deployed-sha>`), because newer merges may already sit on top of it.
 3. Optional post-deploy smoke checks pass.
 
-If verification fails, report `"Merged. Deploy failed: <reason>."` or `"Blocked: merged, deploy not verified (<deploy id>)."` — never guess.
+If verification fails, report `"Merged. Deploy failed: <reason>."` or `"Blocked: merged, deploy not verified (<deploy id>)."`: never guess.
 
 ### 8. Clean up
 - Delete the remote branch and the local branch.

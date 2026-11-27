@@ -34,7 +34,7 @@ Read from `AGENTS.md` or `~/.config/frond/project.md` (infer sensible defaults w
 1. Turn each entry into one numbered item in the user's order, preserving its scope note verbatim.
 2. If an entry is a description without an issue key, **search the tracker first** for an existing match. File a new issue (title, reason, acceptance criteria) only when none exists.
 3. Show the parsed status table once.
-4. Start immediately unless an item is genuinely unclear — if one item is unclear, ask about that item only and start the other independent items.
+4. Start immediately unless an item is genuinely unclear; if one item is unclear, ask about that item only and start the other independent items.
 
 ### 2. Plan sequential vs parallel execution
 Run items **in sequence** when:
@@ -42,7 +42,7 @@ Run items **in sequence** when:
 - Both touch the same files or migrations.
 - They must ship in one release order.
 
-Independent items may run **in parallel**, each in its own worktree, up to the configured limit. Keep the user's order unless a dependency forces a swap — if you change order, state why in one line in the `Note` column.
+Independent items may run **in parallel**, each in its own worktree, up to the configured limit. Keep the user's order unless a dependency forces a swap; if you change order, state why in one line in the `Note` column.
 
 ### 3. Execute each item
 For each item in its own branch (and worktree when parallel):
@@ -79,7 +79,7 @@ Keep this table updated and display it on completion or whenever the user asks `
 | # | Issue | Title | State | PR | Note |
 | --- | --- | --- | --- | --- | --- |
 | 1 | ABC-123 | Fix double submit on save | Live | #42 | Verified at 14:12 |
-| 2 | ABC-124 | Add CSV export button | Blocked | — | Needs decision: inline menu or toolbar? |
+| 2 | ABC-124 | Add CSV export button | Blocked | - | Needs decision: inline menu or toolbar? |
 ```
 
 Allowed states: `Queued`, `Working`, `PR open`, `In review`, `Merged`, `Live`, `Blocked`, `Skipped`.

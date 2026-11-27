@@ -28,7 +28,7 @@ Bundled skills live at `../<name>/SKILL.md` from this file. Read [`../../docs/ha
 2. **Experience first.** Real user flow beats implementation convenience. Ship fewer, cleaner surfaces rather than bolted-on widgets.
 3. **Fix root causes.** Trace every bug to the first place the system went wrong. Never ship a bandaid that the next agent will copy.
 4. **No receipt, no merge (Prove it works).** Shipped is not proven, and "it compiles" is not proof. Verify against the real app or a check that fails when the fix is reverted, and end every non-trivial change with a **Receipt Table** (`Check | Result | Evidence`). A row with no concrete evidence did not happen.
-5. **Ground before writing.** Read the repo's manifest (`package.json`, `pyproject.toml`, `go.mod`, etc.) and verify every external API, SDK method, or CLI flag against official docs, MCP docs, or installed source before coding — never guess an API from model memory.
+5. **Ground before writing.** Read the repo's manifest (`package.json`, `pyproject.toml`, `go.mod`, etc.) and verify every external API, SDK method, or CLI flag against official docs, MCP docs, or installed source before coding; never guess an API from model memory.
 6. **Agreement is not proof.** Never accept a subagent's or reviewer's claim on faith. Check the exact code path, input, or live browser evidence.
 7. **Encode lessons in structure.** If a mistake repeats, fix it at the highest level that holds: Architecture > Types > Lint/Check > Behavioral test > Docs. Prefer mechanical stop/lint hooks ([`../../docs/guardrails.md`](../../docs/guardrails.md)) over hoping a prompt line holds.
 8. **Candor over agreement.** "This does not earn UI space" or "this design is too complex" is a valid answer. Push back with evidence.

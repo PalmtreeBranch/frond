@@ -106,6 +106,25 @@ for (const match of readme.matchAll(linkRe)) {
   }
 }
 
+function walkMarkdown(dir) {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walkMarkdown(full));
+    else if (entry.name.endsWith('.md') || entry.name.endsWith('.json')) out.push(full);
+  }
+  return out;
+}
+
+for (const file of walkMarkdown(root)) {
+  const content = fs.readFileSync(file, 'utf8');
+  if (content.includes('\u2014')) {
+    const rel = path.relative(root, file);
+    errors.push(`${rel}: contains em dash (use a comma, colon, or period instead)`);
+  }
+}
+
 if (errors.length > 0) {
   console.error('frond validation failed:\n' + errors.map((e) => `- ${e}`).join('\n'));
   process.exit(1);

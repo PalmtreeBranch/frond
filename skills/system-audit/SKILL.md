@@ -20,7 +20,7 @@ Both the audit scope and the two model tiers are configurable per run or in `~/.
 
 | Setting | Default | Prompt examples | `~/.config/frond/models.md` key |
 | --- | --- | --- | --- |
-| **Scope** | `full` (all 6 slices) | `--scope diff`, `--scope security`, `--scope perf`, `--scope app/api` | — |
+| **Scope** | `full` (all 6 slices) | `--scope diff`, `--scope security`, `--scope perf`, `--scope app/api` | - |
 | **Explorer model** | `balanced` (mid-tier / fast) | `--explorers light`, `--explorers sonnet` | `audit-explorer-model: balanced` |
 | **Chief Auditor model** | `deep` (strongest security/reasoning model) | `--chief opus`, `--chief gemini-carbon`, `--chief pro` | `audit-chief-model: deep` |
 
@@ -33,7 +33,7 @@ When invoked with `--scope diff` (or `"security sweep on this branch"`), skip th
 - Missing auth, role, or tenant checks on new or altered routes/handlers
 - Newly added dependencies (exact name, version, and why it is needed)
 
-Return each finding with `file:line`, `Severity x Likelihood`, 1-sentence exploit path, and smallest fix — plus a **mandatory "What I checked" receipt list** even when 0 findings are found ("nothing found" without naming checked files/paths is invalid).
+Return each finding with `file:line`, `Severity x Likelihood`, 1-sentence exploit path, and smallest fix, plus a **mandatory "What I checked" receipt list** even when 0 findings are found ("nothing found" without naming checked files/paths is invalid).
 
 ## Hard rules
 
@@ -59,12 +59,12 @@ Open a checklist with these four phases:
 1. Record the audited branch and full committed `HEAD` SHA (`git rev-parse HEAD`).
 2. Spend 1-2 minutes mapping the repo layout: entry points (`app/`, `api/`, `routes/`, `workers/`), database/migrations/RLS, auth/middleware, external providers, queues/crons, and deploy config (`vercel.json`, `Dockerfile`, `fly.toml`, etc.).
 3. Select the active slices (all 6 for `full`, or the subset matching `--scope`):
-   - **Slice 1 — Auth, Tenancy & Access Boundaries:** route/action auth inventory (who can call what), RLS vs service-role bypasses, role checks (`viewer`/`member`/`owner`/`admin`), IDOR, OAuth/session/MFA boundaries.
-   - **Slice 2 — Input, Abuse, Secrets & Cost Burn:** webhook signature/timing-safe checks, rate limiters (fail-open vs fail-closed, per-instance vs shared), unauthenticated spend/bot paths, validation/body-size limits, secret storage/rotation, XSS/CSP/SSRF.
-   - **Slice 3 — Data & Query Scalability:** missing indexes on hot/policy columns, N+1 queries, unbounded selects/pagination, lock contention, connection-pool saturation, migration/schema bottlenecks as rows grow 10x.
-   - **Slice 4 — Concurrency, Queues & Failure Modes:** process-local locks or caches on serverless, ack-before-durable-enqueue message loss, inline webhook work causing retry storms, missing idempotency keys, single-instance SPOFs, external timeout cascades.
-   - **Slice 5 — Runtime & Frontend Performance:** sequential data waterfalls, oversized client bundles, missing `Cache-Control` / ISR / memoization, slow cold starts, unbounded payloads, memory or WebSocket leaks.
-   - **Slice 6 — Cross-Cutting & Operational Surface:** middleware gaps, response/security headers, PII/tokens/raw errors in logs, health-check abuse, exposed internal metadata, dependency/config drift.
+   - **Slice 1: Auth, Tenancy & Access Boundaries:** route/action auth inventory (who can call what), RLS vs service-role bypasses, role checks (`viewer`/`member`/`owner`/`admin`), IDOR, OAuth/session/MFA boundaries.
+   - **Slice 2: Input, Abuse, Secrets & Cost Burn:** webhook signature/timing-safe checks, rate limiters (fail-open vs fail-closed, per-instance vs shared), unauthenticated spend/bot paths, validation/body-size limits, secret storage/rotation, XSS/CSP/SSRF.
+   - **Slice 3: Data & Query Scalability:** missing indexes on hot/policy columns, N+1 queries, unbounded selects/pagination, lock contention, connection-pool saturation, migration/schema bottlenecks as rows grow 10x.
+   - **Slice 4: Concurrency, Queues & Failure Modes:** process-local locks or caches on serverless, ack-before-durable-enqueue message loss, inline webhook work causing retry storms, missing idempotency keys, single-instance SPOFs, external timeout cascades.
+   - **Slice 5: Runtime & Frontend Performance:** sequential data waterfalls, oversized client bundles, missing `Cache-Control` / ISR / memoization, slow cold starts, unbounded payloads, memory or WebSocket leaks.
+   - **Slice 6: Cross-Cutting & Operational Surface:** middleware gaps, response/security headers, PII/tokens/raw errors in logs, health-check abuse, exposed internal metadata, dependency/config drift.
 
 ---
 
@@ -90,10 +90,10 @@ The Chief Auditor performs **three mandatory jobs**:
 1. **Adversarial verification (Skeptic):**
    - Re-read the actual `file:line` for every candidate with `Severity >= 3` or `Score >= 6` (plus any suspiciously low-rated item that implies data loss, cross-tenant leak, or unbounded spend).
    - Tag every verified finding:
-     - `CONFIRMED` — code path and failure hold as reported.
-     - `UPGRADED` — explorer understated severity or likelihood (explain why).
-     - `DOWNGRADED` — partially mitigated elsewhere in the codebase (cite the mitigating `file:line`).
-     - `REFUTED` — false positive or unreachable path (remove from ranked backlog; log in the Refuted section with proof).
+     - `CONFIRMED`: code path and failure hold as reported.
+     - `UPGRADED`: explorer understated severity or likelihood (explain why).
+     - `DOWNGRADED`: partially mitigated elsewhere in the codebase (cite the mitigating `file:line`).
+     - `REFUTED`: false positive or unreachable path (remove from ranked backlog; log in the Refuted section with proof).
    - Merge duplicates that share one root cause across slices.
 
 2. **Big-picture blind-spot sweep:**

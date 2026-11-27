@@ -23,10 +23,10 @@ Use this 2D **Severity x Likelihood** scale instead of vague gut labels or heavy
 
 | Band | Rule | Action |
 | --- | --- | --- |
-| **`P0` — Fix Now** | `Score 9–12`, **or** any `Severity 4` with `Likelihood >= 2` | Block expansion (new tiers, roles, or major traffic growth) until fixed. |
-| **`P1` — Next Sprint** | `Score 6–8` | High real-world leverage; queue into `/work-queue` right after P0s. |
-| **`P2` — Plan & Harden** | `Score 3–5` | Fix when touching the subsystem or ahead of the next scaling milestone. |
-| **`P3` — Monitor / Backlog** | `Score 1–2` | Defense-in-depth; log once and do not distract current shipping. |
+| **`P0`: Fix Now** | `Score 9–12`, **or** any `Severity 4` with `Likelihood >= 2` | Block expansion (new tiers, roles, or major traffic growth) until fixed. |
+| **`P1`: Next Sprint** | `Score 6–8` | High real-world leverage; queue into `/work-queue` right after P0s. |
+| **`P2`: Plan & Harden** | `Score 3–5` | Fix when touching the subsystem or ahead of the next scaling milestone. |
+| **`P3`: Monitor / Backlog** | `Score 1–2` | Defense-in-depth; log once and do not distract current shipping. |
 
 ### Tie-breaking & Effort tags
 Sort findings by: **Band (`P0` -> `P3`) -> Score (`12` -> `1`) -> Severity (`4` -> `1`) -> Effort (`S` -> `M` -> `L`)** so fast, high-impact fixes float to the very top.

@@ -47,7 +47,7 @@ Each seat brief includes:
   - Severity: `blocker` (data loss, security/tenancy leak, duplicate charge/write, broken critical user path), `major` (wrong behavior a real user hits), `minor`.
   - Run an internal skeptic pass before replying.
   - End with one final line: `VERDICT: APPROVE` (when zero blocker/major findings survive) or `VERDICT: BLOCK`.
-- Privacy rule: the brief points at code only — never include production data, customer PII, secrets, or local account IDs.
+- Privacy rule: the brief points at code only; never include production data, customer PII, secrets, or local account IDs.
 
 ---
 
@@ -64,10 +64,10 @@ When all seats return:
 ```
 
 Allowed fates:
-- `fixed` — fix commit SHA + check/test that fails without the fix.
-- `wrong` — exact code path/input at `head` disproving the claim.
-- `intended` — accepted behavior, why it stands, and confirmation of no user harm.
-- `ignored` — left unfixed (allowed for `minor` only), reason, and follow-up issue link if filed.
+- `fixed`: fix commit SHA + check/test that fails without the fix.
+- `wrong`: exact code path/input at `head` disproving the claim.
+- `intended`: accepted behavior, why it stands, and confirmation of no user harm.
+- `ignored`: left unfixed (allowed for `minor` only), reason, and follow-up issue link if filed.
 
 4. **Fix every confirmed `blocker` and `major`** in new commits on the branch, each with a check that goes red when the fix is reverted.
 

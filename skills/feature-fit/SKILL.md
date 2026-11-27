@@ -38,9 +38,9 @@ Score the proposal or diff against [`references/placement-rubric.md`](./referenc
 2. **Natural Flow & Placement Gate**
    - Where is the user mentally when they need this? Place the control at the **moment of need**, not on a generic overview page or settings dumping ground.
    - Compare three concrete options from least invasive to most invasive:
-     - **Option A — Inline / progressive disclosure**: inside an existing row, drawer, empty state, or contextual action.
-     - **Option B — Fold into an existing page/section**: merge with an existing view or replace an outdated block.
-     - **Option C — New card, tab, or nav item**: highest bar. Must prove why Options A and B fail for a frequent user job.
+     - **Option A: Inline / progressive disclosure**: inside an existing row, drawer, empty state, or contextual action.
+     - **Option B: Fold into an existing page/section**: merge with an existing view or replace an outdated block.
+     - **Option C: New card, tab, or nav item**: highest bar. Must prove why Options A and B fail for a frequent user job.
 
 3. **AI-Slop Pattern Check**
    Explicitly inspect for and reject these common vibe-coding traps:
@@ -76,6 +76,6 @@ Pick exactly one verdict:
 
 - Use the concise output template in [`references/placement-rubric.md`](./references/placement-rubric.md).
 - Be candid, not agreeable. "This does not earn a dashboard card" is a valid and valuable answer.
-- Cite real file paths and existing routes from Step 1 — never give generic UX advice.
+- Cite real file paths and existing routes from Step 1; never give generic UX advice.
 - In pre-build mode, stop after the verdict if you recommend `CUT`, `DEFAULT`, or a different placement than the user asked for, so the user can approve before you write code.
 - In pre-push diff mode, list every newly added UI element in a table with its verdict (`KEEP`, `MOVE INLINE`, `TURN INTO DEFAULT`, or `REMOVE`) so nothing sneaks into the portal unreviewed.

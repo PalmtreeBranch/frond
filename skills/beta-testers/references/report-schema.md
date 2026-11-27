@@ -8,7 +8,7 @@ Every persona subagent MUST return a JSON object (fenced in `json`) matching thi
 {
   "persona": {
     "id": "P1",
-    "name": "Ingrid, 62 — hesitant bakery owner",
+    "name": "Ingrid, 62; hesitant bakery owner",
     "archetype": "low-tech-hesitant",
     "viewport": "1280x800",
     "theme": "light",
@@ -76,7 +76,7 @@ The coordinator outputs ONE clean markdown report in this exact format:
 
 ## Bugs (reproducible, sorted by severity)
 
-### [BT-01] <Short concrete title> — `P1`
+### [BT-01] <Short concrete title>: `P1`
 - **Hit by:** `3/<N>` personas (Double-clicker, Mobile-first, Low-tech)
 - **Category:** `functional`
 - **Route / Likely source:** `/portal/hours` (`components/portal/HoursEditor.tsx`)
@@ -104,6 +104,6 @@ The coordinator outputs ONE clean markdown report in this exact format:
 
 ## Recommended fix order
 
-1. **BT-01** — reason + suggested automated regression check.
+1. **BT-01**: reason + suggested automated regression check.
 2. ...
 ```

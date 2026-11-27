@@ -1,6 +1,6 @@
 # Playbook: UI polish & release QA
 
-Copy these steps into your checklist first. Drive the real rendered UI — never grade UI from JSX alone.
+Copy these steps into your checklist first. Drive the real rendered UI; never grade UI from JSX alone.
 
 1. **Audit placement & clutter:** Run [`../../feature-fit/SKILL.md`](../../feature-fit/SKILL.md) on the target surface or current branch diff to catch bolted-on cards, redundant toggles, or awkward flow placement.
 2. **Check localization & copy (if multi-language):** Run [`../../locale-craft/SKILL.md`](../../locale-craft/SKILL.md) for native phrasing, glossary consistency, ICU/tag safety, and longest-locale button lengths.

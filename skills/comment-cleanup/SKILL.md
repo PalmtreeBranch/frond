@@ -19,7 +19,7 @@ Use the files or range the caller named. Otherwise use the current branch diff a
 Only five comment categories survive. If a comment does not clearly match one of these five, delete it:
 
 1. **Legal or license headers.**
-2. **External/foreign gotchas we cannot reshape:** non-obvious behavior forced by a third-party library, browser quirk, vendor API, or protocol — verified to still hold on a live path.
+2. **External/foreign gotchas we cannot reshape:** non-obvious behavior forced by a third-party library, browser quirk, vendor API, or protocol, verified to still hold on a live path.
 3. **Style-only formatter/linter pragmas:** `prettier-ignore` or a verified style-only lint suppression. Correctness, security, and type-safety suppressions (`@ts-ignore`, `@ts-expect-error`, `eslint-disable` on bug-catching rules) do **not** qualify.
 4. **Public API contracts:** JSDoc/TSDoc documenting an exported library or SDK contract.
 5. **Issue, RFC, or spec links** explaining an external business or compliance constraint that code cannot express on its own.
@@ -58,7 +58,7 @@ Inspect the subagent's diff and report carefully:
 
 - **Trivial `REFACTOR` flags** (drop unused param, rename confusing helper, replace workaround with the real API, fix the real type instead of `@ts-expect-error`): implement the smallest in-scope root-cause fix directly. Never bolt on a new symptom guard.
 - **Non-trivial `REFACTOR` flags** that cross module boundaries outside scope: leave out-of-scope files untouched and list them clearly as follow-up work.
-- **`ENCODE` flags** (claimed constraints like "must stay sorted" or "keep in sync"): apply [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md) — propose the cheapest in-scope type, runtime assertion, invariant check, or lint rule.
+- **`ENCODE` flags** (claimed constraints like "must stay sorted" or "keep in sync"): apply [`../correction-loop/SKILL.md`](../correction-loop/SKILL.md); propose the cheapest in-scope type, runtime assertion, invariant check, or lint rule.
   - If the user approves (or pre-approved encoding), add the structural check, prove it fails without the constraint, and delete the comment.
   - Otherwise delete the unenforced comment only if safe, or report the constraint explicitly open with the proposed check.
 

@@ -21,7 +21,7 @@ Read [`references/language-profiles.md`](./references/language-profiles.md) for 
 
 Never guess the source language or invent terms. Inspect first:
 1. Locate translation catalogs (`messages/<locale>/`, `locales/`, `i18n/`, `.po`, `.arb`, `.strings`).
-2. Identify the **true source language** (for example, Swedish `sv`, not English `en`). Always translate from the source language directly — never pivot through English unless English is the source.
+2. Identify the **true source language** (for example, Swedish `sv`, not English `en`). Always translate from the source language directly; never pivot through English unless English is the source.
 3. Read any existing glossaries or style guides (`docs/i18n/`, `GLOSSARY.md`, `DESIGN.md`, `AGENTS.md` copy rules).
 4. Identify hard repo copy rules (for example: no em dashes, sentence case headings, banned brand terms, product/plan names that never translate).
 
@@ -36,7 +36,7 @@ Apply these rules to every string you write or review:
 3. **Ban local AI-slop tells.** Check [`references/language-profiles.md`](./references/language-profiles.md) for each language's banned machine-translation buzzwords (the local equivalents of *seamless*, *delve*, *unlock*, *elevate*, *crucial*).
 4. **Hold one register per locale.** Never mix formal and informal pronouns (`u`/`je`, `Sie`/`Du`, `vous`/`tu`, `ni`/`du`) inside one product or string.
 5. **Hold one term per concept.** Follow the project glossary strictly. Whenever you encounter a new domain term not in the glossary, choose one clear term, stay consistent across the entire diff, and list it under `NEWTERMS` in your report.
-6. **Respect UI length budgets.** Buttons, tabs, nav items, and table headers must stay compact — especially in Dutch, German, French, and Finnish, which expand 20-40% over English or Swedish. Never let a translated button wrap awkwardly or clip at `390px` mobile.
+6. **Respect UI length budgets.** Buttons, tabs, nav items, and table headers must stay compact, especially in Dutch, German, French, and Finnish, which expand 20-40% over English or Swedish. Never let a translated button wrap awkwardly or clip at `390px` mobile.
 
 ---
 

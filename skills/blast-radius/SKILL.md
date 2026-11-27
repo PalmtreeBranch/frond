@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: "Find what a small-looking change could break elsewhere before shipping — tracing past grep into DB columns, API JSON, webhooks, queues, feature flags, and third-party libraries — and prove the single safety fact by running real code instead of writing a reassuring essay. Use for /blast-radius, 'what could this break?', or checking a risky small diff."
+description: "Find what a small-looking change could break elsewhere before shipping (tracing past grep into DB columns, API JSON, webhooks, queues, feature flags, and third-party libraries) and prove the single safety fact by running real code instead of writing a reassuring essay. Use for /blast-radius, 'what could this break?', or checking a risky small diff."
 disable-model-invocation: true
 ---
 
@@ -12,11 +12,11 @@ Find what a change could break outside the diff before it ships. Listing direct 
 
 A plausible-sounding safety essay is worthless without execution. Push every critical safety assumption as far down this evidence ladder as is cheap, and state exactly where you stopped:
 
-1. **Assertion only** — worthless on its own.
-2. **Code pointer** — exact `file:line` in app or library source.
-3. **Trace** — walked the failure path step by step and showed it cannot reach.
-4. **Executed check** — a small script or test that calls the real shipped code/library and fails loud if wrong.
-5. **Live repro** — verified in the running app.
+1. **Assertion only**: worthless on its own.
+2. **Code pointer**: exact `file:line` in app or library source.
+3. **Trace**: walked the failure path step by step and showed it cannot reach.
+4. **Executed check**: a small script or test that calls the real shipped code/library and fails loud if wrong.
+5. **Live repro**: verified in the running app.
 
 Aim for **level 4** whenever practical.
 

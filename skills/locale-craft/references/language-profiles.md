@@ -22,7 +22,7 @@ Built-in starting profiles for `/locale-craft`. Project-specific files (`docs/i1
 Use this compact structure when `/locale-craft init <locale>` creates a repo style guide:
 
 ```markdown
-# <Product> — <Language> (<locale>) style guide and glossary
+# <Product>: <Language> (<locale>) style guide and glossary
 
 - **Source locale:** `<source>` (translate from `<source>`, never through English unless English is the source)
 - **Market variant:** `<e.g., nl-NL, sv-SE, fr-FR>`

@@ -31,7 +31,7 @@ Default is **`N = 10`** (all 10 core archetypes above). When the user requests a
 
 ## Casting rules
 
-- **Ground every persona in the product.** Example: for a B2B restaurant portal, Persona #1 is "Ingrid, 62, bakery owner who still prefers paper calendars and only opens the portal once a week to change holiday hours" — not "Generic 62yo woman".
+- **Ground every persona in the product.** Example: for a B2B restaurant portal, Persona #1 is "Ingrid, 62, bakery owner who still prefers paper calendars and only opens the portal once a week to change holiday hours": not "Generic 62yo woman".
 - **When testing a targeted PR or feature**, keep all 10 archetypes but point all 10 missions at the changed surface and its immediate neighbors (entry point, main interaction, error/empty state, and post-action confirmation).
 - **Locale & language**: if the app supports multiple locales (e.g., Swedish + English), assign at least 2 personas to switch locales or verify untranslated strings/date formats.
 - **No synthetic overlap**: verify that the 10 missions collectively touch desktop + mobile, light + dark, happy path + error path, and navigation/reload edges.

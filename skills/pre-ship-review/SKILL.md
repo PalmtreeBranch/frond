@@ -14,7 +14,7 @@ Read [`../../docs/harness.md`](../../docs/harness.md) to map subagent calls to y
 Confirm these before spawning:
 - `base`: target branch (default `origin/main` or the repo's integration branch)
 - `head`: committed full 40-character SHA (commit everything first; never review a dirty working tree)
-- `intent`: the claimed contract in plain words — what changes and what must stay unchanged
+- `intent`: the claimed contract in plain words: what changes and what must stay unchanged
 - `round`: `1` (default), `2`, or `3` (hard cap at 3; refuse round 4 and revisit the design instead)
 - For rounds 2-3: `since` (previous reviewed SHA) and `previous` (earlier findings + their fates)
 
@@ -24,10 +24,10 @@ Confirm these before spawning:
 
 Spawn four independent read-only subagents in one turn. Every lens inspects only committed git state (`git diff <base>...<head>`, `git show <head>:<path>`, `git grep -n <pattern> <head>`) and never edits files or touches production.
 
-### Lens 1 — Callers & regressions
+### Lens 1: Callers & regressions
 For every changed function, find every caller at `head` and trace every branch condition (mode, channel, feature flag, config). Verify paths the contract promises to leave unchanged really are unchanged (payloads, messages, status codes, return shapes). Check types, nulls, and downstream assumptions.
 
-### Lens 2 — Sequences & concurrency
+### Lens 2: Sequences & concurrency
 For every write, side effect, notification, or state transition added or altered, walk this matrix through the code at `head`:
 - Same operation twice in one session; a third time
 - `A` then `B`, and `B` then `A` for every pair of operations touched
@@ -38,12 +38,12 @@ For every write, side effect, notification, or state transition added or altered
 
 Report every cell that ends in a duplicate, silent drop, wrong message to a user, or inconsistent state.
 
-### Lens 3 — Blast radius, tenancy, privacy & new dependencies
+### Lens 3: Blast radius, tenancy, privacy & new dependencies
 Enumerate every setting or feature flag read by the changed code and walk its extremes (on, off, absent, contradictory combinations). Check recipients and opt-outs of notifications, webhooks, analytics, cost, shared surfaces (web, API, workers, MCP), privacy (no PII, secrets, tokens, or raw error dumps in logs), multi-tenant scoping on every read and write, and any newly added dependency (name, exact version, and whether it is genuinely needed).
 
-### Lens 4 — Proof & anti-cheating test integrity
+### Lens 4: Proof & anti-cheating test integrity
 Read every added or modified test/check file at `head` before trusting green CI:
-- **Anti-cheating audit:** list every changed test file and flag any assertion that was removed, loosened, skipped (`skip`/`only`), or replaced with a weaker check — quote exact old vs new lines.
+- **Anti-cheating audit:** list every changed test file and flag any assertion that was removed, loosened, skipped (`skip`/`only`), or replaced with a weaker check; quote exact old vs new lines.
 - **Hidden mocks:** flag any new mock or stub that hides a real API, DB, or boundary call the test previously exercised.
 - **Scope creep:** flag any edit outside the approved plan or stated contract.
 - **Contract coverage:** for each part of the contract, confirm a real assertion fails if that part of the fix is removed (vacuity control) and identify risky sequences from Lens 2 with zero coverage.

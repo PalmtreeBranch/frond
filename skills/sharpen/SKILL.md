@@ -6,13 +6,13 @@ disable-model-invocation: true
 
 # Sharpen
 
-Make a task **deeper, not bigger**, before spending tokens building the wrong thing. Do not implement the task — hand back a crisp, execution-ready brief.
+Make a task **deeper, not bigger**, before spending tokens building the wrong thing. Do not implement the task; hand back a crisp, execution-ready brief.
 
 ## Steps
 
 Before rewriting the prompt or ticket, inspect the relevant repo context briefly (if in a codebase) and answer four concrete questions:
 
-1. **What a top practitioner would catch that is missing:** the real edge case, constraint, failure mode, or simplification an experienced founder/engineer would check up front — without inflating scope.
+1. **What a top practitioner would catch that is missing:** the real edge case, constraint, failure mode, or simplification an experienced founder/engineer would check up front: without inflating scope.
 2. **The rawest source of truth to start from:** exact files, schemas, live traffic/logs, existing user flows, or vendor docs to read instead of second-hand summaries or guesses.
 3. **Methods and experiments:** which technical forks can be settled cheaply by running a quick probe or tiny prototype instead of debating in theory.
 4. **External proof of done:** what concrete artifact outside the agent's own words proves the result works (a failing-then-passing check, a live browser screenshot, a real API response, or a [`/beta-testers`](../beta-testers/SKILL.md) pass).

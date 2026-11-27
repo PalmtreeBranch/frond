@@ -11,11 +11,11 @@ When a user, reviewer, or CI corrects a mistake, fixing the one line is only hal
 
 Fix every mistake class at the **highest level that holds**, in strict order:
 
-1. **Architecture** — make the wrong thing impossible to write (one shared helper, one boundary module, one read-time default instead of scattered flags).
-2. **Types** — make the compiler refuse it (branded types, discriminated unions, exhaustive switches, Zod/schema parsing at boundaries).
-3. **Static check / Lint** — fail CI with an error message that names the exact helper or pattern to use instead. If legacy code already violates the rule, add a per-file baseline ratchet so existing count can only go down and new violations fail immediately.
-4. **Behavioral test** — run the real code path and assert the observable wrong outcome fails.
-5. **Docs** — last resort (`AGENTS.md`, `CORRECTIONS.md`). Docs never fail CI, so use level 5 only when levels 1-4 genuinely cannot express the rule, and state why.
+1. **Architecture**: make the wrong thing impossible to write (one shared helper, one boundary module, one read-time default instead of scattered flags).
+2. **Types**: make the compiler refuse it (branded types, discriminated unions, exhaustive switches, Zod/schema parsing at boundaries).
+3. **Static check / Lint**: fail CI with an error message that names the exact helper or pattern to use instead. If legacy code already violates the rule, add a per-file baseline ratchet so existing count can only go down and new violations fail immediately.
+4. **Behavioral test**: run the real code path and assert the observable wrong outcome fails.
+5. **Docs**: last resort (`AGENTS.md`, `CORRECTIONS.md`). Docs never fail CI, so use level 5 only when levels 1-4 genuinely cannot express the rule, and state why.
 
 ---
 

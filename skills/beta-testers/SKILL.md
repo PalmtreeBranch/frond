@@ -11,7 +11,7 @@ Read [`../../docs/harness.md`](../../docs/harness.md) when mapping subagent, mod
 
 ## Configuration (count and model)
 
-Both the **persona count** and the **tester model** are configurable per run (in the user's prompt) or persistently in `~/.config/frond/models.md`. When the user does not specify them, start immediately with the defaults — do not block to ask.
+Both the **persona count** and the **tester model** are configurable per run (in the user's prompt) or persistently in `~/.config/frond/models.md`. When the user does not specify them, start immediately with the defaults; do not block to ask.
 
 | Setting | Default | Prompt examples | `~/.config/frond/models.md` key |
 | --- | --- | --- | --- |
@@ -21,9 +21,9 @@ Both the **persona count** and the **tester model** are configurable per run (in
 
 ### Model tiers for tester subagents
 Resolve the tester model from the user's request first, then `~/.config/frond/models.md`, then the default **`balanced`** tier:
-- **`balanced` (default — middle tier):** best speed/cost/quality tradeoff for running 10 parallel UI testers (for example: Claude Sonnet, Gemini Flash, or the active platform's mid-tier model — see the tier table in [`../../docs/harness.md`](../../docs/harness.md)).
-- **`light` (fast / cheap):** Haiku, Flash-Lite, or mini-class models — good for quick sweeps or large `15-20` persona runs.
-- **`deep` (flagship / extensive):** Opus, Pro, or high-reasoning models — best for subtle UX, accessibility, complex multi-step flows, or smaller high-stakes panels.
+- **`balanced` (default (middle tier):** best speed/cost/quality tradeoff for running 10 parallel UI testers (for example: Claude Sonnet, Gemini Flash, or the active platform's mid-tier model) see the tier table in [`../../docs/harness.md`](../../docs/harness.md)).
+- **`light` (fast / cheap):** Haiku, Flash-Lite, or mini-class models; good for quick sweeps or large `15-20` persona runs.
+- **`deep` (flagship / extensive):** Opus, Pro, or high-reasoning models; best for subtle UX, accessibility, complex multi-step flows, or smaller high-stakes panels.
 - **Explicit model or mixed panel:** users may pass any exact model slug supported by their runtime (never route outside the user's active subscription), or ask for a mixed panel (for example, `8 on balanced, 2 on deep`).
 
 Always state the chosen `count`, `model`, and batching plan in one line before launching subagents, because parallel runs spend quota.
@@ -77,7 +77,7 @@ Present a compact roster line plus `N` + resolved model before fanning out.
 
 ### Phase 3: Parallel live testing
 
-Spawn the `N` persona subagents in parallel on the resolved tester model (up to 5-10 per wave depending on local browser/RAM headroom — never starve the user's machine; for `N > 10`, run in waves of 5-10).
+Spawn the `N` persona subagents in parallel on the resolved tester model (up to 5-10 per wave depending on local browser/RAM headroom; never starve the user's machine; for `N > 10`, run in waves of 5-10).
 
 Every persona subagent receives a standalone brief containing:
 1. The **App Brief**, base URL, safe boundary, and how to invoke the browser/verification tool (with an isolated session/context).

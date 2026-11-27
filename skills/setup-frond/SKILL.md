@@ -12,11 +12,11 @@ Configure `frond`'s per-role models and defaults in `~/.config/frond/models.md` 
 ## Step 1: Detect the active runtime and its available models
 
 1. **Identify the active runtime** (unless the user explicitly named another target like `/setup-frond cursor`):
-   - **`t3-code`** — if `orchestrator_capabilities` answers (multi-provider runtime).
-   - **`antigravity`** — Antigravity IDE / CLI (`invoke_subagent` exposes `inherit`, `flash_lite`, `flash`, `pro`).
-   - **`claude-code`** — Claude Code (`Agent` exposes Claude models only, e.g. `opus`, `sonnet`, `haiku` + effort).
-   - **`cursor`** — Cursor (`Task` exposes the user's configured Cursor model catalog).
-   - **`codex`** — OpenAI Codex runtime (Codex/GPT models only).
+   - **`t3-code`**: if `orchestrator_capabilities` answers (multi-provider runtime).
+   - **`antigravity`**: Antigravity IDE / CLI (`invoke_subagent` exposes `inherit`, `flash_lite`, `flash`, `pro`).
+   - **`claude-code`**: Claude Code (`Agent` exposes Claude models only, e.g. `opus`, `sonnet`, `haiku` + effort).
+   - **`cursor`**: Cursor (`Task` exposes the user's configured Cursor model catalog).
+   - **`codex`**: OpenAI Codex runtime (Codex/GPT models only).
 2. **Enumerate only the models actually entitled in this runtime:**
    - Read the live tool schema (`invoke_subagent`, `Agent`, `Task`, or `orchestrator_capabilities`).
    - **Never write a model slug that is unavailable in this runtime** and **never select a route that bills paid overage credits outside the user's active subscription** without explicit confirmation.
@@ -35,13 +35,13 @@ Configure `frond`'s per-role models and defaults in `~/.config/frond/models.md` 
 
 ## Step 3: Ask concise setup choices
 
-Use structured multiple-choice questions (`ask_question` / `AskQuestion` / `AskUserQuestion`) — keep it to 2-3 quick questions:
+Use structured multiple-choice questions (`ask_question` / `AskQuestion` / `AskUserQuestion`); keep it to 2-3 quick questions:
 
 1. **Budget preset for `<active-runtime>`:**
-   - `balanced` **(Recommended)** — mid-tier models for parallel explorers (`beta-testers`, `system-audit` explorers) and flagship model for verification/Chief Auditor (`system-audit` chief, `pre-ship-review` skeptic, `council`).
-   - `light` — cheapest/fastest models across parallel workers to save quota.
-   - `deep` — flagship models everywhere for maximum rigor.
-   - `custom` — pick each role individually from the detected models in this runtime.
+   - `balanced` **(Recommended)**: mid-tier models for parallel explorers (`beta-testers`, `system-audit` explorers) and flagship model for verification/Chief Auditor (`system-audit` chief, `pre-ship-review` skeptic, `council`).
+   - `light`: cheapest/fastest models across parallel workers to save quota.
+   - `deep`: flagship models everywhere for maximum rigor.
+   - `custom`: pick each role individually from the detected models in this runtime.
 2. **Default `beta-testers` panel size (`## shared`):**
    - `10` **(Recommended)**, `5` (fast PR checks), or custom `N`.
 3. **Council handling for `<active-runtime>`:**
@@ -53,7 +53,7 @@ Use structured multiple-choice questions (`ask_question` / `AskQuestion` / `AskU
 Merge changes cleanly into `~/.config/frond/models.md`, keeping `## shared` at the top and one `## <runtime>` section per configured tool:
 
 ```markdown
-# frond models (managed by /setup-frond — re-run inside any runtime to update its section)
+# frond models (managed by /setup-frond: re-run inside any runtime to update its section)
 
 ## shared
 beta-tester-count: 10

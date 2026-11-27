@@ -16,12 +16,12 @@
 
 Always start at rung 1 and move down only when the rung above provably fails:
 
-1. **No UI (smart default in code)** — best possible outcome.
-2. **Improve existing copy, empty state, or error message** — zero new widgets.
-3. **Inline action or contextual disclosure** — inside an existing row, detail drawer, or menu.
-4. **Section inside an existing page** — grouped with related controls.
-5. **Replace an existing card/tab** — net-zero navigation growth.
-6. **New top-level nav item or dashboard card** — requires explicit proof of frequent, standalone user value.
+1. **No UI (smart default in code)**: best possible outcome.
+2. **Improve existing copy, empty state, or error message**: zero new widgets.
+3. **Inline action or contextual disclosure**: inside an existing row, detail drawer, or menu.
+4. **Section inside an existing page**: grouped with related controls.
+5. **Replace an existing card/tab**: net-zero navigation growth.
+6. **New top-level nav item or dashboard card**: requires explicit proof of frequent, standalone user value.
 
 ---
 
@@ -34,7 +34,7 @@ Always start at rung 1 and move down only when the rung above provably fails:
 **User job & frequency:** <who needs this, when, and how often>
 
 ### Current surface check
-- **Existing related surfaces:** `<route/file>` — <what already lives there>
+- **Existing related surfaces:** `<route/file>`: <what already lives there>
 - **Current clutter budget:** <e.g., 7 sidebar items, 5 overview cards>
 
 ### Placement comparison
